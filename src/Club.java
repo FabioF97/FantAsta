@@ -12,40 +12,41 @@ import java.util.List;
 public class Club {
 	
 	/*This constant value represents the number of players 
-	 * that will have to be part of the rose available to each user*/
+	 * that will have to be part of the team available to each user*/
 	private final int players = 25;
+	/*Represents the number of Goalkeepers of each team*/
+	private final int numGoalkeepers = 3;
+	/*Represents the number of Defenders of each team*/
+	private final int numDefenders = 8;
+	/*Represents the number of Midfielders of each team*/
+	private final int numMidfielders = 8;
+	/*Represents the number of Strikers of each team*/
+	private final int numStrikers = 6;
 	
 	/*Name represents the name of the club, chosen by its owner */
 	private String name;
 	/*In this list all 25 players who make up the team are saved*/
 	private List<Player> team;
-	
-	/**
-	 * Constructor without params
-	 */
-	public Club() {
-		super();
-		team = new ArrayList<Player>();
-	}
+	/*Number of goalkeepers currently in the team*/
+	private int goalkeepers;
+	/*Number of defenders currently in the team*/
+	private int defenders;
+	/*Number of midfielders currently in the team*/
+	private int midfielders;
+	/*Number of strikers currently in the team*/
+	private int strikers;
 	
 	/**
 	 * Constructor with one param
-	 * @param name
+	 * @param name The name of the team
 	 */
 	public Club(String name) {
 		super();
 		team = new ArrayList<Player>();
-	}
-	
-	/**
-	 * Constructor with two params
-	 * @param name
-	 * @param team
-	 */
-	public Club(String name, List<Player> team) {
-		super();
-		this.name = name;
-		this.team = team;
+		this.goalkeepers = 0;
+		this.defenders = 0;
+		this.midfielders = 0;
+		this.strikers = 0;
 	}
 
 	/**
@@ -79,13 +80,61 @@ public class Club {
 	public void setTeam(List<Player> team) {
 		this.team = team;
 	}
-
+	
 	/**
-	 * Returns the number of players playing in each team
-	 * @return players
+	 * check if the maximum number of players in the team has been reached
+	 * @return boolean
 	 */
-	public int getPlayers() {
-		return players;
+	public boolean isFullTeam() {
+		if(team.size() == players) {
+			return true;
+		}
+		else
+			return false;
+	}
+	
+	/**
+	 * check if the maximum number of goalkeepers in the team has been reached
+	 * @return boolean
+	 */
+	public boolean isFullGk() {
+		if(goalkeepers == numGoalkeepers)
+			return true;
+		else 
+			return false;
+	}
+	
+	/**
+	 * check if the maximum number of defenders in the team has been reached
+	 * @return boolean
+	 */
+	public boolean isFullDef() {
+		if(defenders == numDefenders)
+			return true;
+		else 
+			return false;
+	}
+	
+	/**
+	 * check if the maximum number of midfielders in the team has been reached
+	 * @return boolean
+	 */
+	public boolean isFullMid() {
+		if(midfielders == numMidfielders)
+			return true;
+		else 
+			return false;
+	}
+	
+	/**
+	 * check if the maximum number of strikers in the team has been reached
+	 * @return boolean
+	 */
+	public boolean isFullStr() {
+		if(strikers == numStrikers)
+			return true;
+		else 
+			return false;
 	}
 	
 }

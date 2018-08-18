@@ -143,6 +143,7 @@ public class Club {
 	 * @param price
 	 */
 	public void addPlayer(Player player, int price) {
+		//non dice che la squadra è piena, da correggere!
 		if(isFullTeam() == true) {
 			System.out.println("This team is full!!");
 			return;

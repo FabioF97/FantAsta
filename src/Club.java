@@ -23,7 +23,7 @@ public class Club {
 	/*Represents the number of Strikers of each team*/
 	private final int numStrikers = 6;
 	
-	/*Name represents the name of the club, chosen by its owner */
+	
 	private String name;
 	/*In this list all 25 players who make up the team are saved*/
 	private List<Player> team;
@@ -38,7 +38,7 @@ public class Club {
 	
 	/**
 	 * Constructor with one param
-	 * @param name The name of the team
+	 * @param name 				Team's name
 	 */
 	public Club(String name) {
 		super();
@@ -135,6 +135,65 @@ public class Club {
 			return true;
 		else 
 			return false;
+	}
+	
+	public void addPlayer(Player player, int price) {
+		if(isFullTeam() == true) {
+			System.out.println("This team is full!!");
+			return;
+		}
+		if(player instanceof Goalkeeper) {
+			if(isFullGk() == true) {
+				System.out.println("Goalkeepers are enough");
+				return;
+			}
+			else {
+				//fare il metodo per incrementare i contatori;
+				++goalkeepers;
+				team.add(player);
+				System.out.println("Gk inserted!");
+				return;
+			}
+		}
+		if(player instanceof Defender) {
+			if(isFullDef() == true) {
+				System.out.println("Defenders are enough");
+				return;
+			}
+			else {
+				//fare il metodo per incrementare i contatori;
+				++defenders;
+				team.add(player);
+				System.out.println("Def inserted!");
+				return;
+			}
+		}
+		if(player instanceof Midfielder) {
+			if(isFullMid() == true) {
+				System.out.println("Midfielders are enough");
+				return;
+			}
+			else {
+				//fare il metodo per incrementare i contatori;
+				++midfielders;
+				team.add(player);
+				System.out.println("Mid inserted!");
+				return;
+			}
+		}
+		if(player instanceof Striker) {
+			if(isFullStr() == true) {
+				System.out.println("Strikers are enough");
+				return;
+			}
+			else {
+				//fare il metodo per incrementare i contatori;
+				++strikers;
+				team.add(player);
+				System.out.println("Str inserted!");
+				return;
+			}
+		}
 	}
 	
 }

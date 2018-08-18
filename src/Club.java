@@ -137,6 +137,11 @@ public class Club {
 			return false;
 	}
 	
+	/**
+	 * With this method you can add a player to the team
+	 * @param player
+	 * @param price
+	 */
 	public void addPlayer(Player player, int price) {
 		if(isFullTeam() == true) {
 			System.out.println("This team is full!!");
@@ -149,9 +154,10 @@ public class Club {
 			}
 			else {
 				//fare il metodo per incrementare i contatori;
+				//togliere il budget al giocatore che ha acquistato il giocatore
 				++goalkeepers;
 				team.add(player);
-				System.out.println("Gk inserted!");
+				System.out.println("Gk inserted! -->" + goalkeepers);
 				return;
 			}
 		}

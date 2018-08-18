@@ -7,10 +7,10 @@ public class Player {
 	
 	/** Minimum selling price of a player */
 	private final int MinPrice = 1;
+	
+	
 	/** Player's name*/
 	private String name;
-	/** Player's position*/
-	private String position;
 	/** Player's team*/
 	private String team;
 	/** Player's value*/
@@ -23,16 +23,14 @@ public class Player {
 	
 	/**
 	 * Constructor with all params
-	 * @param name
-	 * @param position
-	 * @param team
-	 * @param value
-	 * @param id
+	 * @param name					Player's name	
+	 * @param team					Player's team
+	 * @param value					Player's value
+	 * @param id					Player's id
 	 */
-	public Player(String name, String position, String team, int value, int id) {
+	public Player(String name, String team, int value, int id) {
 		super();
 		this.name = name;
-		this.position = position;
 		this.team = team;
 		this.value = value;
 		this.id = id;
@@ -86,23 +84,7 @@ public class Player {
 	public void setName(String name) {
 		this.name = name;
 	}
-		
-	/**
-	 * Gets player's position
-	 * @return position
-	 */
-	public String getPosition() {
-		return position;
-	}
-	
-	/**
-	 * Sets player's position
-	 * @param position
-	 */
-	public void setPosition(String position) {
-		this.position = position;
-	}
-	
+			
 	/**
 	 * Gets player's team
 	 * @return team

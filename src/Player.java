@@ -21,6 +21,8 @@ public class Player {
 	private int id;
 	
 	
+
+
 	/**
 	 * Constructor with all params
 	 * @param name					Player's name	
@@ -117,6 +119,13 @@ public class Player {
 		this.value = value;
 	}
 	
+	/**
+	 * Shows the attributes of the class
+	 */
+	@Override
+	public String toString() {
+		return "Player [name=" + name + ", team=" + team + ", value=" + value + ", price=" + price + ", id=" + id + "]";
+	}
 	
 	
 	

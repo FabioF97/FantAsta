@@ -1,9 +1,10 @@
 
 public class Giocatore {
-	private string nome;
-	private string cognome;
-	private string ruolo;
-	private string suqadra;
+	
+	private String nome;
+	private String cognome;
+	private String ruolo;
+	private String suqadra;
 	private int prezzo;
 	
 

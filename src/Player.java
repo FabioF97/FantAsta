@@ -1,9 +1,10 @@
 /**
  * This class describes the characteristics of a player.
+ * The class is abstract to avoid instancing players without a role.
  * @author Fabio Polito, Fabio Fontana
  *
  */
-public class Player {
+public abstract class Player {
 	
 	/** Minimum selling price of a player */
 	private final int MinPrice = 1;

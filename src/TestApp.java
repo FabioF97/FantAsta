@@ -12,9 +12,13 @@ public class TestApp {
 		Striker p5 = new Striker("Ciccio Valente", "Correggio", 23, 7788);
 		System.out.println(p5);
 		Club c = new Club("Porelli");
+		
+		System.out.println(c.sizeTeam());
+		
 		c.addPlayer(p2, 12);
 		c.addPlayer(p2, 12);
 		c.addPlayer(p2, 12);
+		System.out.println(c.sizeTeam());
 		
 		c.addPlayer(p3, 12);
 		c.addPlayer(p3, 12);
@@ -22,6 +26,9 @@ public class TestApp {
 		c.addPlayer(p3, 12);
 		c.addPlayer(p3, 12);
 		c.addPlayer(p3, 12);
+		c.addPlayer(p3, 12);
+		c.addPlayer(p3, 12);
+		System.out.println(c.sizeTeam());
 		
 		c.addPlayer(p4, 12);
 		c.addPlayer(p4, 12);
@@ -31,7 +38,7 @@ public class TestApp {
 		c.addPlayer(p4, 12);
 		c.addPlayer(p4, 12);
 		c.addPlayer(p4, 12);
-		c.addPlayer(p4, 12);
+		System.out.println(c.sizeTeam());
 		
 		c.addPlayer(p5, 12);
 		c.addPlayer(p5, 12);
@@ -40,6 +47,9 @@ public class TestApp {
 		c.addPlayer(p5, 12);
 		c.addPlayer(p5, 12);
 		c.addPlayer(p5, 12);
+		System.out.println(c.sizeTeam());
+		System.out.println(c.isFullTeam());
+		System.out.println(c);
 
 	}
 }

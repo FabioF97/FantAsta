@@ -42,6 +42,7 @@ public class Club {
 	 */
 	public Club(String name) {
 		super();
+		this.name = name;
 		team = new ArrayList<Player>();
 		this.goalkeepers = 0;
 		this.defenders = 0;
@@ -81,6 +82,41 @@ public class Club {
 		this.team = team;
 	}
 	
+	/**
+	 * Increase the number of goalkeeper by one
+	 */
+	public void increaseGk() {
+		++goalkeepers;
+	}
+	
+	/**
+	 * Increase the number of defenders by one
+	 */
+	public void increaseDef() {
+		++defenders;
+	}
+	
+	/**
+	 * Increase the number of midfielders by one
+	 */
+	public void increaseMid() {
+		++midfielders;
+	}
+	
+	/**
+	 * Increase the number of strikers by one
+	 */
+	public void increaseStr() {
+		++strikers;
+	}
+	
+	/**
+	 * Return the team's size
+	 * @return int
+	 */
+	public int sizeTeam() {
+		return team.size();
+	}
 	/**
 	 * check if the maximum number of players in the team has been reached
 	 * @return boolean
@@ -143,7 +179,6 @@ public class Club {
 	 * @param price
 	 */
 	public void addPlayer(Player player, int price) {
-		//non dice che la squadra è piena, da correggere!
 		if(isFullTeam() == true) {
 			System.out.println("This team is full!!");
 			return;
@@ -156,7 +191,7 @@ public class Club {
 			else {
 				//fare il metodo per incrementare i contatori;
 				//togliere il budget al giocatore che ha acquistato il giocatore
-				++goalkeepers;
+				increaseGk();
 				team.add(player);
 				System.out.println("Gk inserted! -->" + goalkeepers);
 				return;
@@ -169,7 +204,7 @@ public class Club {
 			}
 			else {
 				//fare il metodo per incrementare i contatori;
-				++defenders;
+				increaseDef();
 				team.add(player);
 				System.out.println("Def inserted!");
 				return;
@@ -182,7 +217,7 @@ public class Club {
 			}
 			else {
 				//fare il metodo per incrementare i contatori;
-				++midfielders;
+				increaseMid();
 				team.add(player);
 				System.out.println("Mid inserted!");
 				return;
@@ -195,12 +230,18 @@ public class Club {
 			}
 			else {
 				//fare il metodo per incrementare i contatori;
-				++strikers;
+				increaseStr();
 				team.add(player);
 				System.out.println("Str inserted!");
 				return;
 			}
 		}
+	}
+
+	@Override
+	public String toString() {
+		return "Club [name=" + name + ", team=" + team + ", goalkeepers=" + goalkeepers + ", defenders=" + defenders
+				+ ", midfielders=" + midfielders + ", strikers=" + strikers + "]";
 	}
 	
 }

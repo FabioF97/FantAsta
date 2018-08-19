@@ -13,15 +13,15 @@ public class Club {
 	
 	/*This constant value represents the number of players 
 	 * that will have to be part of the team available to each user*/
-	private final int players = 25;
+	private final int PLAYERS = 25;
 	/*Represents the number of Goalkeepers of each team*/
-	private final int numGoalkeepers = 3;
+	private final int NUMGOALKEEPERS = 3;
 	/*Represents the number of Defenders of each team*/
-	private final int numDefenders = 8;
+	private final int NUMDEFENDERS = 8;
 	/*Represents the number of Midfielders of each team*/
-	private final int numMidfielders = 8;
+	private final int NUMMIDFIELDERS = 8;
 	/*Represents the number of Strikers of each team*/
-	private final int numStrikers = 6;
+	private final int NUMSTRIKERS = 6;
 	
 	
 	private String name;
@@ -122,7 +122,7 @@ public class Club {
 	 * @return boolean
 	 */
 	public boolean isFullTeam() {
-		if(team.size() == players) {
+		if(team.size() == PLAYERS) {
 			return true;
 		}
 		else
@@ -134,7 +134,7 @@ public class Club {
 	 * @return boolean
 	 */
 	public boolean isFullGk() {
-		if(goalkeepers == numGoalkeepers)
+		if(goalkeepers == NUMGOALKEEPERS)
 			return true;
 		else 
 			return false;
@@ -145,7 +145,7 @@ public class Club {
 	 * @return boolean
 	 */
 	public boolean isFullDef() {
-		if(defenders == numDefenders)
+		if(defenders == NUMDEFENDERS)
 			return true;
 		else 
 			return false;
@@ -156,7 +156,7 @@ public class Club {
 	 * @return boolean
 	 */
 	public boolean isFullMid() {
-		if(midfielders == numMidfielders)
+		if(midfielders == NUMMIDFIELDERS)
 			return true;
 		else 
 			return false;
@@ -167,7 +167,7 @@ public class Club {
 	 * @return boolean
 	 */
 	public boolean isFullStr() {
-		if(strikers == numStrikers)
+		if(strikers == NUMSTRIKERS)
 			return true;
 		else 
 			return false;

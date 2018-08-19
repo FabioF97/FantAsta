@@ -7,7 +7,7 @@
 public abstract class Player {
 	
 	/** Minimum selling price of a player */
-	private final int MinPrice = 1;
+	private final int MINPRICE = 1;
 	
 	
 	/** Player's name*/
@@ -37,7 +37,7 @@ public abstract class Player {
 		this.team = team;
 		this.value = value;
 		this.id = id;
-		this.price = MinPrice;
+		this.price = MINPRICE;
 	}
 	
 	/**

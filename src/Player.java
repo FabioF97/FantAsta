@@ -143,15 +143,8 @@ public abstract class Player implements Comparable<Player>{
 	
 	/**
 	 * Method used to sort the team:
-	 * First the method checks if the first player is a goalkeeper. If it is, the method
-	 * checks if the second player is a Gk too.
-	 * If the second plays in a different position then the first player will come first 
-	 * in the order, if instead the second one is a goalkeeper then the method 
-	 * will return the value returned by the compareTo of the names.
-	 * If the first player is not a goalkeeper, the method checks whether the second player
-	 * is and if it is then returns 1. If the second player is not a goalkeeper 
-	 * then the compareTo of the positions will be returned in case they play different 
-	 * positions, the compareTo of the names in case they play the same.
+	 * The players are sorted by looking first at the position
+	 * and then the player's name
 	 */
 	@Override
 	public int compareTo(Player player) {

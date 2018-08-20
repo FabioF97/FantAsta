@@ -85,29 +85,57 @@ public class Club {
 	/**
 	 * Increase the number of goalkeeper by one
 	 */
-	public void increaseGk() {
+	public void incGk() {
 		++goalkeepers;
+	}
+	
+	/**
+	 * Decrease the number of goalkeeper by one
+	 */
+	public void decGk() {
+		--goalkeepers;
 	}
 	
 	/**
 	 * Increase the number of defenders by one
 	 */
-	public void increaseDef() {
+	public void incDef() {
 		++defenders;
+	}
+	
+	/**
+	 * Decrease the number of defenders by one
+	 */
+	public void decDef() {
+		--defenders;
 	}
 	
 	/**
 	 * Increase the number of midfielders by one
 	 */
-	public void increaseMid() {
+	public void incMid() {
 		++midfielders;
+	}
+	
+	/**
+	 * Decrease the number of midfielders by one
+	 */
+	public void decMid() {
+		--midfielders;
 	}
 	
 	/**
 	 * Increase the number of strikers by one
 	 */
-	public void increaseStr() {
+	public void incStr() {
 		++strikers;
+	}
+	
+	/**
+	 * Decrease the number of strikers by one
+	 */
+	public void decStr() {
+		--strikers;
 	}
 	
 	/**
@@ -189,9 +217,8 @@ public class Club {
 				return;
 			}
 			else {
-				//fare il metodo per incrementare i contatori;
 				//togliere il budget al giocatore che ha acquistato il giocatore
-				increaseGk();
+				incGk();
 				team.add(player);
 				System.out.println("Gk inserted! -->" + goalkeepers);
 				return;
@@ -203,8 +230,8 @@ public class Club {
 				return;
 			}
 			else {
-				//fare il metodo per incrementare i contatori;
-				increaseDef();
+				//togliere il budget al giocatore che ha acquistato il giocatore
+				incDef();
 				team.add(player);
 				System.out.println("Def inserted!");
 				return;
@@ -216,8 +243,8 @@ public class Club {
 				return;
 			}
 			else {
-				//fare il metodo per incrementare i contatori;
-				increaseMid();
+				//togliere il budget al giocatore che ha acquistato il giocatore
+				incMid();
 				team.add(player);
 				System.out.println("Mid inserted!");
 				return;
@@ -229,8 +256,8 @@ public class Club {
 				return;
 			}
 			else {
-				//fare il metodo per incrementare i contatori;
-				increaseStr();
+				//togliere il budget al giocatore che ha acquistato il giocatore
+				incStr();
 				team.add(player);
 				System.out.println("Str inserted!");
 				return;

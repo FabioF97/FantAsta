@@ -1,4 +1,6 @@
+
 import java.util.Collections;
+
 
 public class TestApp {
 
@@ -68,10 +70,15 @@ public class TestApp {
 		c.addPlayer(p23, 12);
 		c.addPlayer(p24, 12);
 		c.addPlayer(p25, 12);
+		c.removePlayer(p20);
+		c.removePlayer(p23);
+		c.removePlayer(p20);
 		Collections.sort(c.getTeam());
 		System.out.println(c.sizeTeam());
 		System.out.println(c.isFullTeam());
 		System.out.println(c);
+		
+				
 
 	}
 }

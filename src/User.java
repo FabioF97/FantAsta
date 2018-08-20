@@ -16,9 +16,9 @@ public class User {
 	
 	/**
 	 * Constructor with 3 params
-	 * @param username
-	 * @param club
-	 * @param budget
+	 * @param username				username
+	 * @param club					user's club
+	 * @param budget				user's budget
 	 */
 	public User(String username, Club club, int budget) {
 		super();

@@ -1,5 +1,7 @@
-import java.text.SimpleDateFormat;
+
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 /**
@@ -14,7 +16,7 @@ public class Championship {
 	
 	private String name;
 	/** Date of creation of the championship  */
-	private SimpleDateFormat date;
+	private GregorianCalendar date;
 	/** List of users participating in the championship */
 	private List<User> Competitors;
 	/** Number of users participating in the championship  */
@@ -32,6 +34,7 @@ public class Championship {
 		this.budget = budget;
 		this.nComp = 0;
 		this.Competitors = new ArrayList<User>();
+		this.date = new GregorianCalendar();
 	}
 
 	/**
@@ -50,11 +53,19 @@ public class Championship {
 		this.name = name;
 	}
 
-	public SimpleDateFormat getDate() {
+	/**
+	 * Gets the creation date of this championship
+	 * @return
+	 */
+	public GregorianCalendar getDate() {
 		return date;
 	}
 
-	public void setDate(SimpleDateFormat date) {
+	/**
+	 * Sets the date of the championship
+	 * @param date
+	 */
+	public void setDate(GregorianCalendar date) {
 		this.date = date;
 	}
 
@@ -121,5 +132,12 @@ public class Championship {
 		Competitors.remove(u);
 		decNComp();
 	}
+
+	@Override
+	public String toString() {
+		return "Championship [date= " + date.get(Calendar.DATE) + "/" + (date.get(Calendar.MONTH)+1) + "/" + date.get(Calendar.YEAR) +"]";
+	}
+	
+	
 	
 }

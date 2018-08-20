@@ -16,7 +16,7 @@ public class Championship {
 	
 	private String name;
 	/** Date of creation of the championship  */
-	private GregorianCalendar date;
+	private GregorianCalendar date; // Rivedi data se cambia 
 	/** List of users participating in the championship */
 	private List<User> Competitors;
 	/** Number of users participating in the championship  */

@@ -1,8 +1,13 @@
 
+/**
+ * This class represents defenders
+ * @author Fabio Polito, Fabio Fontana
+ *
+ */
 public class Defender extends Player{
 
 	/**
-	 * 
+	 * Constructor with 4 params
 	 * @param name					Player's name	
 	 * @param team					Player's team
 	 * @param value					Player's value

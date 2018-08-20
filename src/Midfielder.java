@@ -9,8 +9,8 @@ public class Midfielder extends Player {
 	 * @param id					Player's id
 	 */
 	public Midfielder(String name, String team, int value, int id) {
-		super(name, team, value, id);
-		// TODO Auto-generated constructor stub
+		super(name, team, "Mid", value, id);
+		
 	}
 
 }

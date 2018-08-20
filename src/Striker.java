@@ -9,8 +9,8 @@ public class Striker extends Player {
 	 * @param id					Player's id
 	 */
 	public Striker(String name, String team, int value, int id) {
-		super(name, team, value, id);
-		// TODO Auto-generated constructor stub
+		super(name, team, "Str", value, id);
+		
 	}
 
 }

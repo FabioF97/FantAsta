@@ -264,6 +264,33 @@ public class Club {
 			}
 		}
 	}
+	
+	/**
+	 * remove a player from the team.
+	 * @param p player to remove
+	 */
+	public void removePlayer (Player p) {
+		if (team.contains(p)) {
+				team.remove(p);
+				if(p instanceof Goalkeeper) {
+					decGk();
+				}
+				if(p instanceof Defender) {
+					decDef();
+				}
+				if(p instanceof Midfielder) {
+					decMid();
+				}
+				if(p instanceof Striker) {
+					decStr();
+				}
+				// aggiungere il budget del giocatore rimosso
+		} else {
+			
+			System.out.println(p.getName() + " doesn't belong to the club " + name);
+		}
+		return;
+	}
 
 	@Override
 	public String toString() {

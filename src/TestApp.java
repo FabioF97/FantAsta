@@ -68,7 +68,7 @@ public class TestApp {
 		c.addPlayer(p23, 12);
 		c.addPlayer(p24, 12);
 		c.addPlayer(p25, 12);
-		Collections.shuffle(c.getTeam());
+		Collections.sort(c.getTeam());
 		System.out.println(c.sizeTeam());
 		System.out.println(c.isFullTeam());
 		System.out.println(c);

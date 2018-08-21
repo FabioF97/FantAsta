@@ -107,8 +107,6 @@ public class User {
 		}
 	}
 	
-	public boolean 
-
 	
 	@Override
 	public String toString() {

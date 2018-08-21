@@ -18,7 +18,7 @@ public class Championship {
 	/** Date of creation of the championship  */
 	private GregorianCalendar date; // Rivedi data se cambia 
 	/** List of users participating in the championship */
-	private List<User> Competitors;
+	private List<User> competitors;
 	/** Number of users participating in the championship  */
 	private int nComp;
 	private int budget;
@@ -33,7 +33,7 @@ public class Championship {
 		this.name = name;
 		this.budget = budget;
 		this.nComp = 0;
-		this.Competitors = new ArrayList<User>();
+		this.competitors = new ArrayList<User>();
 		this.date = new GregorianCalendar();
 	}
 
@@ -120,7 +120,7 @@ public class Championship {
 	 * @param u
 	 */
 	public void addCompetitor (User u) {
-		Competitors.add(u);
+		competitors.add(u);
 		incNComp();
 	}
 	
@@ -129,8 +129,24 @@ public class Championship {
 	 * @param u
 	 */
 	public void removeCompetitor (User u) {
-		Competitors.remove(u);
+		competitors.remove(u);
 		decNComp();
+	}
+	
+	/**
+	 * Check if all the team are full.
+	 * @return boolean
+	 */
+	public boolean checkClub() {
+		boolean ret = true;
+		for (User u : competitors) {
+			if (!(u.getClub().isFullTeam()))
+			{
+				System.out.println("the club " + u.getClub().getName() + " is not complete!");
+				ret = false;
+			}
+		}
+		return ret;
 	}
 
 	@Override
@@ -138,6 +154,9 @@ public class Championship {
 		return "Championship [date= " + date.get(Calendar.DATE) + "/" + (date.get(Calendar.MONTH)+1) + "/" + date.get(Calendar.YEAR) +"]";
 	}
 	
+	
+	
+
 	
 	
 }

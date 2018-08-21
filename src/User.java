@@ -99,6 +99,7 @@ public class User {
 	 */
 	public boolean buyPlayer(Player player, int price) {
 		if(club.addPlayer(player) == true) {
+			club.inc(player);
 			withdraw(price);
 			return true;
 		}
@@ -107,6 +108,54 @@ public class User {
 		}
 	}
 	
+	/**
+	 * If the player is sold abroad the user has the right to be returned 
+	 * the invested amount to buy it
+	 * @param player
+	 * @return
+	 */
+	public boolean sell(Player player) {
+		if(club.removePlayer(player) == true) {
+			club.dec(player);
+			deposit(player.getPrice());
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
+	/**
+	 * When the user releases one of his players, the player's value is returned
+	 * @param player
+	 * @return
+	 */
+	public boolean release(Player player) {
+		if(club.removePlayer(player) == true) {
+			club.dec(player);
+			deposit(player.getValue());
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+	
+	/**
+	 * Method used for the transfer at no cost during the exchange from one user to another
+	 * @param player
+	 * @param user
+	 * @return
+	 */
+	public boolean transfer(Player player, User user) {
+		if(club.removePlayer(player) == true) {
+			club.dec(player);
+			user.getClub().getTeam().add(player);
+			user.getClub().inc(player);
+			return true;
+		}
+		return false;
+	}
 	
 	@Override
 	public String toString() {

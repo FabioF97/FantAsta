@@ -138,6 +138,56 @@ public class Club {
 		--strikers;
 	}
 	
+	
+	/**
+	 * Decrease the number of players based on position
+	 * @param player
+	 */
+	public void dec(Player player) {
+		if(player instanceof Goalkeeper) {
+			decGk();
+			return;
+		}
+		if(player instanceof Defender) {
+			decDef();
+			return;
+		}
+		if(player instanceof Midfielder) {
+			decMid();
+			return;
+		}
+		if(player instanceof Striker) {
+			decStr();
+			return;
+		}
+		System.out.println("Player's position unknown in dec");
+	}
+	
+	/**
+	 * Increase the number of players based on position
+	 * @param player
+	 */
+	public void inc(Player player) {
+		if(player instanceof Goalkeeper) {
+			incGk();
+			return;
+		}
+		if(player instanceof Defender) {
+			incDef();
+			return;
+		}
+		if(player instanceof Midfielder) {
+			incMid();
+			return;
+		}
+		if(player instanceof Striker) {
+			incStr();
+			return;
+		}
+		System.out.println("Player's position unknown in inc");
+	}
+	
+	
 	/**
 	 * Return the team's size
 	 * @return int
@@ -286,7 +336,6 @@ public class Club {
 					decStr();
 					return true;
 				}
-				// aggiungere il budget del giocatore rimosso
 		} else {
 			
 			System.out.println(p.getName() + " doesn't belong to the club " + name);

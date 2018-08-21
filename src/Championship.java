@@ -101,6 +101,23 @@ public class Championship {
 		this.budget = budget;
 	}
 	
+	
+	/**
+	 * Gets the list of users
+	 * @return competitors
+	 */
+	public List<User> getCompetitors() {
+		return competitors;
+	}
+
+	/**
+	 * Sets competitors
+	 * @param competitors
+	 */
+	public void setCompetitors(List<User> competitors) {
+		this.competitors = competitors;
+	}
+
 	/**
 	 * Increase by one the number of Competitors.
 	 */
@@ -142,7 +159,12 @@ public class Championship {
 		for (User u : competitors) {
 			if (!(u.getClub().isFullTeam()))
 			{
-				System.out.println("the club " + u.getClub().getName() + " is not complete!");
+				if(u.getClub().getTeam().size() < Club.PLAYERS) {
+					System.out.println("there are too few players in " + u.getClub().getName() + "!");
+				}
+				else {
+					System.out.println("there are too many players in " + u.getClub().getName() + "!");
+				}
 				ret = false;
 			}
 		}
@@ -153,10 +175,6 @@ public class Championship {
 	public String toString() {
 		return "Championship [date= " + date.get(Calendar.DATE) + "/" + (date.get(Calendar.MONTH)+1) + "/" + date.get(Calendar.YEAR) +"]";
 	}
-	
-	
-	
-
 	
 	
 }

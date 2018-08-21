@@ -13,7 +13,7 @@ public class Club {
 	
 	/*This constant value represents the number of players 
 	 * that will have to be part of the team available to each user*/
-	private final int PLAYERS = 25;
+	public static final int PLAYERS = 25;
 	/*Represents the number of Goalkeepers of each team*/
 	private final int NUMGOALKEEPERS = 3;
 	/*Represents the number of Defenders of each team*/

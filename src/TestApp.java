@@ -1,7 +1,5 @@
 
-import java.util.Calendar;
 import java.util.Collections;
-import java.util.GregorianCalendar;
 
 
 public class TestApp {
@@ -41,8 +39,14 @@ public class TestApp {
 		Championship ch = new Championship("Parrocchia", 50000000);
 		User u = new User("Fenomeno", c, ch.getBudget());
 		ch.addCompetitor(u);
+		Club c2 = new Club("Scapoli");
+		User u2 = new User("Muscio",c2,ch.getBudget());
+		ch.addCompetitor(u2);
 		
 		System.out.println(c.sizeTeam());
+		System.out.println(ch.getCompetitors().size());
+		
+		Striker p26 = new Striker("Ronaldo","Juventus",23,54);
 		
 		u.buyPlayer(p, 10);
 		u.buyPlayer(p2, 10);
@@ -76,14 +80,22 @@ public class TestApp {
 		u.buyPlayer(p23, 10);
 		u.buyPlayer(p24, 10);
 		u.buyPlayer(p25, 10);
-		System.out.println(c.sizeTeam());
-		c.removePlayer(p20);
-		c.removePlayer(p23);
-		c.removePlayer(p20);
+		
+		
+		u2.buyPlayer(p26, 432);
+		System.out.println(u2.transfer(p26, u));
+		System.out.println(c2.sizeTeam());
+		System.out.println(c2);
+		System.out.println(c);
+		
+		System.out.println("PRIMAAAA");
+		
 		Collections.sort(c.getTeam());
+		Collections.sort(c2.getTeam());
 		System.out.println(c.sizeTeam());
 		System.out.println(c.isFullTeam());
 		System.out.println(c);
+		System.out.println(c2);
 		ch.checkClub();		
 
 	}

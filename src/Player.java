@@ -7,7 +7,7 @@
 public abstract class Player implements Comparable<Player>{
 	
 	/** Minimum selling price of a player */
-	private final int MINPRICE = 1;
+	private final int MINPRICE = 0;
 	
 	
 	private String name;

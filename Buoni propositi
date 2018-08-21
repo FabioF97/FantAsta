@@ -1,9 +1,11 @@
-- Mattere un booleano in Player per fa si che un giocatore sia visibile o meno nel listone
+- Mattere un booleano in Player per fa si che un giocatore sia visibile o meno nel listone (FATTO)
 
-- Fare un metodo in club che toglie il giocatore e aggiunge il price al proprietario (User)
+- Fare un metodo in club che toglie il giocatore e aggiunge il price al proprietario (User) (FATTO)
 
-- Fare che metodo che toglie giocatore e aggiunge value al proprietario (User)
+- Fare che metodo che toglie giocatore e aggiunge value al proprietario (User) (FATTO)
 
-- Fare metodo che toglie un giocatore e lo aggiunge a un'altra squadra senza fare controlli (User/team)
+- Fare metodo che toglie un giocatore e lo aggiunge a un'altra squadra senza fare controlli (User)
 
 - Controllare che alla fine dell'asta tutte le squadre siano al completo
+
+- Bisogna capire come gestire la visibilità del giocatore ed implementarlo con metodi e nei metodi già esistenti

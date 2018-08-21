@@ -95,12 +95,12 @@ public class User {
 	 * An user can buy a player, his price will be subtracted from the budget
 	 * @param player
 	 * @param price
-	 * @return
+	 * @return boolean
 	 */
 	public boolean buyPlayer(Player player, int price) {
 		if(club.addPlayer(player) == true) {
-			club.inc(player);
 			withdraw(price);
+			player.setPrice(price);
 			return true;
 		}
 		else {
@@ -112,11 +112,10 @@ public class User {
 	 * If the player is sold abroad the user has the right to be returned 
 	 * the invested amount to buy it
 	 * @param player
-	 * @return
+	 * @return boolean
 	 */
 	public boolean sell(Player player) {
 		if(club.removePlayer(player) == true) {
-			club.dec(player);
 			deposit(player.getPrice());
 			return true;
 		}
@@ -128,11 +127,10 @@ public class User {
 	/**
 	 * When the user releases one of his players, the player's value is returned
 	 * @param player
-	 * @return
+	 * @return boolean
 	 */
 	public boolean release(Player player) {
 		if(club.removePlayer(player) == true) {
-			club.dec(player);
 			deposit(player.getValue());
 			return true;
 		}
@@ -145,11 +143,10 @@ public class User {
 	 * Method used for the transfer at no cost during the exchange from one user to another
 	 * @param player
 	 * @param user
-	 * @return
+	 * @return boolean
 	 */
 	public boolean transfer(Player player, User user) {
 		if(club.removePlayer(player) == true) {
-			club.dec(player);
 			user.getClub().getTeam().add(player);
 			user.getClub().inc(player);
 			return true;

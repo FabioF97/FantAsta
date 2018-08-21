@@ -38,44 +38,44 @@ public class TestApp {
 		Striker p25 = new Striker("Thereau", "Fiorentina", 23, 7788);
 		System.out.println(p5);
 		Club c = new Club("Porelli");
-		User u = new User("Fenomeno", c, 5000000);
 		Championship ch = new Championship("Parrocchia", 50000000);
+		User u = new User("Fenomeno", c, ch.getBudget());
 		ch.addCompetitor(u);
 		
 		System.out.println(c.sizeTeam());
 		
-		u.buyPlayer(p, 12);
-		u.buyPlayer(p2, 12);
-		u.buyPlayer(p3, 12);
+		u.buyPlayer(p, 10);
+		u.buyPlayer(p2, 10);
+		u.buyPlayer(p3, 10);
 		System.out.println(c.sizeTeam());
 		
-		u.buyPlayer(p4, 12);
-		u.buyPlayer(p5, 12);
-		u.buyPlayer(p6, 12);
-		u.buyPlayer(p7, 12);
-		u.buyPlayer(p8, 12);
-		u.buyPlayer(p9, 12);
-		u.buyPlayer(p10, 12);
-		u.buyPlayer(p11, 12);
+		u.buyPlayer(p4, 10);
+		u.buyPlayer(p5, 10);
+		u.buyPlayer(p6, 10);
+		u.buyPlayer(p7, 10);
+		u.buyPlayer(p8, 10);
+		u.buyPlayer(p9, 10);
+		u.buyPlayer(p10, 10);
+		u.buyPlayer(p11, 10);
 		System.out.println(c.sizeTeam());
 		
-		u.buyPlayer(p12, 12);
-		u.buyPlayer(p13, 12);
-		u.buyPlayer(p14, 12);
-		u.buyPlayer(p15, 12);
-		u.buyPlayer(p16, 12);
-		u.buyPlayer(p17, 12);
-		u.buyPlayer(p18, 12);
-		u.buyPlayer(p19, 12);
+		u.buyPlayer(p12, 10);
+		u.buyPlayer(p13, 10);
+		u.buyPlayer(p14, 10);
+		u.buyPlayer(p15, 10);
+		u.buyPlayer(p16, 10);
+		u.buyPlayer(p17, 10);
+		u.buyPlayer(p18, 10);
+		u.buyPlayer(p19, 10);
 		System.out.println(c.sizeTeam());
 		ch.checkClub();
 		
-		u.buyPlayer(p20, 12);
-		u.buyPlayer(p21, 12);
-		u.buyPlayer(p22, 12);
-		u.buyPlayer(p23, 12);
-		u.buyPlayer(p24, 12);
-		u.buyPlayer(p25, 12);
+		u.buyPlayer(p20, 10);
+		u.buyPlayer(p21, 10);
+		u.buyPlayer(p22, 10);
+		u.buyPlayer(p23, 10);
+		u.buyPlayer(p24, 10);
+		u.buyPlayer(p25, 10);
 		System.out.println(c.sizeTeam());
 		c.removePlayer(p20);
 		c.removePlayer(p23);
@@ -84,16 +84,7 @@ public class TestApp {
 		System.out.println(c.sizeTeam());
 		System.out.println(c.isFullTeam());
 		System.out.println(c);
-		ch.checkClub();
-		
-		
-		
-		Championship c1 = new Championship("Baralla", 500000);
-		System.out.println(c1);
-		
-		Calendar calendar = new GregorianCalendar();
-		
-				
+		ch.checkClub();		
 
 	}
 }

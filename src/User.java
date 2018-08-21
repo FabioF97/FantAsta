@@ -90,6 +90,24 @@ public class User {
 	public void deposit(int deposit) {
 		this.budget = this.budget + deposit;
 	}
+	
+	/**
+	 * An user can buy a player, his price will be subtracted from the budget
+	 * @param player
+	 * @param price
+	 * @return
+	 */
+	public boolean buyPlayer(Player player, int price) {
+		if(club.addPlayer(player) == true) {
+			withdraw(price);
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+	
+	public boolean 
 
 	
 	@Override

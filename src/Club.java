@@ -206,90 +206,92 @@ public class Club {
 	 * @param player
 	 * @param price
 	 */
-	public void addPlayer(Player player, int price) {
+	public boolean addPlayer(Player player) {
 		if(isFullTeam() == true) {
 			System.out.println("This team is full!!");
-			return;
+			return false;
 		}
 		if(player instanceof Goalkeeper) {
 			if(isFullGk() == true) {
 				System.out.println("Goalkeepers are enough");
-				return;
+				return false;
 			}
 			else {
-				//togliere il budget al giocatore che ha acquistato il giocatore
 				incGk();
 				team.add(player);
 				System.out.println("Gk inserted! -->" + goalkeepers);
-				return;
+				return true;
 			}
 		}
 		if(player instanceof Defender) {
 			if(isFullDef() == true) {
 				System.out.println("Defenders are enough");
-				return;
+				return false;
 			}
 			else {
-				//togliere il budget al giocatore che ha acquistato il giocatore
 				incDef();
 				team.add(player);
 				System.out.println("Def inserted!");
-				return;
+				return true;
 			}
 		}
 		if(player instanceof Midfielder) {
 			if(isFullMid() == true) {
 				System.out.println("Midfielders are enough");
-				return;
+				return false;
 			}
 			else {
-				//togliere il budget al giocatore che ha acquistato il giocatore
 				incMid();
 				team.add(player);
 				System.out.println("Mid inserted!");
-				return;
+				return true;
 			}
 		}
 		if(player instanceof Striker) {
 			if(isFullStr() == true) {
 				System.out.println("Strikers are enough");
-				return;
+				return false;
 			}
 			else {
-				//togliere il budget al giocatore che ha acquistato il giocatore
 				incStr();
 				team.add(player);
 				System.out.println("Str inserted!");
-				return;
+				return true;
 			}
 		}
+		System.out.println("Player's position is unknown...");
+		return false;
 	}
 	
 	/**
-	 * remove a player from the team.
+	 * Remove a player from the team.
 	 * @param p player to remove
 	 */
-	public void removePlayer (Player p) {
+	public boolean removePlayer (Player p) {
 		if (team.contains(p)) {
 				team.remove(p);
 				if(p instanceof Goalkeeper) {
 					decGk();
+					return true;
 				}
 				if(p instanceof Defender) {
 					decDef();
+					return true;
 				}
 				if(p instanceof Midfielder) {
 					decMid();
+					return true;
 				}
 				if(p instanceof Striker) {
 					decStr();
+					return true;
 				}
 				// aggiungere il budget del giocatore rimosso
 		} else {
 			
 			System.out.println(p.getName() + " doesn't belong to the club " + name);
 		}
-		return;
+		return false;
 	}
 
 	@Override

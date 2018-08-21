@@ -10,18 +10,14 @@ public abstract class Player implements Comparable<Player>{
 	private final int MINPRICE = 1;
 	
 	
-	/** Player's name*/
 	private String name;
-	/** Player's team*/
 	private String team;
-	/**Player's role*/
 	private String position; 
-	/** Player's value*/
 	private int value;
-	/** price at which the player is bought */
 	private int price;
-	/** Player's id*/
 	private int id;
+	//private boolean visible;
+	
 	
 	
 
@@ -33,6 +29,7 @@ public abstract class Player implements Comparable<Player>{
 	 * @param position				Player's position
 	 * @param value					Player's value
 	 * @param id					Player's id
+	 * @param visible				If it's true, the player will be visible in the list
 	 */
 	public Player(String name, String team, String position, int value, int id) {
 		super();
@@ -41,6 +38,7 @@ public abstract class Player implements Comparable<Player>{
 		this.position = position;
 		this.value = value;
 		this.id = id;
+		//this.visible = true;
 		this.price = MINPRICE;
 	}
 	
@@ -139,6 +137,27 @@ public abstract class Player implements Comparable<Player>{
 	public void setValue(int value) {
 		this.value = value;
 	}
+	
+	/*
+	/**
+	 * Sets visible boolean
+	 * @return
+	 */
+	/*
+	public boolean isVisible() {
+		return visible;
+	}
+	*/
+
+	/**
+	 * Gets visible boolean
+	 * @param visible
+	 */
+	/*
+	public void setVisible(boolean visible) {
+		this.visible = visible;
+	}
+	*/
 	
 	
 	/**

@@ -166,6 +166,22 @@ public class DBQuery {
 	 * @throws SQLException
 	 */
 	/*
+	public Club getClub(String club) throws SQLException {
+		Club ret;
+		List<Player> lPly = new ArrayList<Player>();
+		ResultSet rs = db.executeQuery("select * "	+ "from list_player" + " where Club=" + club);
+		while(rs.next()) {
+			lPly.add(new Striker(rs.getString("name"), rs.getString("team"), rs.getInt("value"), rs.getInt("id"), rs.getInt("price"), toBoolean(rs.getInt("visible"))));
+		}
+	}
+	*/
+	
+	/**
+	 * Returns the list filled with all strikers for the second auction.
+	 * @return List<Player>
+	 * @throws SQLException
+	 */
+	/*
 	 * BISOGNA CAMBIARE IL COSTRUTTORE PRIMA DI ANDARE AVANTI CON QUESTO METODO
 	public List<Championship> getChampionship() throws SQLException {
 		List<Championship> lChmp = new ArrayList<Championship>();

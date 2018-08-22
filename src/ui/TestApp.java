@@ -7,6 +7,7 @@ import java.util.Collections;
 import java.util.List;
 
 import database.DBManager;
+import database.DBQuery;
 
 
 public class TestApp {
@@ -110,46 +111,28 @@ public class TestApp {
 		System.out.println(c2);
 		ch.checkClub();		
 		*/
-		
-		List<Player> listone = new ArrayList<Player>();
-		
-		try {
-			DBManager db = new DBManager();
-			ResultSet rs = db.executeQuery("SELECT * FROM list_player");
-			while(rs.next()) {
-				listone.add(readPlayer(rs.getString("name"),rs.getString("team"),rs.getString("position"),rs.getInt("value"),rs.getInt("id")));
-				System.out.println(readPlayer(rs.getString("name"),rs.getString("team"),rs.getString("position"),rs.getInt("value"),rs.getInt("id")));
-			}
-		} catch(SQLException e) {
-			System.out.println("E' finito qua");
-		}
-		catch(ClassNotFoundException e) {
-			e.printStackTrace();
-		}
-		System.out.println(listone.size());
+			DBQuery q = new DBQuery();
+			List<Player> l1 = q.getDef1();
+			System.out.println(l1);
+			List<Player> l2 = q.getGk1();
+			System.out.println(l2);
+			List<Player> l3 = q.getMid1();
+			System.out.println(l3);
+			List<Player> l4 = q.getStr1();
+			System.out.println(l4);
+			
+			System.out.println("-----------------------------------------------");
+			List<Player> l5 = q.getDef2();
+			System.out.println(l5);
+			List<Player> l6 = q.getGk2();
+			System.out.println(l6);
+			List<Player> l7 =q.getMid2();
+			System.out.println(l7);
+			List<Player> l8 =  q.getStr2();
+			System.out.println(l8);
+			
 
-	}
-	
-	public static Player readPlayer(String name, String team, String position, int value, int id) {
-		Player p;
-		if(position.equals("Gk")) {
-			p = new Goalkeeper(name,team,value,id);
-			return p;
-		}
-		if(position.equals("Def")) {
-			p = new Defender(name,team,value,id);
-			return p;
-		}
-		if(position.equals("Mid")) {
-			p = new Midfielder(name,team,value,id);
-			return p;
-		}
-		if(position.equals("Str")) {
-			p = new Striker(name,team,value,id);
-			return p;
-		}
-			System.out.println("Error in readPlayer");
-			return null;
+
 	}
 	
 	public  static void printRow(ResultSet rs) throws SQLException {

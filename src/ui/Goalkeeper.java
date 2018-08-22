@@ -29,7 +29,7 @@ public class Goalkeeper extends Player {
 	 * @param visible				If it's true, the player will be visible in the list
 	 */
 	public Goalkeeper(String name, String team, int value, int id, int price, boolean visible) {
-		super(name, team, "Str", value, id, price, visible);
+		super(name, team, "Gk", value, id, price, visible);
 		
 	}
 	

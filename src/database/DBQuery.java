@@ -41,6 +41,14 @@ public class DBQuery {
 	}
 	
 	/**
+	 * closes the connection
+	 * @throws SQLException
+	 */
+	public void close() throws SQLException{
+		db.close();
+	}
+	
+	/**
 	 * Returns the list filled with all goalkeepers for the first auction.
 	 * @return List<Player>
 	 * @throws SQLException
@@ -69,89 +77,127 @@ public class DBQuery {
 	}
 	
 	/**
-	 * Returns the list filled with all goalkeepers for the first auction.
+	 * Returns the list filled with all defenders for the first auction.
 	 * @return List<Player>
 	 * @throws SQLException
 	 */
 	public List<Player> getDef1() throws SQLException {
-		List<Player> lGk = new ArrayList<Player>();
-		ResultSet rs = db.executeQuery("select * "	+ "from list_player" + " where position='Gk'");
+		List<Player> lDef = new ArrayList<Player>();
+		ResultSet rs = db.executeQuery("select * "	+ "from list_player" + " where position='Def'");
 		while(rs.next()) {
-			lGk.add(new Defender(rs.getString("name"), rs.getString("team"), rs.getInt("value"), rs.getInt("id")));
+			lDef.add(new Defender(rs.getString("name"), rs.getString("team"), rs.getInt("value"), rs.getInt("id")));
 		}
-		return lGk;
+		return lDef;
 	}
 	
 	/**
-	 * Returns the list filled with all goalkeepers for the second auction.
+	 * Returns the list filled with all defenders for the second auction.
 	 * @return List<Player>
 	 * @throws SQLException
 	 */
 	public List<Player> getDef2() throws SQLException {
-		List<Player> lGk = new ArrayList<Player>();
-		ResultSet rs = db.executeQuery("select * "	+ "from list_player" + " where position='Gk'");
+		List<Player> lDef = new ArrayList<Player>();
+		ResultSet rs = db.executeQuery("select * "	+ "from list_player" + " where position='Def'");
 		while(rs.next()) {
-			lGk.add(new Defender(rs.getString("name"), rs.getString("team"), rs.getInt("value"), rs.getInt("id"), rs.getInt("price"), toBoolean(rs.getInt("visible"))));
+			lDef.add(new Defender(rs.getString("name"), rs.getString("team"), rs.getInt("value"), rs.getInt("id"), rs.getInt("price"), toBoolean(rs.getInt("visible"))));
 		}
-		return lGk;
+		return lDef;
 	}
 	
 	/**
-	 * Returns the list filled with all goalkeepers for the first auction.
+	 * Returns the list filled with all midfielders for the first auction.
 	 * @return List<Player>
 	 * @throws SQLException
 	 */
 	public List<Player> getMid1() throws SQLException {
-		List<Player> lGk = new ArrayList<Player>();
-		ResultSet rs = db.executeQuery("select * "	+ "from list_player" + " where position='Gk'");
+		List<Player> lMid = new ArrayList<Player>();
+		ResultSet rs = db.executeQuery("select * "	+ "from list_player" + " where position='Mid'");
 		while(rs.next()) {
-			lGk.add(new Midfielder(rs.getString("name"), rs.getString("team"), rs.getInt("value"), rs.getInt("id")));
+			lMid.add(new Midfielder(rs.getString("name"), rs.getString("team"), rs.getInt("value"), rs.getInt("id")));
 		}
-		return lGk;
+		return lMid;
 	}
 	
 	/**
-	 * Returns the list filled with all goalkeepers for the second auction.
+	 * Returns the list filled with all midfielders for the second auction.
 	 * @return List<Player>
 	 * @throws SQLException
 	 */
 	public List<Player> getMid2() throws SQLException {
-		List<Player> lGk = new ArrayList<Player>();
-		ResultSet rs = db.executeQuery("select * "	+ "from list_player" + " where position='Gk'");
+		List<Player> lMid = new ArrayList<Player>();
+		ResultSet rs = db.executeQuery("select * "	+ "from list_player" + " where position='Mid'");
 		while(rs.next()) {
-			lGk.add(new Midfielder(rs.getString("name"), rs.getString("team"), rs.getInt("value"), rs.getInt("id"), rs.getInt("price"), toBoolean(rs.getInt("visible"))));
+			lMid.add(new Midfielder(rs.getString("name"), rs.getString("team"), rs.getInt("value"), rs.getInt("id"), rs.getInt("price"), toBoolean(rs.getInt("visible"))));
 		}
-		return lGk;
+		return lMid;
 	}
 	
 	/**
-	 * Returns the list filled with all goalkeepers for the first auction.
+	 * Returns the list filled with all strikers for the first auction.
 	 * @return List<Player>
 	 * @throws SQLException
 	 */
 	public List<Player> getStr1() throws SQLException {
-		List<Player> lGk = new ArrayList<Player>();
-		ResultSet rs = db.executeQuery("select * "	+ "from list_player" + " where position='Gk'");
+		List<Player> lStr = new ArrayList<Player>();
+		ResultSet rs = db.executeQuery("select * "	+ "from list_player" + " where position='Str'");
 		while(rs.next()) {
-			lGk.add(new Striker(rs.getString("name"), rs.getString("team"), rs.getInt("value"), rs.getInt("id")));
+			lStr.add(new Striker(rs.getString("name"), rs.getString("team"), rs.getInt("value"), rs.getInt("id")));
 		}
-		return lGk;
+		return lStr;
 	}
 	
 	/**
-	 * Returns the list filled with all goalkeepers for the second auction.
+	 * Returns the list filled with all strikers for the second auction.
 	 * @return List<Player>
 	 * @throws SQLException
 	 */
 	public List<Player> getStr2() throws SQLException {
-		List<Player> lGk = new ArrayList<Player>();
-		ResultSet rs = db.executeQuery("select * "	+ "from list_player" + " where position='Gk'");
+		List<Player> lStr = new ArrayList<Player>();
+		ResultSet rs = db.executeQuery("select * "	+ "from list_player" + " where position='Str'");
 		while(rs.next()) {
-			lGk.add(new Striker(rs.getString("name"), rs.getString("team"), rs.getInt("value"), rs.getInt("id"), rs.getInt("price"), toBoolean(rs.getInt("visible"))));
+			lStr.add(new Striker(rs.getString("name"), rs.getString("team"), rs.getInt("value"), rs.getInt("id"), rs.getInt("price"), toBoolean(rs.getInt("visible"))));
 		}
-		return lGk;
+		return lStr;
 	}
 	
+	/**
+	 * Returns the list filled with all strikers for the second auction.
+	 * @return List<Player>
+	 * @throws SQLException
+	 */
+	/*
+	 * BISOGNA CAMBIARE IL COSTRUTTORE PRIMA DI ANDARE AVANTI CON QUESTO METODO
+	public List<Championship> getChampionship() throws SQLException {
+		List<Championship> lChmp = new ArrayList<Championship>();
+		ResultSet rs = db.executeQuery("Select * from championship");
+		while(rs.next()) {
+			lChmp.add(rs.getString("name"),rs.get);
+		}
+		return lChmp;
+	}*/
+	
+	/**
+	 * Returns the list filled with all the users of a championship
+	 * @return List<User>
+	 * @throws SQLException
+	 */
+	/*
+	 * Bisogna mettere dentro il metodo il riempimento delle rose da database
+	public List<User> getUser() throws SQLException {
+		List<User> lUsr = new ArrayList<User>();
+		ResultSet rs = db.executeQuery("select * "	+ "from list_player" + " where position='Str'");
+		while(rs.next()) {
+			lUsr.add();
+		}
+		return lUsr;
+	}
+	*/
+	
+	/**
+	 * Prints a row
+	 * @param rs
+	 * @throws SQLException
+	 */
 	public void printRow(ResultSet rs) throws SQLException {
 		System.out.println(
 				"id=" + rs.getInt("id") + 

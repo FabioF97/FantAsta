@@ -91,7 +91,7 @@ public class DBQuery {
 		List<Player> lGk = new ArrayList<Player>();
 		ResultSet rs = db.executeQuery("select * "	+ "from list_player" + " where position='Gk'");
 		while(rs.next()) {
-			lGk.add(new Defender(rs.getString("name"), rs.getString("team"), rs.getInt("value"), rs.getInt("id"), rs.getInt("price"), rs.getInt("visible")));
+			lGk.add(new Defender(rs.getString("name"), rs.getString("team"), rs.getInt("value"), rs.getInt("id"), rs.getInt("price"), toBoolean(rs.getInt("visible"))));
 		}
 		return lGk;
 	}
@@ -119,7 +119,7 @@ public class DBQuery {
 		List<Player> lGk = new ArrayList<Player>();
 		ResultSet rs = db.executeQuery("select * "	+ "from list_player" + " where position='Gk'");
 		while(rs.next()) {
-			lGk.add(new Midfielder(rs.getString("name"), rs.getString("team"), rs.getInt("value"), rs.getInt("id"), rs.getInt("price"), rs.getInt("visible")));
+			lGk.add(new Midfielder(rs.getString("name"), rs.getString("team"), rs.getInt("value"), rs.getInt("id"), rs.getInt("price"), toBoolean(rs.getInt("visible"))));
 		}
 		return lGk;
 	}
@@ -147,7 +147,7 @@ public class DBQuery {
 		List<Player> lGk = new ArrayList<Player>();
 		ResultSet rs = db.executeQuery("select * "	+ "from list_player" + " where position='Gk'");
 		while(rs.next()) {
-			lGk.add(new Striker(rs.getString("name"), rs.getString("team"), rs.getInt("value"), rs.getInt("id"), rs.getInt("price"), rs.getInt("visible")));
+			lGk.add(new Striker(rs.getString("name"), rs.getString("team"), rs.getInt("value"), rs.getInt("id"), rs.getInt("price"), toBoolean(rs.getInt("visible"))));
 		}
 		return lGk;
 	}

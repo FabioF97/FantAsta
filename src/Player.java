@@ -16,7 +16,7 @@ public abstract class Player implements Comparable<Player>{
 	private int value;
 	private int price;
 	private int id;
-	//private boolean visible;
+	private boolean visible;
 	
 	
 	
@@ -38,7 +38,7 @@ public abstract class Player implements Comparable<Player>{
 		this.position = position;
 		this.value = value;
 		this.id = id;
-		//this.visible = true;
+		this.visible = true;
 		this.price = MINPRICE;
 	}
 	
@@ -138,26 +138,23 @@ public abstract class Player implements Comparable<Player>{
 		this.value = value;
 	}
 	
-	/*
+	
 	/**
 	 * Sets visible boolean
 	 * @return
 	 */
-	/*
 	public boolean isVisible() {
 		return visible;
 	}
-	*/
+	
 
 	/**
 	 * Gets visible boolean
 	 * @param visible
 	 */
-	/*
 	public void setVisible(boolean visible) {
 		this.visible = visible;
 	}
-	*/
 	
 	
 	/**
@@ -215,7 +212,7 @@ public abstract class Player implements Comparable<Player>{
 	 */
 	@Override
 	public String toString() {
-		return "[" + name + ", " + position +"]";
+		return "[" + name + ", " + position + ", " + visible +"]";
 	}
 	
 

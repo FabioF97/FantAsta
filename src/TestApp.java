@@ -1,11 +1,16 @@
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 
 
 public class TestApp {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws SQLException {
 
+		/*
 		Goalkeeper p = new Goalkeeper("Lafont", "Fiorentina", 23, 7788);
 		Goalkeeper p2 = new Goalkeeper("Dragowski", "Fiorentina", 23, 7788);
 		Goalkeeper p3 = new Goalkeeper("Sportiello", "Fiorentina", 23, 7788);
@@ -86,9 +91,13 @@ public class TestApp {
 		System.out.println(u2.transfer(p26, u));
 		System.out.println(c2.sizeTeam());
 		System.out.println(c2);
+		Collections.sort(u.getClub().getTeam());
 		System.out.println(c);
 		
 		System.out.println("PRIMAAAA");
+		
+		u.sell(p22);
+		System.out.println(p22);
 		
 		Collections.sort(c.getTeam());
 		Collections.sort(c2.getTeam());
@@ -97,6 +106,57 @@ public class TestApp {
 		System.out.println(c);
 		System.out.println(c2);
 		ch.checkClub();		
+		*/
+		
+		List<Player> listone = new ArrayList<Player>();
+		
+		try {
+			DBManager db = new DBManager();
+			ResultSet rs = db.executeQuery("SELECT * FROM list_player");
+			while(rs.next()) {
+				listone.add(readPlayer(rs.getString("name"),rs.getString("team"),rs.getString("position"),rs.getInt("value"),rs.getInt("id")));
+				System.out.println(readPlayer(rs.getString("name"),rs.getString("team"),rs.getString("position"),rs.getInt("value"),rs.getInt("id")));
+			}
+		} catch(SQLException e) {
+			System.out.println("E' finito qua");
+		}
+		catch(ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		System.out.println(listone.size());
 
+	}
+	
+	public static Player readPlayer(String name, String team, String position, int value, int id) {
+		Player p;
+		if(position.equals("Gk")) {
+			p = new Goalkeeper(name,team,value,id);
+			return p;
+		}
+		if(position.equals("Def")) {
+			p = new Defender(name,team,value,id);
+			return p;
+		}
+		if(position.equals("Mid")) {
+			p = new Midfielder(name,team,value,id);
+			return p;
+		}
+		if(position.equals("Str")) {
+			p = new Striker(name,team,value,id);
+			return p;
+		}
+			System.out.println("Error in readPlayer");
+			return null;
+	}
+	
+	public  static void printRow(ResultSet rs) throws SQLException {
+		System.out.println(
+				"id=" + rs.getInt("id") + 
+				", name=" + rs.getString("name") + 
+				", position=" + rs.getString("position") +
+				", team=" + rs.getString("team") +
+				", value=" + rs.getInt("value") +
+				", price=" + rs.getInt("price") +
+				", visible=" + rs.getInt("visible"));
 	}
 }

@@ -101,6 +101,7 @@ public class User {
 		if(club.addPlayer(player) == true) {
 			withdraw(price);
 			player.setPrice(price);
+			player.setVisible(false);
 			return true;
 		}
 		else {
@@ -116,6 +117,7 @@ public class User {
 	 */
 	public boolean sell(Player player) {
 		if(club.removePlayer(player) == true) {
+			player.setVisible(true);
 			deposit(player.getPrice());
 			return true;
 		}
@@ -131,6 +133,7 @@ public class User {
 	 */
 	public boolean release(Player player) {
 		if(club.removePlayer(player) == true) {
+			player.setVisible(true);
 			deposit(player.getValue());
 			return true;
 		}

@@ -1,4 +1,4 @@
-
+package ui;
 /**
  * This class represents strikers
  * @author Fabio Polito, Fabio Fontana

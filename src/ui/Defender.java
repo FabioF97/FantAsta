@@ -1,3 +1,4 @@
+package ui;
 
 /**
  * This class represents defenders

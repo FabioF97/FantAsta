@@ -1,4 +1,4 @@
-
+package ui;
 /**
  * The class describes each user of each championship.
  * Everyone has a name, a team and a budget

@@ -1,3 +1,4 @@
+package ui;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -5,7 +6,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import Database.DBManager;
+import database.DBManager;
 
 
 public class TestApp {

@@ -1,3 +1,4 @@
+package ui;
 /**
  * This class describes the characteristics of a player.
  * The class is abstract to avoid instancing players without a role.

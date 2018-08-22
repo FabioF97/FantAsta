@@ -44,6 +44,27 @@ public abstract class Player implements Comparable<Player>{
 	}
 	
 	/**
+	 * 
+	 * @param name					Player's name
+	 * @param team					Player's team
+	 * @param position				Player's position
+	 * @param value					Player's value
+	 * @param id					Player's id
+	 * @param price					Price paid by the user who owns this player
+	 * @param visible				If it's true, the player will be visible in the list
+	 */
+	public Player(String name, String team, String position, int value, int id, int price, boolean visible) {
+		super();
+		this.name = name;
+		this.team = team;
+		this.position = position;
+		this.value = value;
+		this.id = id;
+		this.price = price;
+		this.visible = visible;
+	}
+	
+	/**
 	 * Gets player's price
 	 * @return price
 	 */

@@ -30,6 +30,17 @@ public class DBQuery {
 	}
 	
 	/**
+	 * Int -> Boolean converter
+	 * @param n
+	 * @return boolean
+	 */
+	public boolean toBoolean(int n) {
+		if(n != 0)
+			return true;
+		else return false;
+	}
+	
+	/**
 	 * Returns the list filled with all goalkeepers for the first auction.
 	 * @return List<Player>
 	 * @throws SQLException
@@ -52,7 +63,7 @@ public class DBQuery {
 		List<Player> lGk = new ArrayList<Player>();
 		ResultSet rs = db.executeQuery("select * "	+ "from list_player" + " where position='Gk'");
 		while(rs.next()) {
-			lGk.add(new Goalkeeper(rs.getString("name"), rs.getString("team"), rs.getInt("value"), rs.getInt("id"), rs.getInt("price"), rs.getInt("visible")));
+			lGk.add(new Goalkeeper(rs.getString("name"), rs.getString("team"), rs.getInt("value"), rs.getInt("id"), rs.getInt("price"), toBoolean(rs.getInt("visible"))));
 		}
 		return lGk;
 	}

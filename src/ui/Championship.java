@@ -75,27 +75,7 @@ public class Championship {
 	public void setName(String name) {
 		this.name = name;
 	}
-	
-	/**
-	 * Gets the creation date of this championship
-	 * @return
-	 */
-	/**
-	public GregorianCalendar getDate() {
-		return date;
-	}
-	*/
-	/**
-	 * Sets the date of the championship
-	 * @param date
-	 */
-	/*
-	public void setDate(GregorianCalendar date) {
-		this.date = date;
-	}
-	*/
-	
-	
+		
 	/**
 	 * Gets the number of Competitors
 	 * @return nComp
@@ -198,8 +178,11 @@ public class Championship {
 		return ret;
 	}
 
-	@Override
-	public String toString() {
+	/**
+	 * Returns the date of creation of the championship.
+	 * @return String
+	 */
+	public String ShowDate() {
 		return "Championship [date= " + date + " ]";
 	}
 	

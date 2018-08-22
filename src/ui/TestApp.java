@@ -131,7 +131,7 @@ public class TestApp {
 			List<Player> l8 =  q.getStr2();
 			System.out.println(l8);
 			Championship ch = new Championship("NaFedeSola", 5000000);
-			System.out.println(ch);
+			System.out.println(ch.ShowDate());
 			
 
 

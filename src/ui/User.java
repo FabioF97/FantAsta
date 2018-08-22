@@ -13,6 +13,16 @@ public class User {
 	
 	
 	
+	/**
+	 * Constructor with 1 param
+	 * @param username				username
+	 */
+	// Non inizializzo gli atributi club e budget è un problema?
+	public User(String username) {
+		super();
+		this.username = username;
+	}
+	
 	
 	/**
 	 * Constructor with 3 params

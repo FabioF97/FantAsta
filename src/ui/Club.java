@@ -16,15 +16,17 @@ public class Club {
 	 * that will have to be part of the team available to each user*/
 	public static final int PLAYERS = 25;
 	/*Represents the number of Goalkeepers of each team*/
-	private final int NUMGOALKEEPERS = 3;
+	public static final int NUMGOALKEEPERS = 3;
 	/*Represents the number of Defenders of each team*/
-	private final int NUMDEFENDERS = 8;
+	public static final int NUMDEFENDERS = 8;
 	/*Represents the number of Midfielders of each team*/
-	private final int NUMMIDFIELDERS = 8;
+	public static final int NUMMIDFIELDERS = 8;
 	/*Represents the number of Strikers of each team*/
-	private final int NUMSTRIKERS = 6;
+	public static final int NUMSTRIKERS = 6;
 	
 	
+	
+
 	private String name;
 	/*In this list all 25 players who make up the team are saved*/
 	private List<Player> team;
@@ -86,6 +88,71 @@ public class Club {
 	/**
 	 * Increase the number of goalkeeper by one
 	 */
+	
+	/**
+	 * Gets the number of goalkeepers
+	 * @return goalkeepers
+	 */
+	public int getGoalkeepers() {
+		return goalkeepers;
+	}
+
+	/**
+	 * Sets the number of goalkeepers
+	 * @param goalkeepers
+	 */
+	public void setGoalkeepers(int goalkeepers) {
+		this.goalkeepers = goalkeepers;
+	}
+	
+	/**
+	 * Gets the number of defenders
+	 * @return defenders
+	 */
+	public int getDefenders() {
+		return defenders;
+	}
+
+	/**
+	 * Sets the number of defenders
+	 * @param defenders
+	 */
+	public void setDefenders(int defenders) {
+		this.defenders = defenders;
+	}
+
+	/**
+	 * Gets the number of midfielders
+	 * @return midfielders
+	 */
+	public int getMidfielders() {
+		return midfielders;
+	}
+
+	/**
+	 * Sets the number of midfielders
+	 * @param midfielders
+	 */
+	public void setMidfielders(int midfielders) {
+		this.midfielders = midfielders;
+	}
+
+	/**
+	 * Gets the number of strikers
+	 * @return strikers
+	 */
+	public int getStrikers() {
+		return strikers;
+	}
+
+	/**
+	 * Sets the number of strikers
+	 * @param strikers
+	 */
+	public void setStrikers(int strikers) {
+		this.strikers = strikers;
+	}
+	
 	public void incGk() {
 		++goalkeepers;
 	}

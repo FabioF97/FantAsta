@@ -2,9 +2,7 @@ package ui;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
-import java.util.GregorianCalendar;
 import java.util.List;
 
 /**
@@ -26,6 +24,19 @@ public class Championship {
 	private int nComp;
 	private int budget;
 	
+	/**
+	 * Constructor
+	 * @param name						Name of the Championship
+	 */
+	// Anche qua non inizializzo tutti gli attributi sarà un problema? mah...
+	public Championship(String name) {
+		super();
+		this.name = name;
+		this.nComp = 0;
+		this.competitors = new ArrayList<User>();
+	}
+	
+
 	/**
 	 * Constructor
 	 * @param name						Name of the Championship
@@ -108,6 +119,21 @@ public class Championship {
 		this.budget = budget;
 	}
 	
+	/**
+	 * Gets the date of creation of the championship.
+	 * @return
+	 */
+	public String getDate() {
+		return date;
+	}
+
+	/**
+	 * Sets the date of creation of the championship.
+	 * @param date
+	 */
+	public void setDate(String date) {
+		this.date = date;
+	}
 	
 	/**
 	 * Gets the list of users
@@ -178,6 +204,14 @@ public class Championship {
 		return ret;
 	}
 
+	/**
+	 * Show the username of the competitors in the championship.
+	 */
+	public void showCompetitor() {
+		for (User u : competitors) {
+			System.out.println(u.getUsername());
+		}
+	}
 	/**
 	 * Returns the date of creation of the championship.
 	 * @return String

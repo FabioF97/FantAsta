@@ -134,7 +134,21 @@ public class TestApp {
 			Championship ch = new Championship("NaFedeSola", 5000000);
 			System.out.println(ch.ShowDate());
 			*/
-			q.createList("Spongebob");
-
+			//q.createList("Spongebob");
+			//q.deleteChampionship("Calamano");
+			//q.championshipInsert("Calamano", "12-09-2008", 0, 600);
+			//q.userInsert("Fontana", "Correggese", "Calamano", 600);
+			//q.userUpdate("Fontana", 1200);
+			//q.playerUpdate(4, 500, false, "Correggese", "Calamano");
+			
+			/*
+			List<Championship> lc = q.getAllChampionship();
+			for (Championship ch : lc) {
+				System.out.println(ch);
+			}
+			*/
+			
+			
+			//q.getChampionship("Calamano");
 	}
 }

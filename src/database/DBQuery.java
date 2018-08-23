@@ -251,14 +251,15 @@ public class DBQuery {
 	 */
 	public Championship getChampionship(String championship) throws SQLException {
 		ResultSet rs = db.executeQuery("select * from championship where name='" + championship + "'");
+		int nComp = rs.getInt("ncomp");
 		Championship ret = new Championship(championship, rs.getString("date"), rs.getInt("budget"));
 		ResultSet rsu = db.executeQuery("select * from user where championship='" + championship + "'");
 		while(rsu.next()) {
-			ret.addCompetitor(getUser(rsu.getString("name"), championship));;
+			ret.addCompetitor(getUser(rsu.getString("username"), championship));
 		}
-		if (rs.getInt("ncomp") != ret.getnComp()) {
+		if (nComp != ret.getnComp()) {
 			System.out.println("Not all competitors have been found in the championship " + championship);
-		}				
+		}
 		return ret;
 	}
 
@@ -321,6 +322,7 @@ public class DBQuery {
 		db.executeUpdate("INSERT INTO championship (name,date,ncomp,budget) " +
 				  "VALUES('" + name + "' , '" + date + "'," +
 				  ncomp +"," + budget + ")");
+		createList(name);
 	}
 	
 	/**

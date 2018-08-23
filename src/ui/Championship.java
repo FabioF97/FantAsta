@@ -222,5 +222,9 @@ public class Championship {
 		return "Championship [date= " + date + " ]";
 	}
 	
-	
+	@Override
+	public String toString() {
+		return "Championship [name=" + name + ", date=" + date + ", nComp=" + nComp + ", budget=" + budget + "]";
+	}
+
 }

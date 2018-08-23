@@ -112,6 +112,7 @@ public class TestApp {
 		ch.checkClub();		
 		*/
 			DBQuery q = new DBQuery();
+			/*
 			List<Player> l1 = q.getDef1();
 			System.out.println(l1);
 			List<Player> l2 = q.getGk1();
@@ -132,8 +133,8 @@ public class TestApp {
 			System.out.println(l8);
 			Championship ch = new Championship("NaFedeSola", 5000000);
 			System.out.println(ch.ShowDate());
-			
-
+			*/
+			q.createList("Spongebob");
 
 	}
 }

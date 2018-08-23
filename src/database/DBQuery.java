@@ -188,7 +188,7 @@ public class DBQuery {
 	 * @throws SQLException
 	 */
 	public void createList(String championship) throws SQLException {
-		db.executeUpdate("CREATE TABLE" + championship + " (" +
+		db.executeUpdate("CREATE TABLE " + championship + " (" +
 				"id INTEGER, " +
 				"position TEXT, " +
 				"name	TEXT, " +
@@ -200,7 +200,7 @@ public class DBQuery {
 				"PRIMARY KEY(id) " +
 				")");
 		db.executeUpdate("INSERT INTO " + championship + 
-						 "SELECT * FROM list_player");
+						 " SELECT * FROM list_player");
 	}
 	
 	/**

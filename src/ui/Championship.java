@@ -24,18 +24,6 @@ public class Championship {
 	private int nComp;
 	private int budget;
 	
-	/**
-	 * Constructor
-	 * @param name						Name of the Championship
-	 */
-	// Anche qua non inizializzo tutti gli attributi sarà un problema? mah...
-	public Championship(String name) {
-		super();
-		this.name = name;
-		this.nComp = 0;
-		this.competitors = new ArrayList<User>();
-	}
-	
 
 	/**
 	 * Constructor
@@ -48,8 +36,22 @@ public class Championship {
 		this.budget = budget;
 		this.nComp = 0;
 		this.competitors = new ArrayList<User>();
-		//BISOGNA PENSARE COSA FARE CON QUESTA DATA
 		this.date = new SimpleDateFormat("dd-MM-yyyy").format(new Date());
+	}
+	
+	/**
+	 * Constructor with 3 params
+	 * @param name						Name of the Championship
+	 * @date 							Date of creation
+	 * @param budget					Initial championship budget
+	 */
+	public Championship(String name, String date, int budget) {
+		super();
+		this.name = name;
+		this.budget = budget;
+		this.nComp = 0;
+		this.competitors = new ArrayList<User>();
+		this.date = date;
 	}
 	
 	

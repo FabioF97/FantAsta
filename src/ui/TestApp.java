@@ -136,15 +136,4 @@ public class TestApp {
 
 
 	}
-	
-	public  static void printRow(ResultSet rs) throws SQLException {
-		System.out.println(
-				"id=" + rs.getInt("id") + 
-				", name=" + rs.getString("name") + 
-				", position=" + rs.getString("position") +
-				", team=" + rs.getString("team") +
-				", value=" + rs.getInt("value") +
-				", price=" + rs.getInt("price") +
-				", visible=" + rs.getInt("visible"));
-	}
 }

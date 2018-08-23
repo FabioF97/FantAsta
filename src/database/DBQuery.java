@@ -167,20 +167,19 @@ public class DBQuery {
 	 * @return Player
 	 * @throws SQLException
 	 */
-	public Player role (ResultSet rs) throws SQLException {
-		if (rs.getString("position").equals("Gk")) {
-			return new Goalkeeper(rs.getString("name"), rs.getString("team"), rs.getInt("value"), rs.getInt("id"), rs.getInt("price"), toBoolean(rs.getInt("visible")));
+	public Player role (String name, String team, String position, int value, int id, int price, boolean visible) throws SQLException {
+		if (position.equals("Gk")) {
+			return new Goalkeeper(name, team, value, id, price, visible);
 		}
-		if (rs.getString("position").equals("Def")) {
-			return new Defender(rs.getString("name"), rs.getString("team"), rs.getInt("value"), rs.getInt("id"), rs.getInt("price"), toBoolean(rs.getInt("visible")));
+		if (position.equals("Def")) {
+			return new Defender(name, team, value, id, price, visible);
 		}
-		if (rs.getString("position").equals("Mid")) {
-			return new Midfielder(rs.getString("name"), rs.getString("team"), rs.getInt("value"), rs.getInt("id"), rs.getInt("price"), toBoolean(rs.getInt("visible")));
+		if (position.equals("Mid")) {
+			return new Midfielder(name, team, value, id, price, visible);
 		}
 		else {
-			return new Striker(rs.getString("name"), rs.getString("team"), rs.getInt("value"), rs.getInt("id"), rs.getInt("price"), toBoolean(rs.getInt("visible")));
+			return new Striker(name, team, value, id, price, visible);
 		}
-		
 	}
 	
 	/**
@@ -192,16 +191,21 @@ public class DBQuery {
 		Club ret = new Club(club);
 		ResultSet rs = db.executeQuery("select * "	+ "from list_player" + " where Club='" + club + "'");
 		while(rs.next()) {
-			ret.addPlayer(role(rs));
+			ret.addPlayer(role(rs.getString("name"), rs.getString("team"), rs.getString("position"), rs.getInt("value"), rs.getInt("id"), rs.getInt("price"), toBoolean(rs.getInt("visible"))));
 		}
 		Collections.sort(ret.getTeam());
 		if (!(ret.isFullTeam())){
 			System.out.println("Il club " + club + " non è completo! NUMGOALKEEPERS=" + ret.getGoalkeepers() + " NUMDEFENDERS=" + ret.getDefenders() + " NUMMIDFIELDERS=" + ret.getMidfielders() + " NUMSTRIKERS=" + ret.getStrikers());
 		} else {
-			ret.setGoalkeepers(Club.NUMGOALKEEPERS);
-			ret.setDefenders(Club.NUMDEFENDERS);
-			ret.setMidfielders(Club.NUMMIDFIELDERS);
-			ret.setStrikers(Club.NUMSTRIKERS);
+			if(ret.getGoalkeepers()== Club.NUMGOALKEEPERS && ret.getDefenders() == Club.NUMDEFENDERS && ret.getMidfielders() == Club.NUMMIDFIELDERS && ret.getStrikers() == Club.NUMSTRIKERS) {
+				ret.setGoalkeepers(Club.NUMGOALKEEPERS);
+				ret.setDefenders(Club.NUMDEFENDERS);
+				ret.setMidfielders(Club.NUMMIDFIELDERS);
+				ret.setStrikers(Club.NUMSTRIKERS);
+			}
+			else {
+				System.out.println("C'è un problema di riempimento in qualche ruolo per il team " + club);
+			}
 		}
 		return ret;
 	}
@@ -213,11 +217,10 @@ public class DBQuery {
 	 * @throws SQLException
 	 */
 	public User getUser(String user) throws SQLException {
-		User ret = new User(user);
 		ResultSet rs = db.executeQuery("select * from user where username='" + user + "'");
-		ret.setBudget(rs.getInt("budget"));
-		ret.setClub(getClub(rs.getString("club")));
-		return ret;
+		int budget = rs.getInt("budget");
+		Club club = getClub(rs.getString("club"));
+		return new User(user, club, budget);
 	}
 
 	/**
@@ -227,10 +230,8 @@ public class DBQuery {
 	 * @throws SQLException
 	 */
 	public Championship getChampionship(String championship) throws SQLException {
-		Championship ret = new Championship(championship);
 		ResultSet rs = db.executeQuery("select * from championship where name='" + championship + "'");
-		ret.setDate(rs.getString("date"));
-		ret.setBudget(rs.getInt("budget"));
+		Championship ret = new Championship(championship, rs.getString("date"), rs.getInt("budget"));
 		ResultSet rsu = db.executeQuery("select * from user where championship='" + championship + "'");
 		while(rs.next()) {
 			ret.addCompetitor(getUser(rsu.getString("name")));;
@@ -255,25 +256,52 @@ public class DBQuery {
 		return lChmp;
 	}
 	
-	
-	//Questa non dovrebbe servire, ma l'hai scritta quindi la lascio qua che magari mi sono bruciato qualcosa.
-	//Se ti serve la lista basta chiamare il metodo getCompetitors() in Championship
 	/**
-	 * Returns the list filled with all the users of a championship
-	 * @return List<User>
+	 * Saves the attributes of a player on the database
 	 * @throws SQLException
 	 */
-	/*
-	 * Bisogna mettere dentro il metodo il riempimento delle rose da database
-	public List<User> getUser() throws SQLException {
-		List<User> lUsr = new ArrayList<User>();
-		ResultSet rs = db.executeQuery("select * "	+ "from list_player" + " where position='Str'");
-		while(rs.next()) {
-			lUsr.add();
-		}
-		return lUsr;
+	public void playerUpdate(int id, int price, boolean visible, String club) throws SQLException {
+		int n;
+		if(visible == true)
+			n = 1;
+		else
+			n = 0;
+		db.executeUpdate(
+				"UPDATE list_player SET price="+ price + ", " + 
+						"club='" + club + "', " +
+						"visible=" + n +
+				"WHERE id=" + id);
 	}
-	*/
+	
+	/**
+	 * Saves the attributes of a user on the database
+	 * @throws SQLException
+	 */
+	public void userUpdate(String username, int budget) throws SQLException {
+		db.executeUpdate(
+				"UPDATE user SET budget="+ budget + 
+				"WHERE username='" + username + "'");
+	}
+	
+	/**
+	 * Inserts a user in the database
+	 * @throws SQLException
+	 */
+	public void userInsert(String username, String club, String championship, int budget) throws SQLException {	
+		db.executeUpdate("INSERT INTO user (username,club,championship,budget)" +
+						  "VALUES(" + username + ", '" + club + "', '" +
+						  championship +"'," + budget + ")");
+	}
+	
+	/**
+	 * Inserts a championship in the database
+	 * @throws SQLException
+	 */
+	public void championshipInsert(String name, String date, int ncomp, int budget) throws SQLException {	
+		db.executeUpdate("INSERT INTO user (name,date,ncomp,budget)" +
+						  "VALUES(" + name + ", '" + date + "', '" +
+						  ncomp +"'," + budget + ")");
+	}
 	
 	/**
 	 * Prints a row

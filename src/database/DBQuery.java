@@ -183,6 +183,27 @@ public class DBQuery {
 	}
 	
 	/**
+	 * Creates a new list of player for a new championship
+	 * @param championship
+	 * @throws SQLException
+	 */
+	public void createList(String championship) throws SQLException {
+		db.executeUpdate("CREATE TABLE" + championship + " (" +
+				"id INTEGER, " +
+				"position TEXT, " +
+				"name	TEXT, " +
+				"team	TEXT, " +
+				"value INTEGER, " +
+				"price INTEGER, " +
+				"visible INTEGER, " +
+				"club TEXT DEFAULT null, " +
+				"PRIMARY KEY(id) " +
+				")");
+		db.executeUpdate("INSERT INTO " + championship + 
+						 "SELECT * FROM list_player");
+	}
+	
+	/**
 	 * Returns the Club named club.
 	 * @return List<Player>
 	 * @throws SQLException

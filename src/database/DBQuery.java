@@ -187,9 +187,9 @@ public class DBQuery {
 	 * @return List<Player>
 	 * @throws SQLException
 	 */
-	public Club getClub(String club) throws SQLException {
+	public Club getClub(String club, String championship) throws SQLException {
 		Club ret = new Club(club);
-		ResultSet rs = db.executeQuery("select * "	+ "from list_player" + " where Club='" + club + "'");
+		ResultSet rs = db.executeQuery("select * "	+ "from " + championship + " where Club='" + club + "'");
 		while(rs.next()) {
 			ret.addPlayer(role(rs.getString("name"), rs.getString("team"), rs.getString("position"), rs.getInt("value"), rs.getInt("id"), rs.getInt("price"), toBoolean(rs.getInt("visible"))));
 		}
@@ -216,10 +216,10 @@ public class DBQuery {
 	 * @return User
 	 * @throws SQLException
 	 */
-	public User getUser(String user) throws SQLException {
+	public User getUser(String user, String championship) throws SQLException {
 		ResultSet rs = db.executeQuery("select * from user where username='" + user + "'");
 		int budget = rs.getInt("budget");
-		Club club = getClub(rs.getString("club"));
+		Club club = getClub(rs.getString("club"), championship);
 		return new User(user, club, budget);
 	}
 
@@ -234,7 +234,7 @@ public class DBQuery {
 		Championship ret = new Championship(championship, rs.getString("date"), rs.getInt("budget"));
 		ResultSet rsu = db.executeQuery("select * from user where championship='" + championship + "'");
 		while(rsu.next()) {
-			ret.addCompetitor(getUser(rsu.getString("name")));;
+			ret.addCompetitor(getUser(rsu.getString("name"), championship));;
 		}
 		if (rs.getInt("ncomp") != ret.getnComp()) {
 			System.out.println("Not all competitors have been found in the championship " + championship);

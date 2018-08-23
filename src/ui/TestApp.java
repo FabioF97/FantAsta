@@ -112,28 +112,73 @@ public class TestApp {
 		ch.checkClub();		
 		*/
 			DBQuery q = new DBQuery();
+			
+			//List<Player> l1 = q.getDef1();
+			//System.out.println(l1.size());
+			//System.out.println(l1.get(5));
 			/*
-			List<Player> l1 = q.getDef1();
-			System.out.println(l1);
-			List<Player> l2 = q.getGk1();
-			System.out.println(l2);
-			List<Player> l3 = q.getMid1();
-			System.out.println(l3);
-			List<Player> l4 = q.getStr1();
-			System.out.println(l4);
+			List<Player> l1 = q.getDef1("Calamano");
+			System.out.println(l1.size());
+			System.out.println(l1.get(5));
+			for (Player p : l1) {							
+				System.out.println(p);
+			}
+			System.out.println("-----------------------------------------------");
+			List<Player> l2 = q.getGk1("Calamano");
+			System.out.println(l2.size());
+			System.out.println(l2.get(5));
+			for (Player p : l2) {							
+				System.out.println(p);
+			}
+			System.out.println("-----------------------------------------------");
+			List<Player> l3 = q.getMid1("Calamano");
+			System.out.println(l3.size());
+			System.out.println(l3.get(5));
+			for (Player p : l3) {							
+				System.out.println(p);
+			}
+			System.out.println("-----------------------------------------------");
+			List<Player> l4 = q.getStr1("Calamano");
+			System.out.println(l4.size());
+			System.out.println(l4.get(5));
+			for (Player p : l4) {							
+				System.out.println(p);
+			}
 			
 			System.out.println("-----------------------------------------------");
-			List<Player> l5 = q.getDef2();
-			System.out.println(l5);
-			List<Player> l6 = q.getGk2();
-			System.out.println(l6);
-			List<Player> l7 =q.getMid2();
-			System.out.println(l7);
-			List<Player> l8 =  q.getStr2();
-			System.out.println(l8);
-			Championship ch = new Championship("NaFedeSola", 5000000);
-			System.out.println(ch.ShowDate());
+			
+			List<Player> l5 = q.getDef2("Calamano");
+			System.out.println(l5.size());
+			System.out.println(l5.get(5));
+			for (Player p : l5) {							
+				System.out.println(p);
+			}
+			System.out.println("-----------------------------------------------");
+			List<Player> l6 = q.getGk2("Calamano");
+			System.out.println(l6.size());
+			System.out.println(l6.get(5));
+			for (Player p : l6) {							
+				System.out.println(p);
+			}
+			System.out.println("-----------------------------------------------");
+			List<Player> l7 =q.getMid2("Calamano");
+			System.out.println(l7.size());
+			System.out.println(l7.get(5));
+			for (Player p : l7) {							
+				System.out.println(p);
+			}
+			System.out.println("-----------------------------------------------");
+			List<Player> l8 =  q.getStr2("Calamano");
+			System.out.println(l8.size());
+			System.out.println(l8.get(5));
+			for (Player p : l8) {							
+				System.out.println(p);
+			}
+			System.out.println("-----------------------------------------------");
 			*/
+			//Championship ch = new Championship("NaFedeSola", 5000000);
+			//System.out.println(ch.ShowDate());
+			
 			//q.createList("Spongebob");
 			//q.deleteChampionship("Calamano");
 			//q.championshipInsert("Calamano", "12-09-2008", 0, 600);
@@ -141,14 +186,17 @@ public class TestApp {
 			//q.userUpdate("Fontana", 1200);
 			//q.playerUpdate(4, 500, false, "Correggese", "Calamano");
 			
-			/*
+			//q.championshipInsert("LungoMare", "6-03-2017", 0, 100);
 			List<Championship> lc = q.getAllChampionship();
 			for (Championship ch : lc) {
 				System.out.println(ch);
 			}
-			*/
+			
+			//q.userInsert("Prati", "Cadelboschese", "Calamano", 600);
+			
+			//Championship cal = q.getChampionship("Calamano");
+			//System.out.println(cal.getnComp());
 			
 			
-			//q.getChampionship("Calamano");
 	}
 }

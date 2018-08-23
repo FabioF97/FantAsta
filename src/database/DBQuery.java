@@ -53,9 +53,9 @@ public class DBQuery {
 	 * @return List<Player>
 	 * @throws SQLException
 	 */
-	public List<Player> getGk1() throws SQLException {
+	public List<Player> getGk1(String championship) throws SQLException {
 		List<Player> lGk = new ArrayList<Player>();
-		ResultSet rs = db.executeQuery("select * "	+ "from list_player" + " where position='Gk'");
+		ResultSet rs = db.executeQuery("select * "	+ "from " + championship.replace(" ", "_") + " where position='Gk'");
 		while(rs.next()) {
 			lGk.add(new Goalkeeper(rs.getString("name"), rs.getString("team"), rs.getInt("value"), rs.getInt("id")));
 		}
@@ -67,9 +67,9 @@ public class DBQuery {
 	 * @return List<Player>
 	 * @throws SQLException
 	 */
-	public List<Player> getGk2() throws SQLException {
+	public List<Player> getGk2(String championship) throws SQLException {
 		List<Player> lGk = new ArrayList<Player>();
-		ResultSet rs = db.executeQuery("select * "	+ "from list_player" + " where position='Gk'");
+		ResultSet rs = db.executeQuery("select * "	+ "from " + championship.replace(" ", "_") + " where position='Gk'");
 		while(rs.next()) {
 			lGk.add(new Goalkeeper(rs.getString("name"), rs.getString("team"), rs.getInt("value"), rs.getInt("id"), rs.getInt("price"), toBoolean(rs.getInt("visible"))));
 		}
@@ -81,9 +81,9 @@ public class DBQuery {
 	 * @return List<Player>
 	 * @throws SQLException
 	 */
-	public List<Player> getDef1() throws SQLException {
+	public List<Player> getDef1(String championship) throws SQLException {
 		List<Player> lDef = new ArrayList<Player>();
-		ResultSet rs = db.executeQuery("select * "	+ "from list_player" + " where position='Def'");
+		ResultSet rs = db.executeQuery("select * "	+ "from " + championship.replace(" ", "_") + " where position='Def'");
 		while(rs.next()) {
 			lDef.add(new Defender(rs.getString("name"), rs.getString("team"), rs.getInt("value"), rs.getInt("id")));
 		}
@@ -95,9 +95,9 @@ public class DBQuery {
 	 * @return List<Player>
 	 * @throws SQLException
 	 */
-	public List<Player> getDef2() throws SQLException {
+	public List<Player> getDef2(String championship) throws SQLException {
 		List<Player> lDef = new ArrayList<Player>();
-		ResultSet rs = db.executeQuery("select * "	+ "from list_player" + " where position='Def'");
+		ResultSet rs = db.executeQuery("select * "	+ "from " + championship.replace(" ", "_") + " where position='Def'");
 		while(rs.next()) {
 			lDef.add(new Defender(rs.getString("name"), rs.getString("team"), rs.getInt("value"), rs.getInt("id"), rs.getInt("price"), toBoolean(rs.getInt("visible"))));
 		}
@@ -109,9 +109,9 @@ public class DBQuery {
 	 * @return List<Player>
 	 * @throws SQLException
 	 */
-	public List<Player> getMid1() throws SQLException {
+	public List<Player> getMid1(String championship) throws SQLException {
 		List<Player> lMid = new ArrayList<Player>();
-		ResultSet rs = db.executeQuery("select * "	+ "from list_player" + " where position='Mid'");
+		ResultSet rs = db.executeQuery("select * "	+ "from " + championship.replace(" ", "_") + " where position='Mid'");
 		while(rs.next()) {
 			lMid.add(new Midfielder(rs.getString("name"), rs.getString("team"), rs.getInt("value"), rs.getInt("id")));
 		}
@@ -123,9 +123,9 @@ public class DBQuery {
 	 * @return List<Player>
 	 * @throws SQLException
 	 */
-	public List<Player> getMid2() throws SQLException {
+	public List<Player> getMid2(String championship) throws SQLException {
 		List<Player> lMid = new ArrayList<Player>();
-		ResultSet rs = db.executeQuery("select * "	+ "from list_player" + " where position='Mid'");
+		ResultSet rs = db.executeQuery("select * "	+ "from " + championship.replace(" ", "_") + " where position='Mid'");
 		while(rs.next()) {
 			lMid.add(new Midfielder(rs.getString("name"), rs.getString("team"), rs.getInt("value"), rs.getInt("id"), rs.getInt("price"), toBoolean(rs.getInt("visible"))));
 		}
@@ -137,9 +137,9 @@ public class DBQuery {
 	 * @return List<Player>
 	 * @throws SQLException
 	 */
-	public List<Player> getStr1() throws SQLException {
+	public List<Player> getStr1(String championship) throws SQLException {
 		List<Player> lStr = new ArrayList<Player>();
-		ResultSet rs = db.executeQuery("select * "	+ "from list_player" + " where position='Str'");
+		ResultSet rs = db.executeQuery("select * "	+ "from " + championship.replace(" ", "_") + " where position='Str'");
 		while(rs.next()) {
 			lStr.add(new Striker(rs.getString("name"), rs.getString("team"), rs.getInt("value"), rs.getInt("id")));
 		}
@@ -151,9 +151,9 @@ public class DBQuery {
 	 * @return List<Player>
 	 * @throws SQLException
 	 */
-	public List<Player> getStr2() throws SQLException {
+	public List<Player> getStr2(String championship) throws SQLException {
 		List<Player> lStr = new ArrayList<Player>();
-		ResultSet rs = db.executeQuery("select * "	+ "from list_player" + " where position='Str'");
+		ResultSet rs = db.executeQuery("select * "	+ "from " + championship.replace(" ", "_") + " where position='Str'");
 		while(rs.next()) {
 			lStr.add(new Striker(rs.getString("name"), rs.getString("team"), rs.getInt("value"), rs.getInt("id"), rs.getInt("price"), toBoolean(rs.getInt("visible"))));
 		}
@@ -250,12 +250,16 @@ public class DBQuery {
 	 * @throws SQLException
 	 */
 	public Championship getChampionship(String championship) throws SQLException {
+		List<String> user = new ArrayList<String>();
 		ResultSet rs = db.executeQuery("select * from championship where name='" + championship + "'");
 		int nComp = rs.getInt("ncomp");
 		Championship ret = new Championship(championship, rs.getString("date"), rs.getInt("budget"));
 		ResultSet rsu = db.executeQuery("select * from user where championship='" + championship + "'");
 		while(rsu.next()) {
-			ret.addCompetitor(getUser(rsu.getString("username"), championship));
+			user.add(rsu.getString("username"));
+		}
+		for (String s : user) {
+			ret.addCompetitor(getUser(s, championship));
 		}
 		if (nComp != ret.getnComp()) {
 			System.out.println("Not all competitors have been found in the championship " + championship);
@@ -269,10 +273,14 @@ public class DBQuery {
 	 * @throws SQLException
 	 */
 	public List<Championship> getAllChampionship() throws SQLException {
+		List<String> championship = new ArrayList<String>();
 		List<Championship> lChmp = new ArrayList<Championship>();
 		ResultSet rs = db.executeQuery("Select * from championship");
 		while(rs.next()) {
-			lChmp.add(getChampionship(rs.getString("name")));
+			championship.add(rs.getString("name"));
+		}
+		for (String s : championship) {
+			lChmp.add(getChampionship(s));
 		}
 		return lChmp;
 	}

@@ -23,7 +23,6 @@ public class DBQuery {
 		super();
 		try {
 			db = new DBManager();
-			db.executeQuery("select * from list_player");
 		}catch(ClassNotFoundException e) {
 			e.printStackTrace();
 		}
@@ -188,7 +187,7 @@ public class DBQuery {
 	 * @throws SQLException
 	 */
 	public void createList(String championship) throws SQLException {
-		db.executeUpdate("CREATE TABLE " + championship + " (" +
+		db.executeUpdate("CREATE TABLE " + championship.replace(" ", "_") + " (" +
 				"id INTEGER, " +
 				"position TEXT, " +
 				"name	TEXT, " +
@@ -199,7 +198,7 @@ public class DBQuery {
 				"club TEXT DEFAULT null, " +
 				"PRIMARY KEY(id) " +
 				")");
-		db.executeUpdate("INSERT INTO " + championship + 
+		db.executeUpdate("INSERT INTO " + championship.replace(" ", "_") + 
 						 " SELECT * FROM list_player");
 	}
 	
@@ -210,7 +209,7 @@ public class DBQuery {
 	 */
 	public Club getClub(String club, String championship) throws SQLException {
 		Club ret = new Club(club);
-		ResultSet rs = db.executeQuery("select * "	+ "from " + championship + " where Club='" + club + "'");
+		ResultSet rs = db.executeQuery("select * "	+ "from " + championship.replace(" ", "_") + " where Club='" + club + "'");
 		while(rs.next()) {
 			ret.addPlayer(role(rs.getString("name"), rs.getString("team"), rs.getString("position"), rs.getInt("value"), rs.getInt("id"), rs.getInt("price"), toBoolean(rs.getInt("visible"))));
 		}
@@ -288,10 +287,10 @@ public class DBQuery {
 		else
 			n = 0;
 		db.executeUpdate(
-				"UPDATE " + championship + " SET price="+ price + ", " + 
+				"UPDATE " + championship.replace(" ", "_") + " SET price="+ price + ", " + 
 						"club='" + club + "', " +
 						"visible=" + n +
-				"WHERE id=" + id);
+				" WHERE id=" + id);
 	}
 	
 	/**
@@ -301,7 +300,7 @@ public class DBQuery {
 	public void userUpdate(String username, int budget) throws SQLException {
 		db.executeUpdate(
 				"UPDATE user SET budget="+ budget + 
-				"WHERE username='" + username + "'");
+				" WHERE username='" + username + "'");
 	}
 	
 	/**
@@ -309,8 +308,8 @@ public class DBQuery {
 	 * @throws SQLException
 	 */
 	public void userInsert(String username, String club, String championship, int budget) throws SQLException {	
-		db.executeUpdate("INSERT INTO user (username,club,championship,budget)" +
-						  "VALUES(" + username + ", '" + club + "', '" +
+		db.executeUpdate("INSERT INTO user (username,club,championship,budget) " +
+						  "VALUES('" + username + "', '" + club + "', '" +
 						  championship +"'," + budget + ")");
 	}
 	
@@ -324,9 +323,13 @@ public class DBQuery {
 				  ncomp +"," + budget + ")");
 	}
 	
-	
+	/**
+	 * Deletes a championship
+	 * @param championship
+	 * @throws SQLException
+	 */
 	public void deleteChampionship (String championship) throws SQLException {
-		db.executeUpdate("DROP table " + championship);
+		db.executeUpdate("DROP table " + championship.replace(" ", "_"));
 		db.executeUpdate("DELETE from user where championship='" + championship + "'");
 		db.executeUpdate("DELETE from championship where name='" + championship +"'");	
 	}

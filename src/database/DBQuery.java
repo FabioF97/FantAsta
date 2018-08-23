@@ -281,14 +281,14 @@ public class DBQuery {
 	 * Saves the attributes of a player on the database
 	 * @throws SQLException
 	 */
-	public void playerUpdate(int id, int price, boolean visible, String club) throws SQLException {
+	public void playerUpdate(int id, int price, boolean visible, String club, String championship) throws SQLException {
 		int n;
 		if(visible == true)
 			n = 1;
 		else
 			n = 0;
 		db.executeUpdate(
-				"UPDATE list_player SET price="+ price + ", " + 
+				"UPDATE " + championship + " SET price="+ price + ", " + 
 						"club='" + club + "', " +
 						"visible=" + n +
 				"WHERE id=" + id);
@@ -322,6 +322,13 @@ public class DBQuery {
 		db.executeUpdate("INSERT INTO user (name,date,ncomp,budget)" +
 						  "VALUES(" + name + ", '" + date + "', '" +
 						  ncomp +"'," + budget + ")");
+	}
+	
+	
+	public void deleteChampionship (String championship) throws SQLException {
+		db.executeUpdate("DROP table " + championship);
+		db.executeUpdate("DELETE from user where championship='" + championship + "'");
+		db.executeUpdate("DELETE from championship where name='" + championship +"'");	
 	}
 	
 	/**

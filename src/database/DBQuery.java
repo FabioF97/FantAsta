@@ -319,9 +319,9 @@ public class DBQuery {
 	 * @throws SQLException
 	 */
 	public void championshipInsert(String name, String date, int ncomp, int budget) throws SQLException {	
-		db.executeUpdate("INSERT INTO user (name,date,ncomp,budget)" +
-						  "VALUES(" + name + ", '" + date + "', '" +
-						  ncomp +"'," + budget + ")");
+		db.executeUpdate("INSERT INTO championship (name,date,ncomp,budget) " +
+				  "VALUES('" + name + "' , '" + date + "'," +
+				  ncomp +"," + budget + ")");
 	}
 	
 	

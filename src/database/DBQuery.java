@@ -233,7 +233,7 @@ public class DBQuery {
 		ResultSet rs = db.executeQuery("select * from championship where name='" + championship + "'");
 		Championship ret = new Championship(championship, rs.getString("date"), rs.getInt("budget"));
 		ResultSet rsu = db.executeQuery("select * from user where championship='" + championship + "'");
-		while(rs.next()) {
+		while(rsu.next()) {
 			ret.addCompetitor(getUser(rsu.getString("name")));;
 		}
 		if (rs.getInt("ncomp") != ret.getnComp()) {

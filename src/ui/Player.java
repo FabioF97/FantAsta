@@ -1,4 +1,12 @@
 package ui;
+
+import javafx.collections.FXCollections;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.TextField;
+
 /**
  * This class describes the characteristics of a player.
  * The class is abstract to avoid instancing players without a role.
@@ -18,6 +26,12 @@ public abstract class Player implements Comparable<Player>{
 	private int price;
 	private int id;
 	private boolean visible;
+	//In this textfield the admin will write player's price
+	private TextField priceTab;
+	//Button used to buy a player
+	private Button buy;
+	//Used to display the team of destination
+	private ChoiceBox<String> choice; //Qua bisogna modificare i costruttori per metterci le squadre
 	
 	
 	
@@ -41,6 +55,16 @@ public abstract class Player implements Comparable<Player>{
 		this.id = id;
 		this.visible = true;
 		this.price = MINPRICE;
+		priceTab = new TextField();
+		buy = new Button("Buy");
+		buy.setOnAction((EventHandler<ActionEvent>) new EventHandler<ActionEvent>() {
+			public void handle(ActionEvent event) {
+				System.out.println("Player: " + name + " goes to -> " + ((String) choice.getValue()));
+			}
+		});
+		choice = new ChoiceBox<String>();
+		//La successiva linea è temporanea, bisognerà fare il vero set degli items
+		choice.setItems(FXCollections.observableArrayList("Team 1","Team 2","Team 3"));
 	}
 	
 	/**
@@ -64,6 +88,32 @@ public abstract class Player implements Comparable<Player>{
 		this.visible = visible;
 	}
 	
+	
+	
+	public TextField getPriceTab() {
+		return priceTab;
+	}
+
+	public void setPriceTab(TextField priceTab) {
+		this.priceTab = priceTab;
+	}
+
+	public Button getBuy() {
+		return buy;
+	}
+
+	public void setBuy(Button buy) {
+		this.buy = buy;
+	}
+
+	public ChoiceBox<String> getChoice() {
+		return choice;
+	}
+
+	public void setChoice(ChoiceBox<String> choice) {
+		this.choice = choice;
+	}
+
 	/**
 	 * Gets player's price
 	 * @return price

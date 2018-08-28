@@ -5,22 +5,22 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1080.0" spacing="50.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1080.0" spacing="50.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.StartController">
    <children>
       <Label text="FantAsta">
          <font>
             <Font name="System Bold" size="80.0" />
          </font>
       </Label>
-      <Button fx:id="createChampionship" mnemonicParsing="false"  text="New championship" />
-      <Label  text="Load Championship:">
+      <Button fx:id="createChampionship" mnemonicParsing="false" onAction="#handlerCreateChampionshipController" text="New championship" />
+      <Label text="Load Championship:">
          <font>
             <Font name="System Bold" size="25.0" />
          </font>
       </Label>
       <VBox alignment="CENTER" prefHeight="368.0" prefWidth="1080.0" spacing="20.0">
          <children>
-            <Label fx:id="label"  />
+            <Label fx:id="label" onDragDetected="#handlerLabelController" />
             <Label layoutX="536.0" layoutY="186.0" />
             <Label layoutX="536.0" layoutY="177.0" />
             <Label layoutX="536.0" layoutY="194.0" />

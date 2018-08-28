@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1080.0" spacing="32.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="CreateChampionshipController">
+<VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1080.0" spacing="32.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.CreateChampionshipController">
    <children>
       <Label text="Add users and then a championship">
          <font>
@@ -66,7 +66,7 @@
                   <Insets left="450.0" right="450.0" />
                </VBox.margin>
             </TextField>
-            <Button mnemonicParsing="false" onAction="#handlerLabelController" text="Add user" />
+            <Button mnemonicParsing="false" onAction="#handlerAddController" text="Add user" />
             <Label fx:id="label" />
          </children>
       </VBox>

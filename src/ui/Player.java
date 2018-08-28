@@ -30,6 +30,12 @@ public abstract class Player implements Comparable<Player>{
 	private TextField priceTab;
 	//Button used to buy a player
 	private Button buy;
+	//Button used to buy a player
+	private Button sell;
+	//Button used to buy a player
+	private Button release;
+	//Button used to buy a player
+	private Button send;
 	//Used to display the team of destination
 	private ChoiceBox<String> choice; //Qua bisogna modificare i costruttori per metterci le squadre
 	
@@ -62,6 +68,24 @@ public abstract class Player implements Comparable<Player>{
 				System.out.println("Player: " + name + " goes to -> " + ((String) choice.getValue()));
 			}
 		});
+		sell = new Button("Sell");
+		sell.setOnAction((EventHandler<ActionEvent>) new EventHandler<ActionEvent>() {
+			public void handle(ActionEvent event) {
+				System.out.println("Player: " + name + " Sold");
+			}
+		});
+		release = new Button("Realease");
+		release.setOnAction((EventHandler<ActionEvent>) new EventHandler<ActionEvent>() {
+			public void handle(ActionEvent event) {
+				System.out.println("Player: " + name + " released");
+			}
+		});
+		send = new Button("Send");
+		send.setOnAction((EventHandler<ActionEvent>) new EventHandler<ActionEvent>() {
+			public void handle(ActionEvent event) {
+				System.out.println("Player: " + name + " sent to " + ((String) choice.getValue()));
+			}
+		});
 		choice = new ChoiceBox<String>();
 		//La successiva linea è temporanea, bisognerà fare il vero set degli items
 		choice.setItems(FXCollections.observableArrayList("Team 1","Team 2","Team 3"));
@@ -90,6 +114,30 @@ public abstract class Player implements Comparable<Player>{
 	
 	
 	
+	public Button getSell() {
+		return sell;
+	}
+
+	public void setSell(Button sell) {
+		this.sell = sell;
+	}
+
+	public Button getRelease() {
+		return release;
+	}
+
+	public void setRelease(Button release) {
+		this.release = release;
+	}
+
+	public Button getSend() {
+		return send;
+	}
+
+	public void setSend(Button send) {
+		this.send = send;
+	}
+
 	public TextField getPriceTab() {
 		return priceTab;
 	}

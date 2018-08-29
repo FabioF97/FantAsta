@@ -1,5 +1,6 @@
 package gui;
 
+import database.DBQuery;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -14,8 +15,10 @@ import ui.Striker;
 
 public class ShowChampionshipController {
 
-@FXML TableView<Player> tab;
-@FXML ChoiceBox<String> team;
+	@FXML TableView<Player> tab;
+	@FXML ChoiceBox<String> team;
+
+	private DBQuery db;
 	
 	@FXML 
 	public void initialize() {
@@ -48,6 +51,14 @@ public class ShowChampionshipController {
 		tab.setItems(list);
     }
 	
+	public DBQuery getDb() {
+		return db;
+	}
+
+	public void setDb(DBQuery db) {
+		this.db = db;
+	}
+
 	public ObservableList<Player> getPlayers(){
 		ObservableList<Player> players = FXCollections.observableArrayList();
 		players.add(new Striker("Simeone", "Fiorentina",25, 10));
@@ -84,4 +95,5 @@ public class ShowChampionshipController {
 		players.add(new Striker("Simeone", "Fiorentina",25, 10));
 		return players;
 	}
+
 }

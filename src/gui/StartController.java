@@ -60,4 +60,17 @@ public class StartController {
 		window.setScene(scene2);
 		window.show();
 	}
+	
+	@FXML
+	protected void handlerLoadChampionshipController(ActionEvent event) throws IOException {
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("ShowChampionship.fxml"));
+		Parent parent = loader.load();
+		ShowChampionshipController ctrl = loader.getController();
+		ctrl.setDb(db);
+		Scene scene2 = new Scene(parent);
+		Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+		
+		window.setScene(scene2);
+		window.show();
+	}
 }

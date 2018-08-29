@@ -48,6 +48,7 @@ public class AuctionGKController {
 		
 		ObservableList<Player> list = FXCollections.observableArrayList(item -> new Observable[] {item.visibleProperty()});
 		
+		
 		try {
 			db = new DBQuery();
 			list = getPlayers();

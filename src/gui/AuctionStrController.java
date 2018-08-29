@@ -25,6 +25,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import ui.Championship;
 import ui.Player;
 import ui.Striker;
+import ui.User;
 
 public class AuctionStrController {
 	
@@ -93,8 +94,13 @@ public class AuctionStrController {
 	public ObservableList<Player> getPlayers() throws SQLException{
 		ObservableList<Player> ret = FXCollections.observableArrayList(item -> new Observable[] {item.visibleProperty()});
 		List<Player> list = db.getStr1(championship.getName());
+		ObservableList<String> clubs = FXCollections.observableArrayList();
+		for (User u : championship.getCompetitors()) {
+			clubs.add(u.getClub().getName());
+		}
 		for(Player p : list) {
 			if(p.isVisible()) {
+				p.fillChoiceBox(clubs);
 				ret.add(p);
 			}
 		}

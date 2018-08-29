@@ -48,7 +48,7 @@ public class CreateChampionshipController {
 	}
 	
 	@FXML
-	public void handlerButtonChampionship() {
+	public void handlerButtonChampionship(ActionEvent event) {
 		Window owner = buttonChampionship.getScene().getWindow();
 		if (textfieldName.getText().isEmpty()) {
 			AlertHelper.showAlert(Alert.AlertType.ERROR, owner, "Form Error!", "Please enter the championship's name.");

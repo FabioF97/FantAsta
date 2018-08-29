@@ -26,6 +26,7 @@ import javafx.stage.Stage;
 import ui.Championship;
 import ui.Player;
 import ui.Striker;
+import ui.User;
 
 public class AuctionDefController {
 	@FXML TableView<Player> tab;
@@ -93,8 +94,13 @@ public class AuctionDefController {
 	public ObservableList<Player> getPlayers() throws SQLException{
 		ObservableList<Player> ret = FXCollections.observableArrayList(item -> new Observable[] {item.visibleProperty()});
 		List<Player> list = db.getDef1(championship.getName());
+		ObservableList<String> clubs = FXCollections.observableArrayList();
+		for (User u : championship.getCompetitors()) {
+			clubs.add(u.getClub().getName());
+		}
 		for(Player p : list) {
 			if(p.isVisible()) {
+				p.fillChoiceBox(clubs);
 				ret.add(p);
 			}
 		}

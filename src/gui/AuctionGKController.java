@@ -118,7 +118,7 @@ public class AuctionGKController {
 		Collections.sort(ret);
 		ret.addListener((Change<? extends Player> c) -> {
 			while(c.next()) {
-				if(c.wasUpdated()) {
+				if(c.wasUpdated()) { //aggiungere i controlli che sia stato inserito un prezzo corretto e una squadra
 					ret.remove(c.getFrom());
 					tab.setItems(ret);
 					tab.refresh();
@@ -128,6 +128,7 @@ public class AuctionGKController {
 		return ret;
 	}
 	
+	// aggiunger i controlli che si può andare avanti solo se tutti i team hanno il numero correttto di giocatori
 	
 	@FXML
 	protected void handlerNextController(ActionEvent event) throws IOException {

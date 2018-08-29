@@ -42,6 +42,7 @@ public class StartController {
 				loadList.add(c);
 			}
 			choice.getItems().addAll(loadList);
+			choice.setValue(list.get(0));
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -63,10 +64,14 @@ public class StartController {
 	
 	@FXML
 	protected void handlerLoadChampionshipController(ActionEvent event) throws IOException {
+		Championship championship = choice.getValue();
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("ShowChampionship.fxml"));
 		Parent parent = loader.load();
 		ShowChampionshipController ctrl = loader.getController();
 		ctrl.setDb(db);
+		ctrl.setChampionship(championship);
+		ctrl.initialize();
+		
 		Scene scene2 = new Scene(parent);
 		Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
 		

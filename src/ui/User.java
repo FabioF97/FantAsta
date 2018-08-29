@@ -169,7 +169,7 @@ public class User {
 	
 	@Override
 	public String toString() {
-		return "User [username=" + username + ", club=" + club + ", budget=" + budget + "]";
+		return username;
 	}
 
 }

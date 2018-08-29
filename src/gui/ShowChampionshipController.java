@@ -1,32 +1,50 @@
 package gui;
 
+import java.util.List;
+
 import database.DBQuery;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Window;
+import ui.Championship;
 import ui.Player;
 import ui.Striker;
+import ui.User;
 
 public class ShowChampionshipController {
 
 	@FXML TableView<Player> tab;
-	@FXML ChoiceBox<String> team;
+	@FXML ChoiceBox<User> team;
+	@FXML Label teamLabel;
+	@FXML Label budgetLabel;
 
 	private DBQuery db;
+	private Championship championship;
+	private User user;
+	private ObservableList<Player> list;
 	
 	@FXML 
 	public void initialize() {
-		
-		ObservableList<String> teams = FXCollections.observableArrayList("Team 1","Team 2","Team 3");
-		team.setItems(teams);
-		team.setValue(teams.get(0));
-		ObservableList<Player> list = getPlayers();
+		if(db != null) {
+		list = FXCollections.observableArrayList();
+		ObservableList<User> users = FXCollections.observableArrayList();
+		List<User> list1 = championship.getCompetitors();
+		users.addAll(list1);
+		team.getItems().addAll(users);
+		team.setValue(users.get(0));
+		user = team.getValue();
+		teamLabel.setText("Team: "+ user.getClub().getName());
+		budgetLabel.setText("Budget: " + user.getBudget());
 		TableColumn<Player,String> positionColumn = new TableColumn<>("Position");
 		positionColumn.setMinWidth(50);
 		positionColumn.setCellValueFactory(new PropertyValueFactory<>("position"));
@@ -49,8 +67,17 @@ public class ShowChampionshipController {
 		
 		tab.getColumns().addAll(positionColumn, nameColumn,teamColumn,valueColumn,textFieldColumn);
 		tab.setItems(list);
+		}
     }
 	
+	public Championship getChampionship() {
+		return championship;
+	}
+
+	public void setChampionship(Championship championship) {
+		this.championship = championship;
+	}
+
 	public DBQuery getDb() {
 		return db;
 	}
@@ -59,41 +86,20 @@ public class ShowChampionshipController {
 		this.db = db;
 	}
 
-	public ObservableList<Player> getPlayers(){
-		ObservableList<Player> players = FXCollections.observableArrayList();
-		players.add(new Striker("Simeone", "Fiorentina",25, 10));
-		players.add(new Striker("Simeone", "Fiorentina",25, 10));
-		players.add(new Striker("Simeone", "Fiorentina",25, 10));
-		players.add(new Striker("Simeone", "Fiorentina",25, 10));
-		players.add(new Striker("Simeone", "Fiorentina",25, 10));
-		players.add(new Striker("Simeone", "Fiorentina",25, 10));
-		players.add(new Striker("Simeone", "Fiorentina",25, 10));
-		players.add(new Striker("Simeone", "Fiorentina",25, 10));
-		players.add(new Striker("Simeone", "Fiorentina",25, 10));
-		players.add(new Striker("Simeone", "Fiorentina",25, 10));
-		players.add(new Striker("Simeone", "Fiorentina",25, 10));
-		players.add(new Striker("Simeone", "Fiorentina",25, 10));
-		players.add(new Striker("Simeone", "Fiorentina",25, 10));
-		players.add(new Striker("Simeone", "Fiorentina",25, 10));
-		players.add(new Striker("Simeone", "Fiorentina",25, 10));
-		players.add(new Striker("Simeone", "Fiorentina",25, 10));
-		players.add(new Striker("Simeone", "Fiorentina",25, 10));
-		players.add(new Striker("Simeone", "Fiorentina",25, 10));
-		players.add(new Striker("Simeone", "Fiorentina",25, 10));
-		players.add(new Striker("Simeone", "Fiorentina",25, 10));
-		players.add(new Striker("Simeone", "Fiorentina",25, 10));
-		players.add(new Striker("Simeone", "Fiorentina",25, 10));
-		players.add(new Striker("Simeone", "Fiorentina",25, 10));
-		players.add(new Striker("Simeone", "Fiorentina",25, 10));
-		players.add(new Striker("Simeone", "Fiorentina",25, 10));
-		players.add(new Striker("Simeone", "Fiorentina",25, 10));
-		players.add(new Striker("Simeone", "Fiorentina",25, 10));
-		players.add(new Striker("Simeone", "Fiorentina",25, 10));
-		players.add(new Striker("Simeone", "Fiorentina",25, 10));
-		players.add(new Striker("Simeone", "Fiorentina",25, 10));
-		players.add(new Striker("Simeone", "Fiorentina",25, 10));
-		players.add(new Striker("Simeone", "Fiorentina",25, 10));
-		return players;
+	
+	@FXML
+	public void handlerAuctionButton(ActionEvent event) {
+		System.out.println("Questo bottone dovrà fare qualcosa");
+	}
+	
+	@FXML
+	public void handlerChoiceBox(ActionEvent event) {
+		System.out.println("Invocato");
+		teamLabel.setText("Team: " + team.getValue().getClub().getName());
+		budgetLabel.setText("Budget: " + team.getValue().getBudget());
+		list.clear();
+		List<Player> playerList = team.getValue().getClub().getTeam();
+		list.addAll(playerList);
 	}
 
 }

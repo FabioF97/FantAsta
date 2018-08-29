@@ -118,10 +118,12 @@ public class AuctionGKController {
 		Collections.sort(ret);
 		ret.addListener((Change<? extends Player> c) -> {
 			while(c.next()) {
-				if(c.wasUpdated()) { //aggiungere i controlli che sia stato inserito un prezzo corretto e una squadra
-					ret.remove(c.getFrom());
-					tab.setItems(ret);
-					tab.refresh();
+				if(c.wasUpdated()) {
+					if (checkBuy(ret.get(c.getFrom()))){
+						ret.remove(c.getFrom());
+						tab.setItems(ret);
+						tab.refresh();
+					}					
 				}
 			}
 		});
@@ -145,6 +147,18 @@ public class AuctionGKController {
 		
 		window.setScene(scene2);
 		window.show();
+	}
+	
+	public boolean checkBuy(Player p) {
+		if (p.getChoice().getValue().isEmpty()) {
+			return false;
+		}
+		try {
+			Integer x = new Integer (p.getPriceTab().getText());
+		} catch (NumberFormatException e){
+			return false;
+		}
+		return true;
 	}
 
 }

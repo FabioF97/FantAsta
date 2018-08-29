@@ -37,8 +37,6 @@ public class AuctionGKController {
 
 	@FXML TableView<Player> tab;
 
-	private MainController main;
-
 	private DBQuery db;
 	
 	private Championship championship;
@@ -47,10 +45,10 @@ public class AuctionGKController {
 	
 	@FXML 
 	public void initialize() {
-		
+		if(db != null) {
 		ObservableList<Player> list = FXCollections.observableArrayList(item -> new Observable[] {item.visibleProperty()});
 		
-		
+		System.out.println("Mi ha passato: "+ championship);
 		try {
 			list = getPlayers();
 		} catch (SQLException e) {
@@ -83,6 +81,7 @@ public class AuctionGKController {
 		
 		tab.getColumns().addAll(nameColumn,teamColumn,valueColumn,textFieldColumn, choiceBoxColumn, buyColumn);
 		tab.setItems(list);
+		}
     }
 	
 	public DBQuery getDb() {
@@ -102,22 +101,6 @@ public class AuctionGKController {
 	}
 
 	public ObservableList<Player> getPlayers() throws SQLException{
-		//ObservableList<Player> players = FXCollections.observableArrayList();
-		
-		//try {
-			//DBQuery db = new DBQuery();
-		//List<Player> list = db.getGk1("Spongebob"); 	// qua al posto di list_player va il nome della lista creata con lo stesso nome del campionato
-		//ObservableList<Player> players = FXCollections.observableArrayList();
-		//for(Player p : list) {
-		//	players.add(p);
-		//}
-		//System.out.println(players.size());
-		//Collections.sort(players);
-		//return players;
-		//}catch (SQLException e) {
-		//	System.out.println("Error with comunication with the database");
-		//}
-		//return null;
 		ObservableList<Player> ret = FXCollections.observableArrayList(item -> new Observable[] {item.visibleProperty()});
 		List<Player> list = db.getGk1("Spongebob");
 		for(Player p : list) {
@@ -148,10 +131,5 @@ public class AuctionGKController {
 		window.setScene(scene2);
 		window.show();
 	}
-	
-/*
-	public void init(MainController mainController) {
-		main = mainController;
-		
-	}*/
+
 }

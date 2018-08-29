@@ -119,6 +119,7 @@ public class CreateChampionshipController {
 		AuctionGKController ctrl = loader.getController();
 		ctrl.setDb(db);
 		ctrl.setChampionship(championship);
+		ctrl.initialize();
 		Scene scene2 = new Scene(parent);
 		Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
 		

@@ -12,7 +12,7 @@ public class TestApp extends Application {
 
 	@Override
 	public void start(Stage primaryStage) throws IOException {
-		Parent root = FXMLLoader.load(getClass().getResource("AuctionGk.fxml"));
+		Parent root = FXMLLoader.load(getClass().getResource("Start.fxml"));
 		Scene scene1 = new Scene(root);
 		primaryStage.setTitle("FantAsta");
 		primaryStage.setScene(scene1);

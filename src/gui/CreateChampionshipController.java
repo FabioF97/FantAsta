@@ -36,7 +36,17 @@ public class CreateChampionshipController {
 	protected Championship championship;
 	private MainController main;
 	
+	private DBQuery db;
 	
+	
+	public DBQuery getDb() {
+		return db;
+	}
+
+	public void setDb(DBQuery db) {
+		this.db = db;
+	}
+
 	public CreateChampionshipController() {
 		//System.out.println("Costruttore invocato");
 	}
@@ -106,7 +116,6 @@ public class CreateChampionshipController {
 		System.out.println(championship);
 		//main.setChampionship(championship);
 		try {
-			DBQuery db = new DBQuery();
 			db.championshipInsert(championship.getName(), championship.getDate(), championship.getnComp(), championship.getBudget());
 		}catch (SQLException e) {
 			Stage owner = (Stage) ((Node) event.getSource()).getScene().getWindow();

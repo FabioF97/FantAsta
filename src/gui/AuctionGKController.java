@@ -4,11 +4,18 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
 
 import database.DBQuery;
+import javafx.beans.Observable;
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
+import javafx.collections.ListChangeListener.Change;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -28,13 +35,26 @@ import gui.MainController;
 
 public class AuctionGKController {
 
-@FXML TableView<Player> tab;
+	@FXML TableView<Player> tab;
 
-private MainController main;
+	private MainController main;
+
+	private DBQuery db;
+
+	ObservableList<Player> list;
 	
 	@FXML 
 	public void initialize() {
-		ObservableList<Player> list = getPlayers();
+		
+		ObservableList<Player> list = FXCollections.observableArrayList(item -> new Observable[] {item.visibleProperty()});
+		
+		try {
+			db = new DBQuery();
+			list = getPlayers();
+		} catch (SQLException e) {
+			System.out.println("Error with comunication with the database");
+			e.printStackTrace();
+		}
 		TableColumn<Player,String> nameColumn = new TableColumn<>("Name");
 		nameColumn.setMinWidth(200);
 		nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
@@ -63,56 +83,43 @@ private MainController main;
 		tab.setItems(list);
     }
 	
-	public ObservableList<Player> getPlayers(){
+	public ObservableList<Player> getPlayers() throws SQLException{
 		//ObservableList<Player> players = FXCollections.observableArrayList();
-		try {
-			DBQuery db = new DBQuery();
-		List<Player> list = db.getGk1("list_player");	// qua al posto di list_player va il nome della lista creata con lo stesso nome del campionato
-		ObservableList<Player> players = FXCollections.observableArrayList();
+		
+		//try {
+			//DBQuery db = new DBQuery();
+		//List<Player> list = db.getGk1("Spongebob"); 	// qua al posto di list_player va il nome della lista creata con lo stesso nome del campionato
+		//ObservableList<Player> players = FXCollections.observableArrayList();
+		//for(Player p : list) {
+		//	players.add(p);
+		//}
+		//System.out.println(players.size());
+		//Collections.sort(players);
+		//return players;
+		//}catch (SQLException e) {
+		//	System.out.println("Error with comunication with the database");
+		//}
+		//return null;
+		ObservableList<Player> ret = FXCollections.observableArrayList(item -> new Observable[] {item.visibleProperty()});
+		List<Player> list = db.getGk1("Spongebob");
 		for(Player p : list) {
-			players.add(p);
+			if(p.isVisible()) {
+				ret.add(p);
+			}
 		}
-		System.out.println(players.size());
-		/*
-		players.add(new Striker("Simeone", "Fiorentina",25, 10));
-		players.add(new Striker("Simeone", "Fiorentina",25, 10));
-		players.add(new Striker("Simeone", "Fiorentina",25, 10));
-		players.add(new Striker("Simeone", "Fiorentina",25, 10));
-		players.add(new Striker("Simeone", "Fiorentina",25, 10));
-		players.add(new Striker("Simeone", "Fiorentina",25, 10));
-		players.add(new Striker("Simeone", "Fiorentina",25, 10));
-		players.add(new Striker("Simeone", "Fiorentina",25, 10));
-		players.add(new Striker("Simeone", "Fiorentina",25, 10));
-		players.add(new Striker("Simeone", "Fiorentina",25, 10));
-		players.add(new Striker("Simeone", "Fiorentina",25, 10));
-		players.add(new Striker("Simeone", "Fiorentina",25, 10));
-		players.add(new Striker("Simeone", "Fiorentina",25, 10));
-		players.add(new Striker("Simeone", "Fiorentina",25, 10));
-		players.add(new Striker("Simeone", "Fiorentina",25, 10));
-		players.add(new Striker("Simeone", "Fiorentina",25, 10));
-		players.add(new Striker("Simeone", "Fiorentina",25, 10));
-		players.add(new Striker("Simeone", "Fiorentina",25, 10));
-		players.add(new Striker("Simeone", "Fiorentina",25, 10));
-		players.add(new Striker("Simeone", "Fiorentina",25, 10));
-		players.add(new Striker("Simeone", "Fiorentina",25, 10));
-		players.add(new Striker("Simeone", "Fiorentina",25, 10));
-		players.add(new Striker("Simeone", "Fiorentina",25, 10));
-		players.add(new Striker("Simeone", "Fiorentina",25, 10));
-		players.add(new Striker("Simeone", "Fiorentina",25, 10));
-		players.add(new Striker("Simeone", "Fiorentina",25, 10));
-		players.add(new Striker("Simeone", "Fiorentina",25, 10));
-		players.add(new Striker("Simeone", "Fiorentina",25, 10));
-		players.add(new Striker("Simeone", "Fiorentina",25, 10));
-		players.add(new Striker("Simeone", "Fiorentina",25, 10));
-		players.add(new Striker("Simeone", "Fiorentina",25, 10));
-		players.add(new Striker("Simeone", "Fiorentina",25, 10));*/
-		Collections.sort(players);
-		return players;
-		}catch (SQLException e) {
-			System.out.println("Error with comunication with the database");
-		}
-		return null;
+		Collections.sort(ret);
+		ret.addListener((Change<? extends Player> c) -> {
+			while(c.next()) {
+				if(c.wasUpdated()) {
+					ret.remove(c.getFrom());
+					tab.setItems(ret);
+					tab.refresh();
+				}
+			}
+		});
+		return ret;
 	}
+	
 	
 	@FXML
 	protected void handlerNextController(ActionEvent event) throws IOException {
@@ -123,6 +130,7 @@ private MainController main;
 		window.setScene(scene2);
 		window.show();
 	}
+	
 /*
 	public void init(MainController mainController) {
 		main = mainController;

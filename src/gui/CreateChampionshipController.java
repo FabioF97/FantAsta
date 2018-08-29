@@ -38,12 +38,12 @@ public class CreateChampionshipController {
 	
 	
 	public CreateChampionshipController() {
-		System.out.println("Costruttore invocato");
+		//System.out.println("Costruttore invocato");
 	}
 	
 	@FXML 
 	public void initialize() {
-		System.out.println("inizialize invocato");
+		//System.out.println("inizialize invocato");
     }
 	
 	@FXML
@@ -58,22 +58,23 @@ public class CreateChampionshipController {
 			return;
 		}
 		try{
-			Integer x = new Integer(textfieldBudget.getText());
+			Integer.parseInt(textfieldBudget.getText());
 		} catch (NumberFormatException e) {
 			AlertHelper.showAlert(Alert.AlertType.ERROR, owner, "Form Error!", "Budget insertion not allowed.");
 			return;
 		}
-		championship = new Championship(textfieldName.getText(), new Integer(textfieldBudget.getText()));
+		championship = new Championship(textfieldName.getText(), Integer.parseInt(textfieldBudget.getText()));
 		System.out.println(championship);
 		labelChampionship.setText("Championship created: "+ textfieldName.getText());
 		textfieldName.editableProperty().setValue(false);
 		textfieldBudget.editableProperty().setValue(false);
 	}
 	
+	//textfieldName.getText().isEmpty()
 	@FXML
 	protected void handlerButtonUser(ActionEvent event) {
 		Window owner = buttonUser.getScene().getWindow();
-		if (textfieldName.getText().isEmpty()) {
+		if (championship == null) {
 			AlertHelper.showAlert(Alert.AlertType.ERROR, owner, "Form Error!", "Please create the championship.");
 			return;
 		}
@@ -86,7 +87,7 @@ public class CreateChampionshipController {
 			return;
 		}
 		Club club = new Club(textfieldClub.getText());
-		User user = new User(textfieldUsername.getText(), club, new Integer(textfieldBudget.getText()));
+		User user = new User(textfieldUsername.getText(), club, Integer.parseInt(textfieldBudget.getText()));
 		championship.addCompetitor(user);
 		
 		System.out.println(user);
@@ -97,6 +98,11 @@ public class CreateChampionshipController {
 	
 	@FXML
 	protected void handlerNextController(ActionEvent event) throws IOException {
+		if(championship == null || championship.getCompetitors().size() < 2) {
+			Window owner = buttonUser.getScene().getWindow();
+			AlertHelper.showAlert(Alert.AlertType.ERROR, owner, "Form Error!", "Please create the championship and add at least two users!");
+			return;
+		}
 		System.out.println(championship);
 		//main.setChampionship(championship);
 		try {

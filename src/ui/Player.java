@@ -1,5 +1,7 @@
 package ui;
 
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -26,6 +28,7 @@ public abstract class Player implements Comparable<Player>{
 	private int price;
 	private int id;
 	private boolean visible;
+	private BooleanProperty vsbl = new SimpleBooleanProperty();
 	//In this textfield the admin will write player's price
 	private TextField priceTab;
 	//Button used to buy a player
@@ -60,12 +63,14 @@ public abstract class Player implements Comparable<Player>{
 		this.value = value;
 		this.id = id;
 		this.visible = true;
+		vsbl.set(true);
 		this.price = MINPRICE;
 		priceTab = new TextField();
 		buy = new Button("Buy");
 		buy.setOnAction((EventHandler<ActionEvent>) new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
 				System.out.println("Player: " + name + " goes to -> " + ((String) choice.getValue()));
+				vsbl.set(false);
 			}
 		});
 		sell = new Button("Sell");
@@ -112,6 +117,9 @@ public abstract class Player implements Comparable<Player>{
 		this.visible = visible;
 	}
 	
+	public BooleanProperty visibleProperty() {
+		return vsbl;
+	}
 	
 	
 	public Button getSell() {

@@ -1,6 +1,7 @@
 package gui;
 
 import javafx.fxml.FXML;
+
 import ui.Championship;
 import gui.AuctionGKController;
 import gui.CreateChampionshipController;

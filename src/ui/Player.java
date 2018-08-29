@@ -3,6 +3,7 @@ package ui;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
@@ -284,6 +285,13 @@ public abstract class Player implements Comparable<Player>{
 		this.visible = visible;
 	}
 	
+	/**
+	 * Sets the choicebox parameters.
+	 * @param list
+	 */
+	public void fillChoiceBox(ObservableList<String> list) {
+		choice.setItems(list);
+	}
 	
 	/**
 	 * Method used to sort the team:

@@ -1,9 +1,15 @@
 package gui;
 
 import java.io.IOException;
+import java.sql.SQLException;
+import java.util.Collections;
+import java.util.List;
 
+import database.DBQuery;
+import javafx.beans.Observable;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.ListChangeListener.Change;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -16,6 +22,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import ui.Championship;
 import ui.Player;
 import ui.Striker;
 
@@ -23,9 +30,21 @@ public class AuctionStrController {
 	
 	@FXML TableView<Player> tab;
 	
+	private DBQuery db;
+	private Championship championship;
+	
 	@FXML 
 	public void initialize() {
-		ObservableList<Player> list = getPlayers();
+		if(db != null) {
+			ObservableList<Player> list = FXCollections.observableArrayList(item -> new Observable[] {item.visibleProperty()});
+			
+			System.out.println("Mi ha passato: "+ championship);
+			try {
+				list = getPlayers();
+			} catch (SQLException e) {
+				System.out.println("Error with comunication with the database");
+				e.printStackTrace();
+			}
 		TableColumn<Player,String> nameColumn = new TableColumn<>("Name");
 		nameColumn.setMinWidth(200);
 		nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
@@ -52,43 +71,44 @@ public class AuctionStrController {
 		
 		tab.getColumns().addAll(nameColumn,teamColumn,valueColumn,textFieldColumn, choiceBoxColumn, buyColumn);
 		tab.setItems(list);
+		}
     }
 	
-	public ObservableList<Player> getPlayers(){
-		ObservableList<Player> players = FXCollections.observableArrayList();
-		players.add(new Striker("Simeone", "Fiorentina",25, 10));
-		players.add(new Striker("Simeone", "Fiorentina",25, 10));
-		players.add(new Striker("Simeone", "Fiorentina",25, 10));
-		players.add(new Striker("Simeone", "Fiorentina",25, 10));
-		players.add(new Striker("Simeone", "Fiorentina",25, 10));
-		players.add(new Striker("Simeone", "Fiorentina",25, 10));
-		players.add(new Striker("Simeone", "Fiorentina",25, 10));
-		players.add(new Striker("Simeone", "Fiorentina",25, 10));
-		players.add(new Striker("Simeone", "Fiorentina",25, 10));
-		players.add(new Striker("Simeone", "Fiorentina",25, 10));
-		players.add(new Striker("Simeone", "Fiorentina",25, 10));
-		players.add(new Striker("Simeone", "Fiorentina",25, 10));
-		players.add(new Striker("Simeone", "Fiorentina",25, 10));
-		players.add(new Striker("Simeone", "Fiorentina",25, 10));
-		players.add(new Striker("Simeone", "Fiorentina",25, 10));
-		players.add(new Striker("Simeone", "Fiorentina",25, 10));
-		players.add(new Striker("Simeone", "Fiorentina",25, 10));
-		players.add(new Striker("Simeone", "Fiorentina",25, 10));
-		players.add(new Striker("Simeone", "Fiorentina",25, 10));
-		players.add(new Striker("Simeone", "Fiorentina",25, 10));
-		players.add(new Striker("Simeone", "Fiorentina",25, 10));
-		players.add(new Striker("Simeone", "Fiorentina",25, 10));
-		players.add(new Striker("Simeone", "Fiorentina",25, 10));
-		players.add(new Striker("Simeone", "Fiorentina",25, 10));
-		players.add(new Striker("Simeone", "Fiorentina",25, 10));
-		players.add(new Striker("Simeone", "Fiorentina",25, 10));
-		players.add(new Striker("Simeone", "Fiorentina",25, 10));
-		players.add(new Striker("Simeone", "Fiorentina",25, 10));
-		players.add(new Striker("Simeone", "Fiorentina",25, 10));
-		players.add(new Striker("Simeone", "Fiorentina",25, 10));
-		players.add(new Striker("Simeone", "Fiorentina",25, 10));
-		players.add(new Striker("Simeone", "Fiorentina",25, 10));
-		return players;
+	public DBQuery getDb() {
+		return db;
+	}
+
+	public void setDb(DBQuery db) {
+		this.db = db;
+	}
+
+	public Championship getChampionship() {
+		return championship;
+	}
+
+	public void setChampionship(Championship championship) {
+		this.championship = championship;
+	}
+	
+	public ObservableList<Player> getPlayers() throws SQLException{
+		ObservableList<Player> ret = FXCollections.observableArrayList(item -> new Observable[] {item.visibleProperty()});
+		List<Player> list = db.getStr1(championship.getName());
+		for(Player p : list) {
+			if(p.isVisible()) {
+				ret.add(p);
+			}
+		}
+		Collections.sort(ret);
+		ret.addListener((Change<? extends Player> c) -> {
+			while(c.next()) {
+				if(c.wasUpdated()) {
+					ret.remove(c.getFrom());
+					tab.setItems(ret);
+					tab.refresh();
+				}
+			}
+		});
+		return ret;
 	}
 	
 	@FXML

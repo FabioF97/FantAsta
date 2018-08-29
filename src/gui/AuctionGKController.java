@@ -9,9 +9,11 @@ import java.util.List;
 
 import database.DBQuery;
 import javafx.beans.Observable;
+import javafx.beans.binding.Bindings;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleBooleanProperty;
+import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
@@ -102,9 +104,14 @@ public class AuctionGKController {
 
 	public ObservableList<Player> getPlayers() throws SQLException{
 		ObservableList<Player> ret = FXCollections.observableArrayList(item -> new Observable[] {item.visibleProperty()});
-		List<Player> list = db.getGk1("Spongebob");
+		List<Player> list = db.getGk1(championship.getName());
+		ObservableList<String> clubs = FXCollections.observableArrayList();
+		for (User u : championship.getCompetitors()) {
+			clubs.add(u.getClub().getName());
+		}
 		for(Player p : list) {
 			if(p.isVisible()) {
+				p.fillChoiceBox(clubs);
 				ret.add(p);
 			}
 		}
@@ -124,7 +131,14 @@ public class AuctionGKController {
 	
 	@FXML
 	protected void handlerNextController(ActionEvent event) throws IOException {
-		Parent parent = FXMLLoader.load(getClass().getResource("AuctionDef.fxml"));
+		
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("AuctionDef.fxml"));
+		Parent parent = loader.load();
+		AuctionDefController ctrl = loader.getController();
+		ctrl.setDb(db);
+		ctrl.setChampionship(championship);
+		ctrl.initialize();
+		
 		Scene scene2 = new Scene(parent);
 		Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
 		

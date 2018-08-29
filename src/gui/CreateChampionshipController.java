@@ -126,10 +126,5 @@ public class CreateChampionshipController {
 		window.setScene(scene2);
 		window.show();
 	}
-/*
-	public void init(MainController mainController) {
-		main = mainController;
-		
-	}*/
 
 }

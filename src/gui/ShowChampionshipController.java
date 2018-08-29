@@ -15,7 +15,7 @@ import ui.Striker;
 public class ShowChampionshipController {
 
 @FXML TableView<Player> tab;
-@FXML ChoiceBox team;
+@FXML ChoiceBox<String> team;
 	
 	@FXML 
 	public void initialize() {

@@ -1,7 +1,12 @@
 package gui;
 
 import java.io.IOException;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
+import database.DBQuery;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -10,6 +15,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TableColumn;
@@ -18,10 +24,13 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import ui.*;
+import gui.MainController;
 
 public class AuctionGKController {
 
 @FXML TableView<Player> tab;
+
+private MainController main;
 	
 	@FXML 
 	public void initialize() {
@@ -55,7 +64,16 @@ public class AuctionGKController {
     }
 	
 	public ObservableList<Player> getPlayers(){
+		//ObservableList<Player> players = FXCollections.observableArrayList();
+		try {
+			DBQuery db = new DBQuery();
+		List<Player> list = db.getGk1("list_player");	// qua al posto di list_player va il nome della lista creata con lo stesso nome del campionato
 		ObservableList<Player> players = FXCollections.observableArrayList();
+		for(Player p : list) {
+			players.add(p);
+		}
+		System.out.println(players.size());
+		/*
 		players.add(new Striker("Simeone", "Fiorentina",25, 10));
 		players.add(new Striker("Simeone", "Fiorentina",25, 10));
 		players.add(new Striker("Simeone", "Fiorentina",25, 10));
@@ -87,8 +105,13 @@ public class AuctionGKController {
 		players.add(new Striker("Simeone", "Fiorentina",25, 10));
 		players.add(new Striker("Simeone", "Fiorentina",25, 10));
 		players.add(new Striker("Simeone", "Fiorentina",25, 10));
-		players.add(new Striker("Simeone", "Fiorentina",25, 10));
+		players.add(new Striker("Simeone", "Fiorentina",25, 10));*/
+		Collections.sort(players);
 		return players;
+		}catch (SQLException e) {
+			System.out.println("Error with comunication with the database");
+		}
+		return null;
 	}
 	
 	@FXML
@@ -100,4 +123,9 @@ public class AuctionGKController {
 		window.setScene(scene2);
 		window.show();
 	}
+/*
+	public void init(MainController mainController) {
+		main = mainController;
+		
+	}*/
 }

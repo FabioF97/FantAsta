@@ -17,17 +17,14 @@
             <Insets top="58.0" />
          </VBox.margin>
       </Label>
-      <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" spacing="3.0">
-         <padding>
-            <Insets top="121.0" />
-         </padding>
+      <VBox alignment="TOP_CENTER" prefHeight="136.0" prefWidth="1080.0" spacing="10.0">
          <children>
             <Label text="Name">
                <font>
                   <Font name="System Bold" size="20.0" />
                </font>
             </Label>
-            <TextField>
+            <TextField fx:id="textfieldName">
                <VBox.margin>
                   <Insets left="450.0" right="450.0" />
                </VBox.margin>
@@ -37,11 +34,17 @@
                   <Font name="System Bold" size="20.0" />
                </font>
             </Label>
-            <TextField layoutX="460.0" layoutY="161.0">
+            <TextField fx:id="textfieldBudget" layoutX="460.0" layoutY="161.0" prefHeight="0.0" prefWidth="180.0">
                <VBox.margin>
                   <Insets left="450.0" right="450.0" />
                </VBox.margin>
             </TextField>
+            <Button fx:id="buttonChampionship" mnemonicParsing="false" onAction="#handlerButtonChampionship" text="Create championship" />
+            <Label fx:id="labelChampionship">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
          </children>
       </VBox>
       <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="5.0">
@@ -51,7 +54,7 @@
                   <Font name="System Bold" size="20.0" />
                </font>
             </Label>
-            <TextField>
+            <TextField fx:id="textfieldUsername">
                <VBox.margin>
                   <Insets left="450.0" right="450.0" />
                </VBox.margin>
@@ -61,15 +64,15 @@
                   <Font name="System Bold" size="20.0" />
                </font>
             </Label>
-            <TextField fx:id="textfield" layoutX="460.0" layoutY="113.0">
+            <TextField fx:id="textfieldClub" layoutX="460.0" layoutY="113.0">
                <VBox.margin>
                   <Insets left="450.0" right="450.0" />
                </VBox.margin>
             </TextField>
-            <Button mnemonicParsing="false" onAction="#handlerAddController" text="Add user" />
-            <Label fx:id="label" />
+            <Button fx:id="buttonUser" mnemonicParsing="false" onAction="#handlerButtonUser" text="Add user" />
+            <Label fx:id="labelUser" />
          </children>
       </VBox>
-      <Button mnemonicParsing="false" onAction="#handlerNextController" text="Next" />
+      <Button fx:id="buttonNext" mnemonicParsing="false" onAction="#handlerNextController" text="Next" />
    </children>
 </VBox>

@@ -46,15 +46,6 @@ public class CreateChampionshipController {
 	public void setDb(DBQuery db) {
 		this.db = db;
 	}
-
-	public CreateChampionshipController() {
-		//System.out.println("Costruttore invocato");
-	}
-	
-	@FXML 
-	public void initialize() {
-		//System.out.println("inizialize invocato");
-    }
 	
 	@FXML
 	public void handlerButtonChampionship() {
@@ -123,8 +114,11 @@ public class CreateChampionshipController {
 			return;
 		}
 		
-		
-		Parent parent = FXMLLoader.load(getClass().getResource("AuctionGK.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("AuctionGK.fxml"));
+		Parent parent = loader.load();
+		AuctionGKController ctrl = loader.getController();
+		ctrl.setDb(db);
+		ctrl.setChampionship(championship);
 		Scene scene2 = new Scene(parent);
 		Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
 		

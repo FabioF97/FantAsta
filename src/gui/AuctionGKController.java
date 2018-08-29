@@ -40,6 +40,8 @@ public class AuctionGKController {
 	private MainController main;
 
 	private DBQuery db;
+	
+	private Championship championship;
 
 	ObservableList<Player> list;
 	
@@ -50,7 +52,6 @@ public class AuctionGKController {
 		
 		
 		try {
-			db = new DBQuery();
 			list = getPlayers();
 		} catch (SQLException e) {
 			System.out.println("Error with comunication with the database");
@@ -84,6 +85,22 @@ public class AuctionGKController {
 		tab.setItems(list);
     }
 	
+	public DBQuery getDb() {
+		return db;
+	}
+
+	public void setDb(DBQuery db) {
+		this.db = db;
+	}
+
+	public Championship getChampionship() {
+		return championship;
+	}
+
+	public void setChampionship(Championship championship) {
+		this.championship = championship;
+	}
+
 	public ObservableList<Player> getPlayers() throws SQLException{
 		//ObservableList<Player> players = FXCollections.observableArrayList();
 		

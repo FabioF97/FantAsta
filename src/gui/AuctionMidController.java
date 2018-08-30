@@ -151,7 +151,7 @@ public class AuctionMidController {
 						ret.remove(c.getFrom());
 						tab.setItems(ret);
 						tab.refresh();
-						tabClub.refresh();
+						refreshClubBox();
 					}
 					else {
 						ret.get(c.getFrom()).visibleProperty().set(true);
@@ -185,6 +185,13 @@ public class AuctionMidController {
 	
 	@FXML
 	public void handlerClubBox(ActionEvent event) {
+		clubList.clear();
+		List<Player> playerList = clubBox.getValue().getClub().getTeam();
+		clubList.addAll(playerList);
+	}
+	
+	@FXML
+	public void refreshClubBox() {
 		clubList.clear();
 		List<Player> playerList = clubBox.getValue().getClub().getTeam();
 		clubList.addAll(playerList);

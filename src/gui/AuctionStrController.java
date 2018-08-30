@@ -149,7 +149,7 @@ public class AuctionStrController {
 						ret.remove(c.getFrom());
 						tab.setItems(ret);
 						tab.refresh();
-						tabClub.refresh();
+						refreshClubBox();
 					}
 					else {
 						ret.get(c.getFrom()).visibleProperty().set(true);
@@ -176,5 +176,12 @@ public class AuctionStrController {
 	@FXML
 	protected void handlerNextController(ActionEvent event) throws IOException {
 		System.out.println("Bisogna fare la pagina successiva");
+	}
+	
+	@FXML
+	public void refreshClubBox() {
+		clubList.clear();
+		List<Player> playerList = clubBox.getValue().getClub().getTeam();
+		clubList.addAll(playerList);
 	}
 }

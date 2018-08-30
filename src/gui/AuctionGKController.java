@@ -20,6 +20,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -34,6 +35,9 @@ public class AuctionGKController {
 	@FXML private TableView<Player> tabClub;
 	
 	@FXML private ChoiceBox<User> clubBox;
+	
+	@FXML private Label clubUserLabel;
+	@FXML private Label clubBudgetLabel;
 
 	private DBQuery db;
 	
@@ -200,6 +204,8 @@ public class AuctionGKController {
 		clubList.clear();
 		List<Player> playerList = clubBox.getValue().getClub().getTeam();
 		clubList.addAll(playerList);
+		clubUserLabel.setText("User: " + clubBox.getValue().getUsername());
+		clubBudgetLabel.setText("Budget: " + clubBox.getValue().getBudget());
 	}
 	
 	@FXML
@@ -207,6 +213,8 @@ public class AuctionGKController {
 		clubList.clear();
 		List<Player> playerList = clubBox.getValue().getClub().getTeam();
 		clubList.addAll(playerList);
+		clubUserLabel.setText("User: " + clubBox.getValue().getUsername());
+		clubBudgetLabel.setText("Budget: " + clubBox.getValue().getBudget());
 	}
 
 

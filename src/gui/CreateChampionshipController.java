@@ -23,40 +23,78 @@ import ui.Championship;
 import ui.Club;
 import ui.User;
 
+/**
+ * Controller of the page for creation of a championship.
+ * @author Fabio Polito, Fabio Fontana
+ *
+ */
 public class CreateChampionshipController {
 	
+	/** Label used to show the championship just created */
 	@FXML private Label labelChampionship;
+	/** Label used to show the user just added to the championship */
 	@FXML private Label labelUser;
+	/** TextField used to get the championship's name */
 	@FXML private TextField textfieldName;
+	/** TextField used to get the championship's budget */
 	@FXML private TextField textfieldBudget;
+	/** TextField used to get the user's name */
 	@FXML private TextField textfieldUsername;
+	/** TextField used to get the name of the user's club */
 	@FXML private TextField textfieldClub;
+	/** Button used to create the championship */
 	@FXML private Button buttonChampionship;
+	/** Button used to add a user */
 	@FXML private Button buttonUser;
+	/** Button used to start the auction */
 	@FXML private Button buttonNext;
 	
+	/** Used to save the championship just created */
 	protected Championship championship;
+	
+	/** List containing already existing championships */
 	private List<Championship> list;
 	
+	/** Link to the database */
 	private DBQuery db;
 	
-	
+	/**
+	 * Gets the link to the database.
+	 * @return db
+	 */
 	public DBQuery getDb() {
 		return db;
 	}
 
+	/**
+	 * Sets the link to the database.
+	 * @param db
+	 */
 	public void setDb(DBQuery db) {
 		this.db = db;
 	}
 	
+	/**
+	 * Gets the List already existing championships. 
+	 * @return list 
+	 */
 	public List<Championship> getList() {
 		return list;
 	}
-
+	
+	/**
+	 * Sets the List already existing championships. 
+	 * @param list
+	 */
 	public void setList(List<Championship> list) {
 		this.list = list;
 	}
 
+	/**
+	 * Fired by the Button buttonChampionship.
+	 * Creates the championship using the parameters taken from the TextFields texfieldName and textfieldBudget.
+	 * @param event
+	 */
 	@FXML
 	public void handlerButtonChampionship(ActionEvent event) {
 		Window owner = buttonChampionship.getScene().getWindow();
@@ -92,7 +130,11 @@ public class CreateChampionshipController {
 		
 	}
 	
-	//textfieldName.getText().isEmpty()
+	/**
+	 * Fired by the Button buttonUser.
+	 * Adds the user to the championship using the parameters taken from the TextFields texfieldUserame and textfieldClub.
+	 * @param event
+	 */
 	@FXML
 	protected void handlerButtonUser(ActionEvent event) {
 		Window owner = buttonUser.getScene().getWindow();
@@ -118,6 +160,12 @@ public class CreateChampionshipController {
 		textfieldClub.clear();
 	}
 	
+	/**
+	 * Fired by the Button buttonNext.
+	 * Initializes the auction start page.
+	 * @param event
+	 * @throws IOException
+	 */
 	@FXML
 	protected void handlerNextController(ActionEvent event) throws IOException {
 		if(championship == null || championship.getCompetitors().size() < 2) {

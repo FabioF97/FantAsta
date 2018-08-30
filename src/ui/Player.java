@@ -27,7 +27,6 @@ public abstract class Player implements Comparable<Player>{
 	private int value;
 	private int price;
 	private int id;
-	private boolean visible;
 	private BooleanProperty vsbl;
 	//In this textfield the admin will write player's price
 	private TextField priceTab;
@@ -53,7 +52,6 @@ public abstract class Player implements Comparable<Player>{
 	 * @param position				Player's position
 	 * @param value					Player's value
 	 * @param id					Player's id
-	 * @param visible				If it's true, the player will be visible in the list
 	 */
 	public Player(String name, String team, String position, int value, int id) {
 		super();
@@ -62,7 +60,6 @@ public abstract class Player implements Comparable<Player>{
 		this.position = position;
 		this.value = value;
 		this.id = id;
-		this.visible = true;
 		this.vsbl = new SimpleBooleanProperty();
 		vsbl.set(true);
 		this.price = MINPRICE;
@@ -115,7 +112,7 @@ public abstract class Player implements Comparable<Player>{
 		this.value = value;
 		this.id = id;
 		this.price = price;
-		this.visible = visible;
+		vsbl.set(visible);
 	}
 	
 	public BooleanProperty visibleProperty() {
@@ -274,25 +271,7 @@ public abstract class Player implements Comparable<Player>{
 	public void setValue(int value) {
 		this.value = value;
 	}
-	
-	
-	/**
-	 * Sets visible boolean
-	 * @return
-	 */
-	public boolean isVisible() {
-		return visible;
-	}
-	
-
-	/**
-	 * Gets visible boolean
-	 * @param visible
-	 */
-	public void setVisible(boolean visible) {
-		this.visible = visible;
-	}
-	
+		
 	/**
 	 * Sets the choicebox parameters.
 	 * @param list
@@ -368,7 +347,7 @@ public abstract class Player implements Comparable<Player>{
 	 */
 	@Override
 	public String toString() {
-		return "[" + name + ", " + position + ", " + visible +"]";
+		return "[" + name + ", " + position + "]";
 	}
 	
 

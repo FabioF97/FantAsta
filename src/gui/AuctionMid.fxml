@@ -81,7 +81,17 @@
                               <Font size="60.0" />
                            </font>
                         </Label>
-                        <ChoiceBox fx:id="clubBox" prefHeight="32.0" prefWidth="238.0" onAction="#handlerClubBox"/>
+                        <ChoiceBox fx:id="clubBox" onAction="#handlerClubBox" prefHeight="32.0" prefWidth="238.0" />
+                        <Label fx:id="clubUserLabel" text="User:">
+                           <font>
+                              <Font size="40.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="clubBudgetLabel" text="Budget:">
+                           <font>
+                              <Font size="40.0" />
+                           </font>
+                        </Label>
                      </children>
                   </HBox>
                   <TableView fx:id="tabClub" prefHeight="683.0" prefWidth="1080.0">

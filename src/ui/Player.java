@@ -41,7 +41,7 @@ public abstract class Player implements Comparable<Player>{
 	//Button used to buy a player
 	private Button send;
 	//Used to display the team of destination
-	private ChoiceBox<String> choice; //Qua bisogna modificare i costruttori per metterci le squadre
+	private ChoiceBox<User> choice; //Qua bisogna modificare i costruttori per metterci le squadre
 	
 	
 	
@@ -70,8 +70,10 @@ public abstract class Player implements Comparable<Player>{
 		buy = new Button("Buy");
 		buy.setOnAction((EventHandler<ActionEvent>) new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
-				System.out.println("Player: " + name + " goes to -> " + ((String) choice.getValue()));
+				if (checkBuy()) {
+					System.out.println("Player: " + name + " goes to -> " + ((String) choice.getValue().getClub().getName()));
 				vsbl.set(false);
+				}				
 			}
 		});
 		sell = new Button("Sell");
@@ -89,12 +91,10 @@ public abstract class Player implements Comparable<Player>{
 		send = new Button("Send");
 		send.setOnAction((EventHandler<ActionEvent>) new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
-				System.out.println("Player: " + name + " sent to " + ((String) choice.getValue()));
+				System.out.println("Player: " + name + " sent to " + ((String) choice.getValue().getClub().getName()));
 			}
 		});
-		choice = new ChoiceBox<String>();
-		//La successiva linea è temporanea, bisognerà fare il vero set degli items
-		choice.setItems(FXCollections.observableArrayList("Team 1","Team 2","Team 3"));
+		choice = new ChoiceBox<User>();
 	}
 	
 	/**
@@ -163,11 +163,11 @@ public abstract class Player implements Comparable<Player>{
 		this.buy = buy;
 	}
 
-	public ChoiceBox<String> getChoice() {
+	public ChoiceBox<User> getChoice() {
 		return choice;
 	}
 
-	public void setChoice(ChoiceBox<String> choice) {
+	public void setChoice(ChoiceBox<User> choice) {
 		this.choice = choice;
 	}
 
@@ -289,8 +289,8 @@ public abstract class Player implements Comparable<Player>{
 	 * Sets the choicebox parameters.
 	 * @param list
 	 */
-	public void fillChoiceBox(ObservableList<String> list) {
-		choice.setItems(list);
+	public void fillChoiceBox(ObservableList<User> list) {
+		choice.getItems().addAll(list);
 	}
 	
 	/**
@@ -342,6 +342,18 @@ public abstract class Player implements Comparable<Player>{
 		return 2;
 	}
 	
+	public boolean checkBuy()
+	{
+		if (choice.getValue() == null) {
+			return false;
+		}
+		try {
+			Integer.parseInt(priceTab.getText());
+		}catch (NumberFormatException e) {
+			return false;
+		}
+		return true;
+	}
 	
 	/**
 	 * Shows the attributes of the class

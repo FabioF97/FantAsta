@@ -30,14 +30,25 @@ import ui.User;
 public class AuctionStrController {
 	
 	@FXML TableView<Player> tab;
+	@FXML private TableView<Player> tabClub;
+	
+	@FXML private ChoiceBox<User> clubBox;
 	
 	private DBQuery db;
 	private Championship championship;
+	
+	private ObservableList<User> clubs;
+	private ObservableList<Player> clubList;
 	
 	@FXML 
 	public void initialize() {
 		if(db != null) {
 			ObservableList<Player> list = FXCollections.observableArrayList(item -> new Observable[] {item.visibleProperty()});
+			
+			clubs = FXCollections.observableArrayList();
+			for (User u : championship.getCompetitors()) {
+				clubs.add(u);
+			}
 			
 			System.out.println("Mi ha passato: "+ championship);
 			try {
@@ -72,6 +83,34 @@ public class AuctionStrController {
 		
 		tab.getColumns().addAll(nameColumn,teamColumn,valueColumn,textFieldColumn, choiceBoxColumn, buyColumn);
 		tab.setItems(list);
+		
+		clubList = FXCollections.observableArrayList();
+		
+		TableColumn<Player,String> positionClubColumn = new TableColumn<>("Position");
+		positionClubColumn.setMinWidth(50);
+		positionClubColumn.setCellValueFactory(new PropertyValueFactory<>("position"));
+		
+		TableColumn<Player,String> nameClubColumn = new TableColumn<>("Name");
+		nameClubColumn.setMinWidth(200);
+		nameClubColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
+		
+		TableColumn<Player,String> teamClubColumn = new TableColumn<>("Team");
+		teamClubColumn.setMinWidth(200);
+		teamClubColumn.setCellValueFactory(new PropertyValueFactory<>("team"));
+		
+		TableColumn<Player,Integer> valueClubColumn = new TableColumn<>("Value");
+		valueClubColumn.setMinWidth(100);
+		valueClubColumn.setCellValueFactory(new PropertyValueFactory<>("value"));
+		
+		TableColumn<Player,Integer> priceClubColumn = new TableColumn<>("Price");
+		priceClubColumn.setMinWidth(200);
+		priceClubColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
+		
+		
+		clubBox.getItems().addAll(clubs);
+		clubBox.setValue(clubs.get(0));
+		tabClub.getColumns().addAll(positionClubColumn,nameClubColumn,teamClubColumn,valueClubColumn,priceClubColumn);
+		tabClub.setItems(clubList);
 		}
     }
 	
@@ -94,10 +133,6 @@ public class AuctionStrController {
 	public ObservableList<Player> getPlayers() throws SQLException{
 		ObservableList<Player> ret = FXCollections.observableArrayList(item -> new Observable[] {item.visibleProperty()});
 		List<Player> list = db.getStr1(championship.getName());
-		ObservableList<String> clubs = FXCollections.observableArrayList();
-		for (User u : championship.getCompetitors()) {
-			clubs.add(u.getClub().getName());
-		}
 		for(Player p : list) {
 			if(p.isVisible()) {
 				p.fillChoiceBox(clubs);
@@ -115,6 +150,14 @@ public class AuctionStrController {
 			}
 		});
 		return ret;
+	}
+	
+	@FXML
+	public void handlerClubBox(ActionEvent event) {
+		System.out.println("Invocato");
+		clubList.clear();
+		List<Player> playerList = clubBox.getValue().getClub().getTeam();
+		clubList.addAll(playerList);
 	}
 	
 	@FXML

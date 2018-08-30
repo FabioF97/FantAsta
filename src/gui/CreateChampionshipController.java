@@ -69,6 +69,7 @@ public class CreateChampionshipController {
 		labelChampionship.setText("Championship created: "+ textfieldName.getText());
 		textfieldName.editableProperty().setValue(false);
 		textfieldBudget.editableProperty().setValue(false);
+		
 	}
 	
 	//textfieldName.getText().isEmpty()

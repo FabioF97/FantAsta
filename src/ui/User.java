@@ -22,8 +22,7 @@ public class User {
 		super();
 		this.username = username;
 	}
-	
-	
+
 	/**
 	 * Constructor with 3 params
 	 * @param username				username

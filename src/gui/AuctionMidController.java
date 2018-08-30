@@ -159,7 +159,7 @@ public class AuctionMidController {
 						Alert alert = new Alert(AlertType.ERROR);
 						alert.setTitle("Error");
 						alert.setHeaderText(null);
-						alert.setContentText("Midfielders are enough!");
+						alert.setContentText("Midfielders are enough or the budget is insufficient!");
 						alert.showAndWait();
 					}
 				}
@@ -170,6 +170,16 @@ public class AuctionMidController {
 	
 	@FXML
 	protected void handlerNextController(ActionEvent event) throws IOException {
+		for(User u: clubs) {
+			if(u.getClub().isFullMid() == false) {
+				Alert alert = new Alert(AlertType.ERROR);
+				alert.setTitle("Error");
+				alert.setHeaderText(null);
+				alert.setContentText(u.getClub().getName() +" is missing midfielders!");
+				alert.showAndWait();
+				return;
+			}
+		}
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("AuctionStr.fxml"));
 		Parent parent = loader.load();
 		AuctionStrController ctrl = loader.getController();

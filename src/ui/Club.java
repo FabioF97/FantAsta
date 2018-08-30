@@ -337,7 +337,6 @@ public class Club {
 			else {
 				incGk();
 				team.add(player);
-				System.out.println("Gk inserted! -->" + goalkeepers);
 				return true;
 			}
 		}
@@ -349,7 +348,6 @@ public class Club {
 			else {
 				incDef();
 				team.add(player);
-				System.out.println("Def inserted!");
 				return true;
 			}
 		}
@@ -361,7 +359,6 @@ public class Club {
 			else {
 				incMid();
 				team.add(player);
-				System.out.println("Mid inserted!");
 				return true;
 			}
 		}
@@ -373,7 +370,6 @@ public class Club {
 			else {
 				incStr();
 				team.add(player);
-				System.out.println("Str inserted!");
 				return true;
 			}
 		}

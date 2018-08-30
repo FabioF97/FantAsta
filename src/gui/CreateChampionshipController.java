@@ -107,7 +107,6 @@ public class CreateChampionshipController {
 			return;
 		}
 		System.out.println(championship);
-		//main.setChampionship(championship);
 		try {
 			db.championshipInsert(championship.getName(), championship.getDate(), championship.getnComp(), championship.getBudget());
 		}catch (SQLException e) {

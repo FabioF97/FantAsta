@@ -157,7 +157,7 @@ public class AuctionStrController {
 						Alert alert = new Alert(AlertType.ERROR);
 						alert.setTitle("Error");
 						alert.setHeaderText(null);
-						alert.setContentText("Strikers are enough!");
+						alert.setContentText("Strikers are enough or the budget is insufficient!");
 						alert.showAndWait();
 					}
 				}
@@ -175,6 +175,16 @@ public class AuctionStrController {
 	
 	@FXML
 	protected void handlerNextController(ActionEvent event) throws IOException {
+		for(User u: clubs) {
+			if(u.getClub().isFullStr() == false) {
+				Alert alert = new Alert(AlertType.ERROR);
+				alert.setTitle("Error");
+				alert.setHeaderText(null);
+				alert.setContentText(u.getClub().getName() +" is missing strikers!");
+				alert.showAndWait();
+				return;
+			}
+		}
 		System.out.println("Bisogna fare la pagina successiva");
 	}
 	

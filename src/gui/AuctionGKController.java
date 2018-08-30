@@ -158,7 +158,7 @@ public class AuctionGKController {
 						Alert alert = new Alert(AlertType.ERROR);
 						alert.setTitle("Error");
 						alert.setHeaderText(null);
-						alert.setContentText("Goalkeepers are enough!");
+						alert.setContentText("Goalkeepers are enough or the budget is insufficient!");
 						alert.showAndWait();
 					}
 				}
@@ -171,7 +171,16 @@ public class AuctionGKController {
 	
 	@FXML
 	protected void handlerNextController(ActionEvent event) throws IOException {
-		
+		for(User u: clubs) {
+			if(u.getClub().isFullGk() == false) {
+				Alert alert = new Alert(AlertType.ERROR);
+				alert.setTitle("Error");
+				alert.setHeaderText(null);
+				alert.setContentText(u.getClub().getName() +" is missing goalkeepers!");
+				alert.showAndWait();
+				return;
+			}
+		}
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("AuctionDef.fxml"));
 		Parent parent = loader.load();
 		AuctionDefController ctrl = loader.getController();

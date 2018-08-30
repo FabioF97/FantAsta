@@ -157,7 +157,7 @@ public class AuctionDefController {
 						Alert alert = new Alert(AlertType.ERROR);
 						alert.setTitle("Error");
 						alert.setHeaderText(null);
-						alert.setContentText("Defenders are enough!");
+						alert.setContentText("Defenders are enough or the budget is insufficient!");
 						alert.showAndWait();
 					}
 				}
@@ -168,6 +168,16 @@ public class AuctionDefController {
 	
 	@FXML
 	protected void handlerNextController(ActionEvent event) throws IOException {
+		for(User u: clubs) {
+			if(u.getClub().isFullDef() == false) {
+				Alert alert = new Alert(AlertType.ERROR);
+				alert.setTitle("Error");
+				alert.setHeaderText(null);
+				alert.setContentText(u.getClub().getName() +" is missing defenders!");
+				alert.showAndWait();
+				return;
+			}
+		}
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("AuctionMid.fxml"));
 		Parent parent = loader.load();
 		AuctionMidController ctrl = loader.getController();

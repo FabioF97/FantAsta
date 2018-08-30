@@ -16,11 +16,13 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.PropertyValueFactory;
 import ui.Championship;
 import ui.Player;
@@ -143,9 +145,20 @@ public class AuctionStrController {
 		ret.addListener((Change<? extends Player> c) -> {
 			while(c.next()) {
 				if(c.wasUpdated()) {
-					ret.remove(c.getFrom());
-					tab.setItems(ret);
-					tab.refresh();
+					if(ret.get(c.getFrom()).destination().buyPlayer(ret.get(c.getFrom()), ret.get(c.getFrom()).buyPrice()) == true) {
+						ret.remove(c.getFrom());
+						tab.setItems(ret);
+						tab.refresh();
+						tabClub.refresh();
+					}
+					else {
+						ret.get(c.getFrom()).visibleProperty().set(true);
+						Alert alert = new Alert(AlertType.ERROR);
+						alert.setTitle("Error");
+						alert.setHeaderText(null);
+						alert.setContentText("Strikers are enough!");
+						alert.showAndWait();
+					}
 				}
 			}
 		});
@@ -154,7 +167,6 @@ public class AuctionStrController {
 	
 	@FXML
 	public void handlerClubBox(ActionEvent event) {
-		System.out.println("Invocato");
 		clubList.clear();
 		List<Player> playerList = clubBox.getValue().getClub().getTeam();
 		clubList.addAll(playerList);

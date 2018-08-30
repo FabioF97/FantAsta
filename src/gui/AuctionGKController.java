@@ -2,20 +2,12 @@ package gui;
 
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Iterator;
 import java.util.List;
 
 import database.DBQuery;
 import javafx.beans.Observable;
-import javafx.beans.binding.Bindings;
-import javafx.beans.property.BooleanProperty;
-import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.SimpleBooleanProperty;
-import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
-import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.collections.ListChangeListener.Change;
 import javafx.event.ActionEvent;
@@ -25,6 +17,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TableColumn;
@@ -32,8 +25,8 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
+import javafx.stage.Window;
 import ui.*;
-import gui.MainController;
 
 public class AuctionGKController {
 
@@ -46,9 +39,7 @@ public class AuctionGKController {
 	
 	private Championship championship;
 	
-	
 
-	private ObservableList<Player> list; //Serve?
 	private ObservableList<User> clubs;
 	private ObservableList<Player> clubList;
 	
@@ -155,9 +146,20 @@ public class AuctionGKController {
 		ret.addListener((Change<? extends Player> c) -> {
 			while(c.next()) {
 				if(c.wasUpdated()) { 
-					ret.remove(c.getFrom());
-					tab.setItems(ret);
-					tab.refresh();
+					if(ret.get(c.getFrom()).destination().buyPlayer(ret.get(c.getFrom()), ret.get(c.getFrom()).buyPrice()) == true) {
+						ret.remove(c.getFrom());
+						tab.setItems(ret);
+						tab.refresh();
+						tabClub.refresh();
+					}
+					else {
+						ret.get(c.getFrom()).visibleProperty().set(true);
+						Alert alert = new Alert(AlertType.ERROR);
+						alert.setTitle("Error");
+						alert.setHeaderText(null);
+						alert.setContentText("Goalkeepers are enough!");
+						alert.showAndWait();
+					}
 				}
 			}
 		});
@@ -185,7 +187,6 @@ public class AuctionGKController {
 	
 	@FXML
 	public void handlerClubBox(ActionEvent event) {
-		System.out.println("Invocato");
 		clubList.clear();
 		List<Player> playerList = clubBox.getValue().getClub().getTeam();
 		clubList.addAll(playerList);

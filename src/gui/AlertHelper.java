@@ -1,6 +1,7 @@
 package gui;
 
 import javafx.scene.control.Alert;
+
 import javafx.stage.Window;
 
 public class AlertHelper {

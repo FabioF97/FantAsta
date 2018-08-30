@@ -26,6 +26,7 @@
                <children>
                   <ChoiceBox fx:id="choice" prefWidth="150.0" />
                   <Button fx:id="loadChampionhsip" mnemonicParsing="false" onAction="#handlerLoadChampionshipController" text="Load" />
+                  <Button fx:id="deleteChampionshipButton" mnemonicParsing="false" onAction="#handlerDeleteChampionshipButton" text="Delete" />
                </children>
             </HBox>
          </children>

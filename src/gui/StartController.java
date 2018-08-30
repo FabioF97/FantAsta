@@ -26,20 +26,35 @@ import javafx.stage.Stage;
 import ui.Championship;
 import database.DBQuery;
 
+/**
+ * Controller of the home page.
+ * @author Fabio Polito, Fabio Fontana
+ *
+ */
 public class StartController {
 
+	/** ChoiceBox used to show the championships */
 	@FXML private ChoiceBox<Championship> choice;
 	
+	/** Button used to create a new championship */
 	@FXML private Button createChampionship;
 	
+	/** Button used to load an already existing championship */
 	@FXML private Button loadChampionhsip;
 	
+	/** Link to the database */
 	private DBQuery db;
 	
+	/** List containing all the already existing championships */ 
 	private List<Championship> list;
 	
+	/** ObservableList loaded in the choiceBox 	containing the championships */
 	private ObservableList<Championship> loadList;
 	
+	/**
+	 * Initializes the home page.
+	 * Instantiates the DBQuery and populates the list with all the championships.
+	 */
 	@FXML
     public void initialize() {
 		try {
@@ -56,7 +71,12 @@ public class StartController {
 		}
     }
 	
-	
+	/**
+	 * Fired by the button createChampionship.
+	 * Initializes the page to create the championship.
+	 * @param event
+	 * @throws IOException
+	 */
 	@FXML
 	protected void handlerCreateChampionshipController(ActionEvent event) throws IOException {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("createChampionship.fxml"));
@@ -71,6 +91,12 @@ public class StartController {
 		window.show();
 	}
 	
+	/**
+	 * Fired by the button loadChampionship.
+	 * Initializes the page showing the selected championship in the ChoiceBox choice.
+	 * @param event
+	 * @throws IOException
+	 */
 	@FXML
 	protected void handlerLoadChampionshipController(ActionEvent event) throws IOException {
 		Championship championship = choice.getValue();
@@ -88,6 +114,11 @@ public class StartController {
 		window.show();
 	}
 	
+	/**
+	 * Fired by the button deleteChampionshipButton.
+	 * Delete the championship selected in the ChoiceBox choice.
+	 * @param event
+	 */
 	@FXML
 	public void handlerDeleteChampionshipButton(ActionEvent event) {
 		Alert alert = new Alert(AlertType.CONFIRMATION);

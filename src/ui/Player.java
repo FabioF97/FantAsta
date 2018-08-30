@@ -1,4 +1,14 @@
 package ui;
+
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
+import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.TextField;
+
 /**
  * This class describes the characteristics of a player.
  * The class is abstract to avoid instancing players without a role.
@@ -18,6 +28,19 @@ public abstract class Player implements Comparable<Player>{
 	private int price;
 	private int id;
 	private boolean visible;
+	private BooleanProperty vsbl;
+	//In this textfield the admin will write player's price
+	private TextField priceTab;
+	//Button used to buy a player
+	private Button buy;
+	//Button used to buy a player
+	private Button sell;
+	//Button used to buy a player
+	private Button release;
+	//Button used to buy a player
+	private Button send;
+	//Used to display the team of destination
+	private ChoiceBox<User> choice; //Qua bisogna modificare i costruttori per metterci le squadre
 	
 	
 	
@@ -40,7 +63,38 @@ public abstract class Player implements Comparable<Player>{
 		this.value = value;
 		this.id = id;
 		this.visible = true;
+		this.vsbl = new SimpleBooleanProperty();
+		vsbl.set(true);
 		this.price = MINPRICE;
+		priceTab = new TextField();
+		buy = new Button("Buy");
+		buy.setOnAction((EventHandler<ActionEvent>) new EventHandler<ActionEvent>() {
+			public void handle(ActionEvent event) {
+				if (checkBuy()) {
+					System.out.println("Player: " + name + " goes to -> " + ((String) choice.getValue().getClub().getName()));
+				vsbl.set(false);
+				}				
+			}
+		});
+		sell = new Button("Sell");
+		sell.setOnAction((EventHandler<ActionEvent>) new EventHandler<ActionEvent>() {
+			public void handle(ActionEvent event) {
+				System.out.println("Player: " + name + " Sold");
+			}
+		});
+		release = new Button("Realease");
+		release.setOnAction((EventHandler<ActionEvent>) new EventHandler<ActionEvent>() {
+			public void handle(ActionEvent event) {
+				System.out.println("Player: " + name + " released");
+			}
+		});
+		send = new Button("Send");
+		send.setOnAction((EventHandler<ActionEvent>) new EventHandler<ActionEvent>() {
+			public void handle(ActionEvent event) {
+				System.out.println("Player: " + name + " sent to " + ((String) choice.getValue().getClub().getName()));
+			}
+		});
+		choice = new ChoiceBox<User>();
 	}
 	
 	/**
@@ -64,6 +118,67 @@ public abstract class Player implements Comparable<Player>{
 		this.visible = visible;
 	}
 	
+	public BooleanProperty visibleProperty() {
+		return vsbl;
+	}
+	
+	
+	public Button getSell() {
+		return sell;
+	}
+
+	public void setSell(Button sell) {
+		this.sell = sell;
+	}
+
+	public Button getRelease() {
+		return release;
+	}
+
+	public void setRelease(Button release) {
+		this.release = release;
+	}
+
+	public Button getSend() {
+		return send;
+	}
+
+	public void setSend(Button send) {
+		this.send = send;
+	}
+
+	public TextField getPriceTab() {
+		return priceTab;
+	}
+
+	public void setPriceTab(TextField priceTab) {
+		this.priceTab = priceTab;
+	}
+
+	public Button getBuy() {
+		return buy;
+	}
+
+	public void setBuy(Button buy) {
+		this.buy = buy;
+	}
+
+	public ChoiceBox<User> getChoice() {
+		return choice;
+	}
+
+	public void setChoice(ChoiceBox<User> choice) {
+		this.choice = choice;
+	}
+	
+	public User destination() {
+		return choice.getValue();
+	}
+	
+	public int buyPrice() {
+		return Integer.parseInt(priceTab.getText());
+	}
+
 	/**
 	 * Gets player's price
 	 * @return price
@@ -178,6 +293,13 @@ public abstract class Player implements Comparable<Player>{
 		this.visible = visible;
 	}
 	
+	/**
+	 * Sets the choicebox parameters.
+	 * @param list
+	 */
+	public void fillChoiceBox(ObservableList<User> list) {
+		choice.getItems().addAll(list);
+	}
 	
 	/**
 	 * Method used to sort the team:
@@ -228,6 +350,18 @@ public abstract class Player implements Comparable<Player>{
 		return 2;
 	}
 	
+	public boolean checkBuy()
+	{
+		if (choice.getValue() == null) {
+			return false;
+		}
+		try {
+			Integer.parseInt(priceTab.getText());
+		}catch (NumberFormatException e) {
+			return false;
+		}
+		return true;
+	}
 	
 	/**
 	 * Shows the attributes of the class

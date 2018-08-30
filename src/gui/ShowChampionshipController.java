@@ -7,32 +7,60 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.stage.Window;
 import ui.Championship;
 import ui.Player;
-import ui.Striker;
 import ui.User;
 
+/**
+ * This class is the ShowChampionship controller and is responsible 
+ * for initializing and managing it.
+ * In this scene the championship, the team of each user and his information
+ * iare displayed and there is the possibility to start a repair auction.
+ * 
+ * @author Fabio Polito, Fabio Fontana
+ *
+ */
 public class ShowChampionshipController {
 
+	/**
+	 * This table shows the team selected in the ChoiceBox
+	 */
 	@FXML TableView<Player> tab;
+	/**
+	 * It allows you to choose the team to display
+	 */
 	@FXML ChoiceBox<User> team;
+	/**
+	 * Shows the username
+	 */
 	@FXML Label teamLabel;
+	/**
+	 * Shows the budget of the selected user
+	 */
 	@FXML Label budgetLabel;
 
+	/**
+	 * Link to the database
+	 */
 	private DBQuery db;
+	/**
+	 * Choosen championship
+	 */
 	private Championship championship;
-	private User user;
+	/**
+	 * This list contains the team currently displayed
+	 */
 	private ObservableList<Player> list;
 	
+	/**
+	 * This method initializes the scene by creating 
+	 * the table columns that are filled by the ObservableLists 
+	 */
 	@FXML 
 	public void initialize() {
 		if(db != null) {
@@ -42,7 +70,7 @@ public class ShowChampionshipController {
 		users.addAll(list1);
 		team.getItems().addAll(users);
 		team.setValue(users.get(0));
-		user = team.getValue();
+		User user = team.getValue();
 		teamLabel.setText("Team: "+ user.getClub().getName());
 		budgetLabel.setText("Budget: " + user.getBudget());
 		TableColumn<Player,String> positionColumn = new TableColumn<>("Position");
@@ -70,28 +98,53 @@ public class ShowChampionshipController {
 		}
     }
 	
+	/**
+	 * Gets the current championship
+	 * @return championship
+	 */
 	public Championship getChampionship() {
 		return championship;
 	}
 
+	/**
+	 * Sets the current championship
+	 * @param championship
+	 */
 	public void setChampionship(Championship championship) {
 		this.championship = championship;
 	}
 
+	/**
+	 * Gets the link to the database
+	 * @return db
+	 */
 	public DBQuery getDb() {
 		return db;
 	}
 
+	/**
+	 * Sets the link to the database
+	 * @param db
+	 */
 	public void setDb(DBQuery db) {
 		this.db = db;
 	}
 
 	
+	/**
+	 * This button gives access to the repair auction
+	 * @param event
+	 */
 	@FXML
 	public void handlerAuctionButton(ActionEvent event) {
 		System.out.println("Questo bottone dovrà fare qualcosa");
 	}
 	
+	/**
+	 * This method manages the ComboBox and changes team information, 
+	 * current user and team displayed (fired by team)
+	 * @param event
+	 */
 	@FXML
 	public void handlerChoiceBox(ActionEvent event) {
 		System.out.println("Invocato");

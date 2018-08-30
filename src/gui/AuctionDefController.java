@@ -28,24 +28,61 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import ui.Championship;
 import ui.Player;
-import ui.Striker;
 import ui.User;
-
+/**
+ * This class is the AuctionDef controller and is responsible 
+ * for initializing and managing it
+ * @author Fabio Polito, Fabio Fontana
+ *
+ */
 public class AuctionDefController {
+	
+	/**
+	 * Table containing all the available goalkeepers
+	 * */
 	@FXML TableView<Player> tab;
+	/**
+	 * Table containing all the players of a chosen team
+	 * */
 	@FXML private TableView<Player> tabClub;
 	
+	/**
+	 * Used to choose the user to view the team
+	 * */
 	@FXML private ChoiceBox<User> clubBox;
 	
+	/**
+	 * Shows the username
+	 * */
 	@FXML private Label clubUserLabel;
+	/**
+	 * Show the budget of the chosen user
+	 * */
 	@FXML private Label clubBudgetLabel;
 	
+	/**
+	 * Link to the Database
+	 * */
 	private DBQuery db;
+	/**
+	 * The championship to which users are participating
+	 * */
 	private Championship championship;
 	
+	/**
+	 * Used to fill clubBox
+	 * */
 	private ObservableList<User> clubs;
+	/**
+	 * Used to fill tabClub
+	 * */
 	private ObservableList<Player> clubList;
 	
+	/**
+	 * This method initializes the scene by creating 
+	 * the table columns that are filled by the ObservableLists 
+	 * 
+	 */
 	@FXML 
 	public void initialize() {
 		if(db != null) {
@@ -120,22 +157,44 @@ public class AuctionDefController {
 		}
     }
 	
+	/**
+	 * Returns the link with the database
+	 * @return db
+	 */
 	public DBQuery getDb() {
 		return db;
 	}
 
+	/**
+	 * Sets the connection to the database
+	 * @param db
+	 */
 	public void setDb(DBQuery db) {
 		this.db = db;
 	}
 
+	/**
+	 * Returns the current championship
+	 * @return championship
+	 */
 	public Championship getChampionship() {
 		return championship;
 	}
 
+	/**
+	 * Sets the current championship
+	 * @param championship
+	 */
 	public void setChampionship(Championship championship) {
 		this.championship = championship;
 	}
 	
+	/**
+	 * Return the list of purchasable players sensitive 
+	 * to the change of the attribute of the players vsbl
+	 * @return list
+	 * @throws SQLException
+	 */
 	public ObservableList<Player> getPlayers() throws SQLException{
 		ObservableList<Player> ret = FXCollections.observableArrayList(item -> new Observable[] {item.visibleProperty()});
 		List<Player> list = db.getDef1(championship.getName());
@@ -170,6 +229,13 @@ public class AuctionDefController {
 		return ret;
 	}
 	
+	/**
+	 * Change the scene and pass the necessary 
+	 * parameters to the next scene if the requirements are met
+	 * (fired by next button)
+	 * @param event
+	 * @throws IOException
+	 */
 	@FXML
 	protected void handlerNextController(ActionEvent event) throws IOException {
 		for(User u: clubs) {
@@ -195,6 +261,10 @@ public class AuctionDefController {
 		window.show();
 	}
 	
+	/**
+	 * Updates the team shown when the choice is changed to ChoicheBox (fired by clubBox)
+	 * @param event
+	 */
 	@FXML
 	public void handlerClubBox(ActionEvent event) {
 		clubList.clear();
@@ -204,6 +274,9 @@ public class AuctionDefController {
 		clubBudgetLabel.setText("Budget: " + clubBox.getValue().getBudget());
 	}
 	
+	/**
+	 * Updates the team shown by entering the newly purchased players
+	 */
 	@FXML
 	public void refreshClubBox() {
 		clubList.clear();

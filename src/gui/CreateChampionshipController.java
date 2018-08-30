@@ -2,6 +2,7 @@ package gui;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.List;
 
 import database.DBQuery;
 import javafx.event.ActionEvent;
@@ -14,6 +15,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
 import javafx.stage.Window;
 import gui.AlertHelper;
@@ -34,7 +36,7 @@ public class CreateChampionshipController {
 	@FXML private Button buttonNext;
 	
 	protected Championship championship;
-	private MainController main;
+	private List<Championship> list;
 	
 	private DBQuery db;
 	
@@ -47,6 +49,14 @@ public class CreateChampionshipController {
 		this.db = db;
 	}
 	
+	public List<Championship> getList() {
+		return list;
+	}
+
+	public void setList(List<Championship> list) {
+		this.list = list;
+	}
+
 	@FXML
 	public void handlerButtonChampionship(ActionEvent event) {
 		Window owner = buttonChampionship.getScene().getWindow();
@@ -65,7 +75,16 @@ public class CreateChampionshipController {
 			return;
 		}
 		championship = new Championship(textfieldName.getText(), Integer.parseInt(textfieldBudget.getText()));
-		System.out.println(championship);
+		for(Championship c: list) {
+			if(c.getName().equals(championship.getName())) {
+				Alert alert = new Alert(AlertType.ERROR);
+				alert.setTitle("Error");
+				alert.setHeaderText(null);
+				alert.setContentText("There is another championship with the name " + c.getName());
+				alert.showAndWait();
+				return;
+			}
+		}
 		labelChampionship.setText("Championship created: "+ textfieldName.getText());
 		textfieldName.editableProperty().setValue(false);
 		textfieldBudget.editableProperty().setValue(false);

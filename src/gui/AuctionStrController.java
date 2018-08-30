@@ -223,6 +223,7 @@ public class AuctionStrController {
 		clubList.clear();
 		List<Player> playerList = clubBox.getValue().getClub().getTeam();
 		clubList.addAll(playerList);
+		Collections.sort(clubList);
 		clubUserLabel.setText("User: " + clubBox.getValue().getUsername());
 		clubBudgetLabel.setText("Budget: " + clubBox.getValue().getBudget());
 	}

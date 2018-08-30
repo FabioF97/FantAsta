@@ -63,6 +63,7 @@ public class StartController {
 		Parent parent = loader.load();
 		CreateChampionshipController ctrl = loader.getController();
 		ctrl.setDb(db);
+		ctrl.setList(list);
 		Scene scene2 = new Scene(parent);
 		Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
 		

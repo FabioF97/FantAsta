@@ -107,6 +107,8 @@ public class User {
 	 * @return boolean
 	 */
 	public boolean buyPlayer(Player player, int price) {
+		if(getBudget() < price)
+			return false;
 		if(club.addPlayer(player) == true) {
 			withdraw(price);
 			player.setPrice(price);

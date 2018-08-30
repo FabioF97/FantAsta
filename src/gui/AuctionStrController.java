@@ -25,6 +25,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
 import ui.Championship;
 import ui.Player;
 import ui.Striker;
@@ -191,7 +192,30 @@ public class AuctionStrController {
 				return;
 			}
 		}
-		System.out.println("Bisogna fare la pagina successiva");
+		for(User u: clubs) {
+			try {
+				db.userInsert(u.getUsername(), u.getClub().getName(), championship.getName(), u.getBudget());
+				List<Player> ply = u.getClub().getTeam();
+				for(Player p: ply) {
+					db.playerUpdate(p.getId(), p.getPrice(), p.visibleProperty().get(), u.getClub().getName(), championship.getName());
+				}
+			} catch (SQLException e) {
+				System.out.println("Comunication error with the database");
+				e.printStackTrace();
+			}
+		}
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("ShowChampionship.fxml"));
+		Parent parent = loader.load();
+		ShowChampionshipController ctrl = loader.getController();
+		ctrl.setDb(db);
+		ctrl.setChampionship(championship);
+		ctrl.initialize();
+		
+		Scene scene2 = new Scene(parent);
+		Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+		
+		window.setScene(scene2);
+		window.show();
 	}
 	
 	@FXML

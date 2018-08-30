@@ -154,6 +154,7 @@ public class AuctionGKController {
 					}
 					else {
 						ret.get(c.getFrom()).visibleProperty().set(true);
+						System.out.println(ret.get(c.getFrom()).visibleProperty());
 						Alert alert = new Alert(AlertType.ERROR);
 						alert.setTitle("Error");
 						alert.setHeaderText(null);

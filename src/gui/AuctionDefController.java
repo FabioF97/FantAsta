@@ -140,7 +140,7 @@ public class AuctionDefController {
 		ObservableList<Player> ret = FXCollections.observableArrayList(item -> new Observable[] {item.visibleProperty()});
 		List<Player> list = db.getDef1(championship.getName());
 		for(Player p : list) {
-			if(p.isVisible()) {
+			if(p.visibleProperty().get()) {
 				p.fillChoiceBox(clubs);
 				ret.add(p);
 			}

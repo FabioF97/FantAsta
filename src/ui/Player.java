@@ -112,14 +112,14 @@ public abstract class Player implements Comparable<Player>{
 		this.value = value;
 		this.id = id;
 		this.price = price;
-		vsbl.set(visible);
+		this.vsbl = new SimpleBooleanProperty();
+		this.vsbl.set(visible);
 	}
 	
 	public BooleanProperty visibleProperty() {
 		return vsbl;
 	}
-	
-	
+
 	public Button getSell() {
 		return sell;
 	}

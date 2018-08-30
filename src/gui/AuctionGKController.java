@@ -141,7 +141,7 @@ public class AuctionGKController {
 		ObservableList<Player> ret = FXCollections.observableArrayList(item -> new Observable[] {item.visibleProperty()});
 		List<Player> list = db.getGk1(championship.getName());
 		for(Player p : list) {
-			if(p.isVisible()) {
+			if(p.visibleProperty().get()) {
 				p.fillChoiceBox(clubs);
 				ret.add(p);
 			}

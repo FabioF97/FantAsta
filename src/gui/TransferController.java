@@ -68,6 +68,8 @@ public class TransferController {
 				}
 			}
 			
+			creditBox.getItems().addAll(users);
+			creditBox.setValue(users.get(0));
 			clubBox.getItems().addAll(users);
 			clubBox.setValue(users.get(0));
 			User user = clubBox.getValue();

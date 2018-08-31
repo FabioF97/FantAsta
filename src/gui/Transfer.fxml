@@ -31,7 +31,7 @@
             </Label>
          </children>
       </HBox>
-      <TableView fx:id="tab" prefHeight="474.0" prefWidth="1080.0">
+      <TableView fx:id="tab1" prefHeight="474.0" prefWidth="1080.0">
          <columnResizePolicy>
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
          </columnResizePolicy>

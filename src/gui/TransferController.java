@@ -2,6 +2,7 @@ package gui;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.Collections;
 import java.util.List;
 
 import database.DBQuery;
@@ -32,7 +33,7 @@ import ui.User;
 
 public class TransferController {
 	
-	@FXML private TableView<Player> tab;
+	@FXML private TableView<Player> tab1;
 	@FXML private ChoiceBox<User> clubBox;
 	@FXML private ChoiceBox<User> creditBox;
 	@FXML private TextField creditTextfield; 
@@ -58,9 +59,11 @@ public class TransferController {
 					if(c.wasUpdated()) {
 						System.out.println("Vedi?");
 						list.get(c.getFrom()).visibleProperty().set(false);
+						clubBox.getValue().transfer(list.get(c.getFrom()),list.get(c.getFrom()).getChoice().getValue());
+						refreshClubBox(list.get(c.getFrom()).getChoice().getValue().getClub().getTeam());
 						list.remove(c.getFrom());
-						tab.setItems(list);
-						tab.refresh();
+						tab1.setItems(list);
+						refreshClubBox2();
 					}
 				}
 			});
@@ -105,8 +108,8 @@ public class TransferController {
 			sendColumn.setMinWidth(200);
 			sendColumn.setCellValueFactory(new PropertyValueFactory<>("send"));
 				
-			tab.getColumns().addAll(positionColumn, nameColumn,teamColumn,valueColumn,priceColumn,choiceColumn,sendColumn);
-			tab.setItems(list);
+			tab1.getColumns().addAll(positionColumn, nameColumn,teamColumn,valueColumn,priceColumn,choiceColumn,sendColumn);
+			tab1.setItems(list);
 			}
 
 	}
@@ -155,6 +158,19 @@ public class TransferController {
 		creditBox.getValue().deposit(n);
 		creditTextfield.clear();
 		budgetLabel.setText("Budget: " + clubBox.getValue().getBudget());
+	}
+	
+	public void refreshClubBox(List<Player> team) {
+		list.clear();
+		Collections.sort(team);
+		list.addAll(team);
+	}
+	
+	public void refreshClubBox2() {
+		list.clear();
+		List<Player> playerList = clubBox.getValue().getClub().getTeam();
+		list.addAll(playerList);
+		Collections.sort(list);
 	}
 	
 	@FXML

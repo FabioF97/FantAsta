@@ -82,7 +82,7 @@ public class ShowChampionshipController {
 		team.getItems().addAll(users);
 		team.setValue(users.get(0));
 		User user = team.getValue();
-		teamLabel.setText("Team: "+ user.getClub().getName());
+		teamLabel.setText("User: "+ user.getUsername());
 		budgetLabel.setText("Budget: " + user.getBudget());
 		TableColumn<Player,String> positionColumn = new TableColumn<>("Position");
 		positionColumn.setMinWidth(50);
@@ -171,7 +171,7 @@ public class ShowChampionshipController {
 	@FXML
 	public void handlerChoiceBox(ActionEvent event) {
 		System.out.println("Invocato");
-		teamLabel.setText("Team: " + team.getValue().getUsername());
+		teamLabel.setText("User: " + team.getValue().getUsername());
 		budgetLabel.setText("Budget: " + team.getValue().getBudget());
 		list.clear();
 		List<Player> playerList = team.getValue().getClub().getTeam();

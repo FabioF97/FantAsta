@@ -35,11 +35,11 @@ public abstract class Player implements Comparable<Player>{
 	//Button used to buy a player
 	private Button sell;
 	//Button used to buy a player
-	private Button release;
+	//private Button release;
 	//Button used to buy a player
 	private Button send;
 	//Used to display the team of destination
-	private ChoiceBox<User> choice; //Qua bisogna modificare i costruttori per metterci le squadre
+	private ChoiceBox<User> choice; 
 	
 	
 	
@@ -73,13 +73,14 @@ public abstract class Player implements Comparable<Player>{
 				}				
 			}
 		});
-		sell = new Button("Sell");
+		sell = new Button("Remove player");
 		sell.setOnAction((EventHandler<ActionEvent>) new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
 				System.out.println("Player: " + name + " Sold");
 				vsbl.set(true);
 			}
 		});
+		/*
 		release = new Button("Realease");
 		release.setOnAction((EventHandler<ActionEvent>) new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
@@ -87,6 +88,7 @@ public abstract class Player implements Comparable<Player>{
 				vsbl.set(true);
 			}
 		});
+		*/
 		send = new Button("Send");
 		send.setOnAction((EventHandler<ActionEvent>) new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
@@ -116,6 +118,40 @@ public abstract class Player implements Comparable<Player>{
 		this.price = price;
 		this.vsbl = new SimpleBooleanProperty();
 		this.vsbl.set(visible);
+		priceTab = new TextField();
+		buy = new Button("Buy");
+		buy.setOnAction((EventHandler<ActionEvent>) new EventHandler<ActionEvent>() {
+			public void handle(ActionEvent event) {
+				if (checkBuy()) {
+					System.out.println("Player: " + name + " goes to -> " + ((String) choice.getValue().getClub().getName()));
+				vsbl.set(false);
+				}				
+			}
+		});
+		sell = new Button("Remove player");
+		sell.setOnAction((EventHandler<ActionEvent>) new EventHandler<ActionEvent>() {
+			public void handle(ActionEvent event) {
+				System.out.println("Player: " + name + " Sold");
+				System.out.println(vsbl.get());
+				vsbl.set(true);
+			}
+		});
+		/*
+		release = new Button("Realease");
+		release.setOnAction((EventHandler<ActionEvent>) new EventHandler<ActionEvent>() {
+			public void handle(ActionEvent event) {
+				System.out.println("Player: " + name + " released");
+				vsbl.set(true);
+			}
+		});
+		*/
+		send = new Button("Send");
+		send.setOnAction((EventHandler<ActionEvent>) new EventHandler<ActionEvent>() {
+			public void handle(ActionEvent event) {
+				System.out.println("Player: " + name + " sent to " + ((String) choice.getValue().getClub().getName()));
+			}
+		});
+		choice = new ChoiceBox<User>();
 	}
 	
 	public BooleanProperty visibleProperty() {
@@ -130,6 +166,7 @@ public abstract class Player implements Comparable<Player>{
 		this.sell = sell;
 	}
 
+	/*
 	public Button getRelease() {
 		return release;
 	}
@@ -137,6 +174,7 @@ public abstract class Player implements Comparable<Player>{
 	public void setRelease(Button release) {
 		this.release = release;
 	}
+	*/
 
 	public Button getSend() {
 		return send;

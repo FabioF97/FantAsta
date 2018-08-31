@@ -92,8 +92,6 @@ public class AuctionGKController {
 		for (User u : championship.getCompetitors()) {
 			clubs.add(u);
 		}
-		
-		System.out.println("Mi ha passato: "+ championship);
 		try {
 			list = getPlayers();
 		} catch (SQLException e) {

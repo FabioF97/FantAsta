@@ -15,7 +15,7 @@ public class TransferController {
 			
 		}
 	}
-	
+
 	public DBQuery getDb() {
 		return db;
 	}

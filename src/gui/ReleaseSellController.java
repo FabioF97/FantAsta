@@ -47,13 +47,12 @@ public class ReleaseSellController {
 	private ObservableList<User> listUser;
 	private ObservableList<Player> list;
 	private List<Player> toUpdate;
+	private boolean sceneSelector = false;
 	
 	@FXML 
 	public void initialize() {
 		if (db != null) {
-			if(toUpdate == null) {
-				toUpdate = new ArrayList<Player>();
-			}
+			toUpdate = new ArrayList<Player>();
 			list = FXCollections.observableArrayList(item -> new Observable[] {item.visibleProperty()});
 			list.addListener((Change<? extends Player> c) -> {
 			while(c.next()) {
@@ -88,7 +87,6 @@ public class ReleaseSellController {
 					}
 					else {
 						list.get(c.getFrom()).visibleProperty().set(false);
-						//System.out.println(list.get(c.getFrom()).visibleProperty());
 					}
 				}
 			}
@@ -117,11 +115,6 @@ public class ReleaseSellController {
 		sellColumn.setMinWidth(100);
 		sellColumn.setCellValueFactory(new PropertyValueFactory<>("sell"));
 		
-		/*
-		TableColumn<Player,Button> releaseColumn = new TableColumn<>("Release");
-		releaseColumn.setMinWidth(100);
-		releaseColumn.setCellValueFactory(new PropertyValueFactory<>("release"));
-		*/
 		tab.getColumns().addAll(nameColumn,valueColumn,priceColumn,sellColumn);
 		tab.setItems(list);
 		}
@@ -167,27 +160,53 @@ public class ReleaseSellController {
 	
 	@FXML
 	public void handlerNextController(ActionEvent event) throws IOException{
-
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("Transfer.fxml"));
-		Parent parent = loader.load();
-		TransferController ctrl = loader.getController();
-		System.out.println("Nella lista dei giocatori da aggiornare ci sono: " + toUpdate.size() + " giocatori");
-		for(Player p: toUpdate) {
-			try {
-				db.playerUpdate(p.getId(), p.getPrice(), p.visibleProperty().get(), null, championship.getName());
-			} catch (SQLException e) {
-				System.out.println("Comunication error with the database");
-				e.printStackTrace();
+		if(sceneSelector == false) {
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("Transfer.fxml"));
+			Parent parent = loader.load();
+			TransferController ctrl = loader.getController();
+			ctrl.setDb(db);
+			ctrl.setChampionship(championship);
+			ctrl.initialize();
+			System.out.println("Nella lista dei giocatori da aggiornare ci sono: " + toUpdate.size() + " giocatori");
+			for(Player p: toUpdate) {
+				try {
+					db.playerUpdate(p.getId(), p.getPrice(), p.visibleProperty().get(), null, championship.getName());
+				} catch (SQLException e) {
+					System.out.println("Comunication error with the database");
+					e.printStackTrace();
+				}
 			}
+			Scene scene2 = new Scene(parent);
+			Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+			
+			window.setScene(scene2);
+			window.show();
 		}
-		ctrl.setDb(db);
-		ctrl.setChampionship(championship);
-		ctrl.initialize();
-		Scene scene2 = new Scene(parent);
-		Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-		
-		window.setScene(scene2);
-		window.show();
+		else {
+			FXMLLoader loader = new FXMLLoader(getClass().getResource("AuctionGK.fxml"));
+			Parent parent = loader.load();
+			AuctionGKController ctrl = loader.getController();
+			/*
+			ctrl.setDb(db);
+			ctrl.setChampionship(championship);
+			ctrl.initialize();
+			*/
+			//Il passaggio dei parametri qua sopra è da fare bene
+			System.out.println("Nella lista dei giocatori da aggiornare ci sono: " + toUpdate.size() + " giocatori");
+			for(Player p: toUpdate) {
+				try {
+					db.playerUpdate(p.getId(), p.getPrice(), p.visibleProperty().get(), null, championship.getName());
+				} catch (SQLException e) {
+					System.out.println("Comunication error with the database");
+					e.printStackTrace();
+				}
+			}
+			Scene scene2 = new Scene(parent);
+			Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+			
+			window.setScene(scene2);
+			window.show();
+		}
 	}
 
 }

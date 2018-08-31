@@ -80,15 +80,6 @@ public abstract class Player implements Comparable<Player>{
 				vsbl.set(true);
 			}
 		});
-		/*
-		release = new Button("Realease");
-		release.setOnAction((EventHandler<ActionEvent>) new EventHandler<ActionEvent>() {
-			public void handle(ActionEvent event) {
-				System.out.println("Player: " + name + " released");
-				vsbl.set(true);
-			}
-		});
-		*/
 		send = new Button("Send");
 		send.setOnAction((EventHandler<ActionEvent>) new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
@@ -136,15 +127,6 @@ public abstract class Player implements Comparable<Player>{
 				vsbl.set(true);
 			}
 		});
-		/*
-		release = new Button("Realease");
-		release.setOnAction((EventHandler<ActionEvent>) new EventHandler<ActionEvent>() {
-			public void handle(ActionEvent event) {
-				System.out.println("Player: " + name + " released");
-				vsbl.set(true);
-			}
-		});
-		*/
 		send = new Button("Send");
 		send.setOnAction((EventHandler<ActionEvent>) new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
@@ -165,16 +147,6 @@ public abstract class Player implements Comparable<Player>{
 	public void setSell(Button sell) {
 		this.sell = sell;
 	}
-
-	/*
-	public Button getRelease() {
-		return release;
-	}
-
-	public void setRelease(Button release) {
-		this.release = release;
-	}
-	*/
 
 	public Button getSend() {
 		return send;

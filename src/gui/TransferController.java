@@ -25,6 +25,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
+import javafx.stage.Window;
 import ui.Championship;
 import ui.Player;
 import ui.User;
@@ -35,7 +36,6 @@ public class TransferController {
 	@FXML private ChoiceBox<User> clubBox;
 	@FXML private ChoiceBox<User> creditBox;
 	@FXML private TextField creditTextfield; 
-	@FXML private Button creditButton;
 	@FXML private Label userLabel;
 	@FXML private Label budgetLabel;
 	
@@ -132,8 +132,25 @@ public class TransferController {
 	}
 	
 	@FXML
-	public void handlerCreditBox(ActionEvent event) {
-
+	public void handlerGoButton(ActionEvent event) {
+		Window owner = creditTextfield.getScene().getWindow();
+		int n;
+		if (creditTextfield.getText().isEmpty()) {
+			AlertHelper.showAlert(Alert.AlertType.ERROR, owner, "Form Error!", "Please enter the amount of credits to be sent!");
+			return;
+		}
+		try{
+			n = Integer.parseInt(creditTextfield.getText());
+		} catch (NumberFormatException e) {
+			AlertHelper.showAlert(Alert.AlertType.ERROR, owner, "Form Error!", "Credit insertion not allowed.");
+			return;
+		}
+		if(clubBox.getValue().getBudget() < n) {
+			AlertHelper.showAlert(Alert.AlertType.ERROR, owner, "Form Error!", clubBox.getValue().getUsername() + " has insufficient credit!");
+			return;
+		}
+		clubBox.getValue().withdraw(n);
+		creditBox.getValue().deposit(n);
 	}
 	
 	@FXML

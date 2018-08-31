@@ -161,6 +161,7 @@ public class ReleaseSellController {
 	@FXML
 	public void handlerNextController(ActionEvent event) throws IOException{
 		if(sceneSelector == false) {
+			list.clear();
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("Transfer.fxml"));
 			Parent parent = loader.load();
 			TransferController ctrl = loader.getController();

@@ -97,12 +97,12 @@ public class TransferController {
 			priceColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
 			
 			TableColumn<Player,ChoiceBox<User>> choiceColumn = new TableColumn<>("To");
-			priceColumn.setMinWidth(200);
-			priceColumn.setCellValueFactory(new PropertyValueFactory<>("choice"));
+			choiceColumn.setMinWidth(200);
+			choiceColumn.setCellValueFactory(new PropertyValueFactory<>("choice"));
 			
 			TableColumn<Player,Button> sendColumn = new TableColumn<>("Send");
-			priceColumn.setMinWidth(200);
-			priceColumn.setCellValueFactory(new PropertyValueFactory<>("send"));
+			sendColumn.setMinWidth(200);
+			sendColumn.setCellValueFactory(new PropertyValueFactory<>("send"));
 				
 			tab.getColumns().addAll(positionColumn, nameColumn,teamColumn,valueColumn,priceColumn,choiceColumn,sendColumn);
 			tab.setItems(list);

@@ -49,6 +49,8 @@ public class TransferController {
 	@FXML
 	public void initialize() {
 		if(db != null) {
+			users = FXCollections.observableArrayList();
+			users.addAll(championship.getCompetitors());
 			list = FXCollections.observableArrayList(item -> new Observable[] {item.visibleProperty()});
 			list.addListener((Change<? extends Player> c) -> {
 				while(c.next()) {
@@ -60,8 +62,12 @@ public class TransferController {
 					}
 				}
 			});
-			users = FXCollections.observableArrayList();
-			users.addAll(championship.getCompetitors());
+			for (User u : championship.getCompetitors()) {
+				for (Player p : u.getClub().getTeam()) {
+					p.fillChoiceBox(users);
+				}
+			}
+			
 			clubBox.getItems().addAll(users);
 			clubBox.setValue(users.get(0));
 			User user = clubBox.getValue();
@@ -72,26 +78,30 @@ public class TransferController {
 			positionColumn.setCellValueFactory(new PropertyValueFactory<>("position"));
 				
 			TableColumn<Player,String> nameColumn = new TableColumn<>("Name");
-			nameColumn.setMinWidth(200);
+			nameColumn.setMinWidth(100);
 			nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
 				
 			TableColumn<Player,String> teamColumn = new TableColumn<>("Team");
-			teamColumn.setMinWidth(200);
+			teamColumn.setMinWidth(100);
 			teamColumn.setCellValueFactory(new PropertyValueFactory<>("team"));
 				
 			TableColumn<Player,Integer> valueColumn = new TableColumn<>("Value");
-			valueColumn.setMinWidth(100);
+			valueColumn.setMinWidth(50);
 			valueColumn.setCellValueFactory(new PropertyValueFactory<>("value"));
 				
 			TableColumn<Player,Integer> priceColumn = new TableColumn<>("Price");
-			priceColumn.setMinWidth(200);
+			priceColumn.setMinWidth(50);
 			priceColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
+			
+			TableColumn<Player,ChoiceBox<User>> choiceColumn = new TableColumn<>("To");
+			priceColumn.setMinWidth(200);
+			priceColumn.setCellValueFactory(new PropertyValueFactory<>("choice"));
 			
 			TableColumn<Player,Button> sendColumn = new TableColumn<>("Send");
 			priceColumn.setMinWidth(200);
 			priceColumn.setCellValueFactory(new PropertyValueFactory<>("send"));
 				
-			tab.getColumns().addAll(positionColumn, nameColumn,teamColumn,valueColumn,priceColumn,sendColumn);
+			tab.getColumns().addAll(positionColumn, nameColumn,teamColumn,valueColumn,priceColumn,choiceColumn,sendColumn);
 			tab.setItems(list);
 			}
 

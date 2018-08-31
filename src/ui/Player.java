@@ -131,7 +131,10 @@ public abstract class Player implements Comparable<Player>{
 		send = new Button("Send");
 		send.setOnAction((EventHandler<ActionEvent>) new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
-				System.out.println("Player: " + name + " sent to " + ((String) choice.getValue().getClub().getName()));
+				if (checkSend()) {
+					System.out.println("Player: " + name + " sent to " + ((String) choice.getValue().getClub().getName()));
+				vsbl.set(false);
+				}		
 			}
 		});
 		choice = new ChoiceBox<User>();
@@ -353,6 +356,14 @@ public abstract class Player implements Comparable<Player>{
 			return false;
 		}
 		return true;
+	}
+	
+	public boolean checkSend() {
+		if (choice.getValue() == null) {
+			return false;
+		}
+		return true;
+		
 	}
 	
 	/**

@@ -53,13 +53,13 @@
                   <Font size="36.0" />
                </font>
             </Label>
-            <ChoiceBox fx:id="creditBox" onAction="#handlerGoButton" prefHeight="34.0" prefWidth="197.0" />
+            <ChoiceBox fx:id="creditBox" prefHeight="34.0" prefWidth="197.0" />
             <Label text="--&gt;">
                <font>
                   <Font size="18.0" />
                </font>
             </Label>
-            <Button mnemonicParsing="false" onAction="#handlerGoButton" text="Go">
+            <Button fx:id="goButton" mnemonicParsing="false" onAction="#handlerGoButton" text="Go">
                <font>
                   <Font size="18.0" />
                </font>

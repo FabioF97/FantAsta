@@ -36,6 +36,7 @@ public class TransferController {
 	@FXML private ChoiceBox<User> clubBox;
 	@FXML private ChoiceBox<User> creditBox;
 	@FXML private TextField creditTextfield; 
+	@FXML private Button goButton;
 	@FXML private Label userLabel;
 	@FXML private Label budgetLabel;
 	
@@ -133,7 +134,7 @@ public class TransferController {
 	
 	@FXML
 	public void handlerGoButton(ActionEvent event) {
-		Window owner = creditTextfield.getScene().getWindow();
+		Window owner = goButton.getScene().getWindow();
 		int n;
 		if (creditTextfield.getText().isEmpty()) {
 			AlertHelper.showAlert(Alert.AlertType.ERROR, owner, "Form Error!", "Please enter the amount of credits to be sent!");
@@ -151,15 +152,18 @@ public class TransferController {
 		}
 		clubBox.getValue().withdraw(n);
 		creditBox.getValue().deposit(n);
+		creditTextfield.clear();
+		budgetLabel.setText("Budget: " + clubBox.getValue().getBudget());
 	}
 	
 	@FXML
 	public void handlerNextController(ActionEvent event) throws IOException{
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("ReleaseSell.fxml"));
 		Parent parent = loader.load();
-		TransferController ctrl = loader.getController();
+		ReleaseSellController ctrl = loader.getController();
 		ctrl.setDb(db);
 		ctrl.setChampionship(championship);
+		ctrl.setSceneSelector(true);
 		ctrl.initialize();
 		Scene scene2 = new Scene(parent);
 		Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();

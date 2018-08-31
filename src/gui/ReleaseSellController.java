@@ -119,13 +119,13 @@ public class ReleaseSellController {
 		tab.setItems(list);
 		}
     }
-	
-	public List<Player> getToUpdate() {
-		return toUpdate;
+
+	public boolean isSceneSelector() {
+		return sceneSelector;
 	}
 
-	public void setToUpdate(List<Player> toUpdate) {
-		this.toUpdate = toUpdate;
+	public void setSceneSelector(boolean sceneSelector) {
+		this.sceneSelector = sceneSelector;
 	}
 
 	public DBQuery getDb() {

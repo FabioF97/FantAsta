@@ -29,6 +29,7 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import ui.Championship;
+import ui.Club;
 import ui.Player;
 import ui.User;
 
@@ -185,15 +186,66 @@ public class ReleaseSellController {
 		}
 		else {
 			list.clear();
+			List<User> userList = championship.getCompetitors();
+			for(User u: userList) {
+				if(u.getClub().getGoalkeepers() > Club.NUMGOALKEEPERS) {
+					Alert alert = new Alert(AlertType.ERROR);
+					alert.setTitle("Error!");
+					alert.setHeaderText(null);
+					alert.setContentText("Ooops, " + u.getClub().getName() + " has too many goalkeepers!");
+					alert.showAndWait();
+					return;
+				}
+				if(u.getClub().getDefenders() > Club.NUMDEFENDERS) {
+					Alert alert = new Alert(AlertType.ERROR);
+					alert.setTitle("Error!");
+					alert.setHeaderText(null);
+					alert.setContentText("Ooops, " + u.getClub().getName() + " has too many defenders!");
+					alert.showAndWait();
+					return;
+				}
+				if(u.getClub().getMidfielders() > Club.NUMMIDFIELDERS) {
+					Alert alert = new Alert(AlertType.ERROR);
+					alert.setTitle("Error!");
+					alert.setHeaderText(null);
+					alert.setContentText("Ooops, " + u.getClub().getName() + " has too many midfielders!");
+					alert.showAndWait();
+					return;
+				}
+				if(u.getClub().getStrikers() > Club.NUMSTRIKERS) {
+					Alert alert = new Alert(AlertType.ERROR);
+					alert.setTitle("Error!");
+					alert.setHeaderText(null);
+					alert.setContentText("Ooops, " + u.getClub().getName() + " has too many strikers!");
+					alert.showAndWait();
+					return;
+				}
+			}
+			for(Player p: toUpdate) {
+				try {
+					db.playerUpdate(p.getId(), p.getPrice(), p.visibleProperty().get(), null, championship.getName());
+				} catch (SQLException e) {
+					System.out.println("Comunication error with the database");
+					e.printStackTrace();
+				}
+			}
+			for(User u: userList) {
+				List<Player> club = u.getClub().getTeam();
+				for(Player p: club) {
+					try {
+						db.playerUpdate(p.getId(), p.getPrice(), p.visibleProperty().get(), u.getClub().getName(), championship.getName());
+					} catch (SQLException e) {
+						System.out.println("Comunication error with the database");
+						e.printStackTrace();
+					}
+				}
+			}
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("AuctionGK.fxml"));
 			Parent parent = loader.load();
 			AuctionGKController ctrl = loader.getController();
-			/*
 			ctrl.setDb(db);
 			ctrl.setChampionship(championship);
 			ctrl.initialize();
-			*/
-			//Il passaggio dei parametri qua sopra è da fare bene
 			System.out.println("Nella lista dei giocatori da aggiornare ci sono: " + toUpdate.size() + " giocatori");
 			for(Player p: toUpdate) {
 				try {

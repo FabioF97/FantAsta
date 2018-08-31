@@ -86,10 +86,6 @@ public class Club {
 	}
 	
 	/**
-	 * Increase the number of goalkeeper by one
-	 */
-	
-	/**
 	 * Gets the number of goalkeepers
 	 * @return goalkeepers
 	 */
@@ -153,6 +149,10 @@ public class Club {
 		this.strikers = strikers;
 	}
 	
+	
+	/**
+	 * Increase the number of goalkeeper by one
+	 */
 	public void incGk() {
 		++goalkeepers;
 	}

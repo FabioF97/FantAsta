@@ -10,8 +10,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1080.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1080.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.TransferController">
    <children>
       <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="30.0">
          <children>
@@ -21,6 +20,16 @@
                </font>
             </Label>
             <ChoiceBox prefHeight="30.0" prefWidth="199.0" />
+            <Label text="User:">
+               <font>
+                  <Font size="48.0" />
+               </font>
+            </Label>
+            <Label text="Budget:">
+               <font>
+                  <Font size="48.0" />
+               </font>
+            </Label>
          </children>
       </HBox>
       <TableView prefHeight="474.0" prefWidth="1080.0">

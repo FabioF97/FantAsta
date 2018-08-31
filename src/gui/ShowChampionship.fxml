@@ -14,14 +14,14 @@
    <children>
       <VBox alignment="CENTER" prefHeight="720.0" prefWidth="1080.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <Label text="Championship">
+            <Label fx:id="championshipLabel" text="Championship">
                <font>
                   <Font name="System Bold" size="80.0" />
                </font>
             </Label>
             <HBox alignment="CENTER">
                <children>
-                  <ChoiceBox fx:id="team" onDragDetected="#handlerChoiceBox" prefWidth="150.0" onAction="#handlerChoiceBox"/>
+                  <ChoiceBox fx:id="team" onAction="#handlerChoiceBox" onDragDetected="#handlerChoiceBox" prefWidth="150.0" />
                   <HBox alignment="CENTER" prefHeight="66.0" prefWidth="565.0" spacing="30.0">
                      <children>
                         <Label fx:id="teamLabel" text="Team: Fiorentina">

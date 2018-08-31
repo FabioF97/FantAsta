@@ -1,5 +1,6 @@
 package gui;
 
+import java.io.IOException;
 import java.util.List;
 
 import database.DBQuery;
@@ -7,11 +8,16 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
 import ui.Championship;
 import ui.Player;
 import ui.User;
@@ -43,6 +49,11 @@ public class ShowChampionshipController {
 	 * Shows the budget of the selected user
 	 */
 	@FXML Label budgetLabel;
+	
+	/**
+	 * Label showing the championship's name
+	 */
+	@FXML Label championshipLabel;
 
 	/**
 	 * Link to the database
@@ -95,6 +106,7 @@ public class ShowChampionshipController {
 		
 		tab.getColumns().addAll(positionColumn, nameColumn,teamColumn,valueColumn,textFieldColumn);
 		tab.setItems(list);
+		championshipLabel.setText(championship.getName());
 		}
     }
 	
@@ -136,8 +148,19 @@ public class ShowChampionshipController {
 	 * @param event
 	 */
 	@FXML
-	public void handlerAuctionButton(ActionEvent event) {
-		System.out.println("Questo bottone dovrà fare qualcosa");
+	public void handlerAuctionButton(ActionEvent event) throws IOException{
+
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("RealeaseSell.fxml"));
+		Parent parent = loader.load();
+		ReleaseSellController ctrl = loader.getController();
+		ctrl.setDb(db);
+		ctrl.setChampionship(championship);
+		ctrl.initialize();
+		Scene scene2 = new Scene(parent);
+		Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+		
+		window.setScene(scene2);
+		window.show();
 	}
 	
 	/**
@@ -148,7 +171,7 @@ public class ShowChampionshipController {
 	@FXML
 	public void handlerChoiceBox(ActionEvent event) {
 		System.out.println("Invocato");
-		teamLabel.setText("Team: " + team.getValue().getClub().getName());
+		teamLabel.setText("Team: " + team.getValue().getUsername());
 		budgetLabel.setText("Budget: " + team.getValue().getBudget());
 		list.clear();
 		List<Player> playerList = team.getValue().getClub().getTeam();

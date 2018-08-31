@@ -77,12 +77,14 @@ public abstract class Player implements Comparable<Player>{
 		sell.setOnAction((EventHandler<ActionEvent>) new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
 				System.out.println("Player: " + name + " Sold");
+				vsbl.set(true);
 			}
 		});
 		release = new Button("Realease");
 		release.setOnAction((EventHandler<ActionEvent>) new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
 				System.out.println("Player: " + name + " released");
+				vsbl.set(true);
 			}
 		});
 		send = new Button("Send");

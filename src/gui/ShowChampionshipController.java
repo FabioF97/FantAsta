@@ -150,7 +150,7 @@ public class ShowChampionshipController {
 	@FXML
 	public void handlerAuctionButton(ActionEvent event) throws IOException{
 
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("RealeaseSell.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("ReleaseSell.fxml"));
 		Parent parent = loader.load();
 		ReleaseSellController ctrl = loader.getController();
 		ctrl.setDb(db);

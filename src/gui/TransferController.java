@@ -56,7 +56,8 @@ public class TransferController {
 			list.addListener((Change<? extends Player> c) -> {
 				while(c.next()) {
 					if(c.wasUpdated()) {
-						list.get(c.getFrom()).visibleProperty().set(true);
+						System.out.println("Vedi?");
+						list.get(c.getFrom()).visibleProperty().set(false);
 						list.remove(c.getFrom());
 						tab.setItems(list);
 						tab.refresh();

@@ -18,7 +18,7 @@
                   <Font size="48.0" />
                </font>
             </Label>
-            <ChoiceBox fx:id="clubBox" prefHeight="30.0" prefWidth="199.0" />
+            <ChoiceBox fx:id="clubBox" prefHeight="30.0" prefWidth="199.0" onAction="#handlerClubBox"/>
             <Label fx:id="userLabel" text="User:">
                <font>
                   <Font size="48.0" />
@@ -53,7 +53,7 @@
                   <Font size="36.0" />
                </font>
             </Label>
-            <ChoiceBox fx:id="creditBox" prefHeight="34.0" prefWidth="197.0" />
+            <ChoiceBox fx:id="creditBox" prefHeight="34.0" prefWidth="197.0" onAction="#handlerCreditBox"/>
             <Label text="--&gt;">
                <font>
                   <Font size="18.0" />

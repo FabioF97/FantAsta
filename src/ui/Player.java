@@ -84,6 +84,7 @@ public abstract class Player implements Comparable<Player>{
 		send.setOnAction((EventHandler<ActionEvent>) new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
 				System.out.println("Player: " + name + " sent to " + ((String) choice.getValue().getClub().getName()));
+				vsbl.set(false);
 			}
 		});
 		choice = new ChoiceBox<User>();

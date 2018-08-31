@@ -1,18 +1,30 @@
 package gui;
 
+import java.io.IOException;
+import java.sql.SQLException;
 import java.util.List;
 
 import database.DBQuery;
+import javafx.beans.Observable;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.ListChangeListener.Change;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
 import ui.Championship;
 import ui.Player;
 import ui.User;
@@ -37,7 +49,17 @@ public class TransferController {
 	@FXML
 	public void initialize() {
 		if(db != null) {
-			list = FXCollections.observableArrayList();
+			list = FXCollections.observableArrayList(item -> new Observable[] {item.visibleProperty()});
+			list.addListener((Change<? extends Player> c) -> {
+				while(c.next()) {
+					if(c.wasUpdated()) {
+						list.get(c.getFrom()).visibleProperty().set(true);
+						list.remove(c.getFrom());
+						tab.setItems(list);
+						tab.refresh();
+					}
+				}
+			});
 			users = FXCollections.observableArrayList();
 			users.addAll(championship.getCompetitors());
 			clubBox.getItems().addAll(users);
@@ -61,11 +83,15 @@ public class TransferController {
 			valueColumn.setMinWidth(100);
 			valueColumn.setCellValueFactory(new PropertyValueFactory<>("value"));
 				
-			TableColumn<Player,Integer> textFieldColumn = new TableColumn<>("Price");
-			textFieldColumn.setMinWidth(200);
-			textFieldColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
+			TableColumn<Player,Integer> priceColumn = new TableColumn<>("Price");
+			priceColumn.setMinWidth(200);
+			priceColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
+			
+			TableColumn<Player,Button> sendColumn = new TableColumn<>("Send");
+			priceColumn.setMinWidth(200);
+			priceColumn.setCellValueFactory(new PropertyValueFactory<>("send"));
 				
-			tab.getColumns().addAll(positionColumn, nameColumn,teamColumn,valueColumn,textFieldColumn);
+			tab.getColumns().addAll(positionColumn, nameColumn,teamColumn,valueColumn,priceColumn,sendColumn);
 			tab.setItems(list);
 			}
 
@@ -82,6 +108,35 @@ public class TransferController {
 	}
 	public void setChampionship(Championship championship) {
 		this.championship = championship;
+	}
+	
+	@FXML
+	public void handlerClubBox(ActionEvent event) {
+		userLabel.setText("User: " + clubBox.getValue().getUsername());
+		budgetLabel.setText("Budget: " + clubBox.getValue().getBudget());
+		list.clear();
+		List<Player> playerList = clubBox.getValue().getClub().getTeam();
+		list.addAll(playerList);
+	}
+	
+	@FXML
+	public void handlerCreditBox(ActionEvent event) {
+
+	}
+	
+	@FXML
+	public void handlerNextController(ActionEvent event) throws IOException{
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("ReleaseSell.fxml"));
+		Parent parent = loader.load();
+		TransferController ctrl = loader.getController();
+		ctrl.setDb(db);
+		ctrl.setChampionship(championship);
+		ctrl.initialize();
+		Scene scene2 = new Scene(parent);
+		Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+			
+		window.setScene(scene2);
+		window.show();
 	}
 
 }

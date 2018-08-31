@@ -184,6 +184,7 @@ public class ReleaseSellController {
 			window.show();
 		}
 		else {
+			list.clear();
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("AuctionGK.fxml"));
 			Parent parent = loader.load();
 			AuctionGKController ctrl = loader.getController();

@@ -70,6 +70,9 @@ public class AuctionStrController {
 	 * */
 	private Championship championship;
 	
+	/** Used to check if the current auction is a repair auction */
+	private boolean sceneSelector;
+	
 	/**
 	 * Used to fill clubBox
 	 * */
@@ -158,6 +161,17 @@ public class AuctionStrController {
 		}
     }
 	
+	
+	public boolean isSceneSelector() {
+		return sceneSelector;
+	}
+
+
+	public void setSceneSelector(boolean sceneSelector) {
+		this.sceneSelector = sceneSelector;
+	}
+
+
 	/**
 	 * Returns the link with the database
 	 * @return db
@@ -264,7 +278,19 @@ public class AuctionStrController {
 			}
 		}
 		for(User u: clubs) {
-			try {
+			if (sceneSelector) {
+				try {
+					db.userUpdate(u.getUsername(), u.getBudget());
+					List<Player> ply = u.getClub().getTeam();
+					for(Player p: ply) {
+						db.playerUpdate(p.getId(), p.getPrice(), p.visibleProperty().get(), u.getClub().getName(), championship.getName());
+					}
+				} catch (SQLException e) {
+					System.out.println("Comunication error with the database");
+					e.printStackTrace();
+				}
+			}else {
+				try {
 				db.userInsert(u.getUsername(), u.getClub().getName(), championship.getName(), u.getBudget());
 				List<Player> ply = u.getClub().getTeam();
 				for(Player p: ply) {
@@ -273,7 +299,9 @@ public class AuctionStrController {
 			} catch (SQLException e) {
 				System.out.println("Comunication error with the database");
 				e.printStackTrace();
+				}
 			}
+			
 		}
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("ShowChampionship.fxml"));
 		Parent parent = loader.load();

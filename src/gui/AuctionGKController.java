@@ -68,6 +68,8 @@ public class AuctionGKController {
 	 * */
 	private Championship championship;
 	
+	/** Used to check if the current auction is a repair auction */
+	private boolean sceneSelector;
 
 	/**
 	 * Used to fill clubBox
@@ -155,6 +157,20 @@ public class AuctionGKController {
 		}
     }
 	
+	
+	
+	public boolean isSceneSelector() {
+		return sceneSelector;
+	}
+
+
+
+	public void setSceneSelector(boolean sceneSelector) {
+		this.sceneSelector = sceneSelector;
+	}
+
+
+
 	/**
 	 * Returns the link with the database
 	 * @return db
@@ -251,6 +267,7 @@ public class AuctionGKController {
 		AuctionDefController ctrl = loader.getController();
 		ctrl.setDb(db);
 		ctrl.setChampionship(championship);
+		ctrl.setSceneSelector(sceneSelector);
 		ctrl.initialize();
 		
 		Scene scene2 = new Scene(parent);

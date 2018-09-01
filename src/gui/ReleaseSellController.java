@@ -245,6 +245,7 @@ public class ReleaseSellController {
 			AuctionGKController ctrl = loader.getController();
 			ctrl.setDb(db);
 			ctrl.setChampionship(championship);
+			ctrl.setSceneSelector(sceneSelector);
 			ctrl.initialize();
 			System.out.println("Nella lista dei giocatori da aggiornare ci sono: " + toUpdate.size() + " giocatori");
 			for(Player p: toUpdate) {

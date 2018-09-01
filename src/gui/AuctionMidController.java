@@ -70,6 +70,9 @@ public class AuctionMidController {
 	 * */
 	private Championship championship;
 	
+	/** Used to check if the current auction is a repair auction */
+	private boolean sceneSelector;
+	
 	/**
 	 * Used to fill clubBox
 	 * */
@@ -159,6 +162,20 @@ public class AuctionMidController {
 		}
     }
 	
+	
+	
+	public boolean isSceneSelector() {
+		return sceneSelector;
+	}
+
+
+
+	public void setSceneSelector(boolean sceneSelector) {
+		this.sceneSelector = sceneSelector;
+	}
+
+
+
 	/**
 	 * Returns the link with the database
 	 * @return db
@@ -255,6 +272,7 @@ public class AuctionMidController {
 		AuctionStrController ctrl = loader.getController();
 		ctrl.setDb(db);
 		ctrl.setChampionship(championship);
+		ctrl.setSceneSelector(sceneSelector);
 		ctrl.initialize();
 		Scene scene2 = new Scene(parent);
 		Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -288,5 +306,7 @@ public class AuctionMidController {
 		clubUserLabel.setText("User: " + clubBox.getValue().getUsername());
 		clubBudgetLabel.setText("Budget: " + clubBox.getValue().getBudget());
 	}
+
+
 
 }

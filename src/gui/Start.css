@@ -1,8 +1,8 @@
 
 .root {
      /*-fx-background-image: url("bluBackground.jpg");*/
-     -fx-background-image: url("background3.jpg");
-     /*-fx-background-color: #008080;*/
+     /*-fx-background-image: url("background3.jpg");*/
+     -fx-background-color: linear-gradient( #dcdcdc, #f0ffff);
 }
 
 .label {
@@ -18,15 +18,19 @@
 }
 
 .button {
-	-fx-text-fill: white;
+	-fx-text-fill: black;
     -fx-font-family: "Arial Narrow";
     -fx-font-weight: bold;
+    /*-fx-border-width: 0.1;*/
+    /*-fx-border-style: solid;*/
     /*-fx-background-color: linear-gradient(#61a2b1, #2A5058);*/
-    -fx-background-color: linear-gradient( #778899, #696969);
-    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );
+    -fx-background-color: linear-gradient(#dcdcdc, #c0c0c0);
+    /*-fx-background-color: rgba(0,0,0,0); */
+    /*-fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );*/
+    -fx-box-shadow: 5px 10px,  5, 10;
 }
 .button:hover {
     /*-fx-background-color: linear-gradient(#2A5058, #61a2b1);*/
-    -fx-background-color: linear-gradient(#696969, #778899);
+    -fx-background-color: linear-gradient(#c0c0c0, #dcdcdc);
 }
 

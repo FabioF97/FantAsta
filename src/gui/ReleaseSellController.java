@@ -185,6 +185,7 @@ public class ReleaseSellController {
 			}
 			Scene scene2 = new Scene(parent);
 			Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+			scene2.getStylesheets().add(getClass().getResource("Start.css").toExternalForm());
 			
 			window.setScene(scene2);
 			window.show();
@@ -263,6 +264,7 @@ public class ReleaseSellController {
 			}
 			Scene scene2 = new Scene(parent);
 			Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+			scene2.getStylesheets().add(getClass().getResource("Start.css").toExternalForm());
 			
 			window.setScene(scene2);
 			window.show();

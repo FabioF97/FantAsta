@@ -1,6 +1,7 @@
 package gui;
 
 import java.io.IOException;
+import java.util.Collections;
 import java.util.List;
 
 import database.DBQuery;
@@ -105,6 +106,7 @@ public class ShowChampionshipController {
 		textFieldColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
 		
 		tab.getColumns().addAll(positionColumn, nameColumn,teamColumn,valueColumn,textFieldColumn);
+		Collections.sort(list);
 		tab.setItems(list);
 		championshipLabel.setText(championship.getName());
 		}

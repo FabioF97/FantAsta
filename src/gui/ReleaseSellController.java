@@ -96,6 +96,11 @@ public class ReleaseSellController {
 		listUser.addAll(championship.getCompetitors());
 		team.getItems().addAll(listUser);
 		team.setValue(listUser.get(0));
+		
+		TableColumn<Player,String> positionColumn = new TableColumn<>("Position");
+		positionColumn.setMinWidth(20);
+		positionColumn.setCellValueFactory(new PropertyValueFactory<>("position"));
+		
 		TableColumn<Player,String> nameColumn = new TableColumn<>("Name");
 		nameColumn.setMinWidth(200);
 		nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
@@ -116,7 +121,7 @@ public class ReleaseSellController {
 		sellColumn.setMinWidth(100);
 		sellColumn.setCellValueFactory(new PropertyValueFactory<>("sell"));
 		
-		tab.getColumns().addAll(nameColumn,valueColumn,priceColumn,sellColumn);
+		tab.getColumns().addAll(positionColumn, nameColumn,valueColumn,priceColumn,sellColumn);
 		tab.setItems(list);
 		}
     }

@@ -214,9 +214,16 @@ public class AuctionDefController {
 	 */
 	public ObservableList<Player> getPlayers() throws SQLException{
 		ObservableList<Player> ret = FXCollections.observableArrayList(item -> new Observable[] {item.visibleProperty()});
-		List<Player> list = db.getDef1(championship.getName());
+		List<Player> list;
+		if(sceneSelector == false) {
+			list = db.getDef1(championship.getName());
+		}
+		else {
+			list = db.getDef2(championship.getName());
+		}
 		for(Player p : list) {
-			if(p.visibleProperty().get()) {
+			boolean bool = p.visibleProperty().getValue();
+			if(bool == true) {
 				p.fillChoiceBox(clubs);
 				ret.add(p);
 			}

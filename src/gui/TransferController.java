@@ -175,6 +175,7 @@ public class TransferController {
 	
 	@FXML
 	public void handlerNextController(ActionEvent event) throws IOException{
+		list.clear();
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("ReleaseSell.fxml"));
 		Parent parent = loader.load();
 		ReleaseSellController ctrl = loader.getController();

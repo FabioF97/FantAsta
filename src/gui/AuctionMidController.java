@@ -216,7 +216,13 @@ public class AuctionMidController {
 	 */
 	public ObservableList<Player> getPlayers() throws SQLException{
 		ObservableList<Player> ret = FXCollections.observableArrayList(item -> new Observable[] {item.visibleProperty()});
-		List<Player> list = db.getMid1(championship.getName());
+		List<Player> list;
+		if(sceneSelector == false) {
+			list = db.getMid1(championship.getName());
+		}
+		else {
+			list = db.getMid2(championship.getName());
+		}
 		for(Player p : list) {
 			if(p.visibleProperty().get()) {
 				p.fillChoiceBox(clubs);

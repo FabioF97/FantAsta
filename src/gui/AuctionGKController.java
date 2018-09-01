@@ -211,7 +211,13 @@ public class AuctionGKController {
 	 */
 	public ObservableList<Player> getPlayers() throws SQLException{
 		ObservableList<Player> ret = FXCollections.observableArrayList(item -> new Observable[] {item.visibleProperty()});
-		List<Player> list = db.getGk1(championship.getName());
+		List<Player> list;
+		if(sceneSelector == false) {
+			list = db.getGk1(championship.getName());
+		}
+		else {
+			list = db.getGk2(championship.getName());
+		}
 		for(Player p : list) {
 			if(p.visibleProperty().get()) {
 				p.fillChoiceBox(clubs);

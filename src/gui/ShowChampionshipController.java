@@ -195,6 +195,7 @@ public class ShowChampionshipController {
 		budgetLabel.setText("Budget: " + team.getValue().getBudget());
 		list.clear();
 		List<Player> playerList = team.getValue().getClub().getTeam();
+		Collections.sort(playerList);
 		list.addAll(playerList);
 	}
 

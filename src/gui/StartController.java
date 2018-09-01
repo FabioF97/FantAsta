@@ -64,10 +64,12 @@ public class StartController {
 			for(Championship c: list) {
 				loadList.add(c);
 			}
-			choice.getItems().addAll(loadList);
-			choice.setValue(list.get(0));
+			if(list.size() > 0) {
+				choice.getItems().addAll(loadList);
+				choice.setValue(list.get(0));
+			}
 		} catch (SQLException e) {
-			e.printStackTrace();
+			System.out.println("No championships found");
 		}
     }
 	
@@ -100,6 +102,8 @@ public class StartController {
 	@FXML
 	protected void handlerLoadChampionshipController(ActionEvent event) throws IOException {
 		Championship championship = choice.getValue();
+		if(championship == null)
+			return;
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("ShowChampionship.fxml"));
 		Parent parent = loader.load();
 		ShowChampionshipController ctrl = loader.getController();

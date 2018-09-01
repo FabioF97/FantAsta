@@ -190,7 +190,6 @@ public class ReleaseSellController {
 			window.show();
 		}
 		else {
-			list.clear();
 			List<User> userList = championship.getCompetitors();
 			for(User u: userList) {
 				if(u.getClub().getGoalkeepers() > Club.NUMGOALKEEPERS) {
@@ -245,6 +244,7 @@ public class ReleaseSellController {
 					}
 				}
 			}
+			list.clear();
 			FXMLLoader loader = new FXMLLoader(getClass().getResource("AuctionGK.fxml"));
 			Parent parent = loader.load();
 			AuctionGKController ctrl = loader.getController();

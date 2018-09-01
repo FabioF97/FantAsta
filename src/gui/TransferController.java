@@ -57,7 +57,6 @@ public class TransferController {
 			list.addListener((Change<? extends Player> c) -> {
 				while(c.next()) {
 					if(c.wasUpdated()) {
-						System.out.println("Vedi?");
 						list.get(c.getFrom()).visibleProperty().set(false);
 						clubBox.getValue().transfer(list.get(c.getFrom()),list.get(c.getFrom()).getChoice().getValue());
 						refreshClubBox(list.get(c.getFrom()).getChoice().getValue().getClub().getTeam());

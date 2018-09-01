@@ -14,6 +14,7 @@ public class TestApp extends Application {
 	public void start(Stage primaryStage) throws IOException {
 		Parent root = FXMLLoader.load(getClass().getResource("Start.fxml"));
 		Scene scene1 = new Scene(root);
+		scene1.getStylesheets().add(getClass().getResource("Start.css").toExternalForm());
 		primaryStage.setTitle("FantAsta");
 		primaryStage.setScene(scene1);
 		primaryStage.show();

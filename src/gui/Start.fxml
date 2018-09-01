@@ -9,7 +9,7 @@
 
 <VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1080.0" spacing="50.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.StartController">
    <children>
-      <Label text="FantAsta">
+      <Label fx:id="fantaAstaLabel" text="FantAsta">
          <font>
             <Font name="System Bold" size="80.0" />
          </font>

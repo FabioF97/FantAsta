@@ -19,9 +19,14 @@
                   <Font name="System Bold" size="80.0" />
                </font>
             </Label>
-            <HBox alignment="CENTER">
+            <HBox alignment="CENTER" spacing="2.0">
                <children>
-                  <ChoiceBox fx:id="team" onAction="#handlerChoiceBox" onDragDetected="#handlerChoiceBox" prefWidth="150.0" />
+                  <HBox alignment="CENTER" spacing="25.0">
+                     <children>
+                        <Button mnemonicParsing="false" onAction="#handlerBackButton" text="Back" />
+                        <ChoiceBox fx:id="team" onAction="#handlerChoiceBox" onDragDetected="#handlerChoiceBox" prefWidth="150.0" />
+                     </children>
+                  </HBox>
                   <HBox alignment="CENTER" prefHeight="66.0" prefWidth="565.0" spacing="30.0">
                      <children>
                         <Label fx:id="teamLabel" text="Team: Fiorentina">

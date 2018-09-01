@@ -16,18 +16,18 @@
          <children>
             <Label text="Club:">
                <font>
-                  <Font size="48.0" />
+                  <Font size="25.0" />
                </font>
             </Label>
             <ChoiceBox fx:id="clubBox" onAction="#handlerClubBox" prefHeight="30.0" prefWidth="199.0" />
             <Label fx:id="userLabel" text="User:">
                <font>
-                  <Font size="48.0" />
+                  <Font size="25.0" />
                </font>
             </Label>
             <Label fx:id="budgetLabel" text="Budget:">
                <font>
-                  <Font size="48.0" />
+                  <Font size="25.0" />
                </font>
             </Label>
          </children>
@@ -41,7 +41,7 @@
          <children>
             <Label text="Send">
                <font>
-                  <Font size="36.0" />
+                  <Font size="25.0" />
                </font>
             </Label>
             <TextField fx:id="creditTextfield">
@@ -51,7 +51,7 @@
             </TextField>
             <Label text="to">
                <font>
-                  <Font size="36.0" />
+                  <Font size="25.0" />
                </font>
             </Label>
             <ChoiceBox fx:id="creditBox" prefHeight="34.0" prefWidth="197.0" />

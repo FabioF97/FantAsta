@@ -164,6 +164,24 @@ public class ShowChampionshipController {
 	}
 	
 	/**
+	 * This button gives access to the homepage
+	 * @param event
+	 * @throws IOException
+	 */
+	@FXML
+	public void handlerBackButton(ActionEvent event) throws IOException{
+
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("Start.fxml"));
+		Parent parent = loader.load();
+		StartController ctrl = loader.getController();
+		Scene scene2 = new Scene(parent);
+		Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+		
+		window.setScene(scene2);
+		window.show();
+	}
+	
+	/**
 	 * This method manages the ComboBox and changes team information, 
 	 * current user and team displayed (fired by team)
 	 * @param event

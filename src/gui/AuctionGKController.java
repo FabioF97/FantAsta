@@ -292,6 +292,9 @@ public class AuctionGKController {
 		clubList.clear();
 		List<Player> playerList = clubBox.getValue().getClub().getTeam();
 		clubList.addAll(playerList);
+		Collections.sort(clubList);
+		tabClub.setItems(clubList);
+		tabClub.refresh();
 		clubUserLabel.setText("User: " + clubBox.getValue().getUsername());
 		clubBudgetLabel.setText("Budget: " + clubBox.getValue().getBudget());
 	}

@@ -255,6 +255,9 @@ public class DBQuery {
 		int nComp = rs.getInt("ncomp");
 		Championship ret = new Championship(championship, rs.getString("date"), rs.getInt("budget"));
 		ResultSet rsu = db.executeQuery("select * from user where championship='" + championship + "'");
+		if (!rsu.isBeforeFirst()) {
+			return ret;
+		}
 		while(rsu.next()) {
 			user.add(rsu.getString("username"));
 		}
@@ -339,9 +342,15 @@ public class DBQuery {
 	 * @throws SQLException
 	 */
 	public void deleteChampionship (String championship) throws SQLException {
-		db.executeUpdate("DROP table " + championship.replace(" ", "_"));
+		ResultSet rs = db.executeQuery("SELECT name FROM sqlite_master " +
+		"WHERE type='table' " +
+		"and name='" + championship.replace(" ", "_") + "'");
+		if (rs.isBeforeFirst()) {
+			db.executeUpdate("DROP table " + championship.replace(" ", "_"));
+			db.executeUpdate("DELETE from user where championship='" + championship + "'");
+		}	
 		db.executeUpdate("DELETE from user where championship='" + championship + "'");
-		db.executeUpdate("DELETE from championship where name='" + championship +"'");	
+		db.executeUpdate("DELETE from championship where name='" + championship +"'");		
 	}
 	
 	/**

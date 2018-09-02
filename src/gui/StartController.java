@@ -62,7 +62,11 @@ public class StartController {
 			list = db.getAllChampionship();
 			loadList = FXCollections.observableArrayList();
 			for(Championship c: list) {
-				loadList.add(c);
+				if (c.getCompetitors().size() == 0 || !(c.checkClub())) {
+					db.deleteChampionship(c.getName());
+				}else {
+					loadList.add(c);
+				}														
 			}
 			if(list.size() > 0) {
 				choice.getItems().addAll(loadList);

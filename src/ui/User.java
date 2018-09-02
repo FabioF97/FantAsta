@@ -54,7 +54,7 @@ public class User {
 
 	/**
 	 * Gets the club
-	 * @return budget
+	 * @return club
 	 */
 	public Club getClub() {
 		return club;

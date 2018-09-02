@@ -161,12 +161,19 @@ public class AuctionStrController {
 		}
     }
 	
-	
+	/**
+	 * Gets sceneSelector
+	 * @return sceneSelector
+	 */
 	public boolean isSceneSelector() {
 		return sceneSelector;
 	}
 
 
+	/**
+	 * Sets sceneSelector
+	 * @param sceneSelector
+	 */
 	public void setSceneSelector(boolean sceneSelector) {
 		this.sceneSelector = sceneSelector;
 	}

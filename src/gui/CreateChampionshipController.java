@@ -112,6 +112,10 @@ public class CreateChampionshipController {
 			AlertHelper.showAlert(Alert.AlertType.ERROR, owner, "Form Error!", "Budget insertion not allowed.");
 			return;
 		}
+		if(Character.isDigit(textfieldName.getText().charAt(0))) {
+			System.out.println("The championship name can not start with a digit");
+			return;
+		}
 		championship = new Championship(textfieldName.getText(), Integer.parseInt(textfieldBudget.getText()));
 		for(Championship c: list) {
 			if(c.getName().equals(championship.getName())) {

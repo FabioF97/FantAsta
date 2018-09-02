@@ -9,6 +9,11 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
+/**
+ * This class starts the graphical interface
+ * @author Fabio Polito, Fabio Fontana
+ *
+ */
 public class TestApp extends Application {
 
 	@Override

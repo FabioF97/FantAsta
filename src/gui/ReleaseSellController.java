@@ -32,24 +32,65 @@ import ui.Championship;
 import ui.Club;
 import ui.Player;
 import ui.User;
-
+/**
+ * This class manages the sell and release phase in the repair auction. 
+ * You can choose the team where you want to sell or release a particular 
+ * player and proceed to remove all the players you want to remove
+ * @author Fabio Polito, Fabio Fontana
+ *
+ */
 public class ReleaseSellController {
 	
+	/**
+	 * The table contains the selected team
+	 */
 	@FXML TableView<Player> tab;
 
+	/**
+	 * Allows to choose the team to display
+	 */
 	@FXML ChoiceBox<User> team;
 
+	/**
+	 * Shows the username
+	 */
 	@FXML Label userLabel;
+	/**
+	 * Shows the user's budget
+	 */
 	@FXML Label budgetLabel;
 
+	/**
+	 * Link to the database
+	 */
 	private DBQuery db;
+	/**
+	 * Current championship
+	 */
 	private Championship championship;
 	
+	/**
+	 * Used to fill team
+	 */
 	private ObservableList<User> listUser;
+	/**
+	 * Used to fill tab
+	 */
 	private ObservableList<Player> list;
+	/**
+	 * Contains the players to be updated on the database
+	 */
 	private List<Player> toUpdate;
+	/**
+	 * This Boolean determines if it is the first or second time that you are 
+	 * in the sell or release phase
+	 */
 	private boolean sceneSelector = false;
 	
+	/**
+	 * This method initializes the scene by creating 
+	 * the table columns that are filled by the ObservableLists 
+	 */
 	@FXML 
 	public void initialize() {
 		if (db != null) {
@@ -126,26 +167,50 @@ public class ReleaseSellController {
 		}
     }
 
+	/**
+	 * Gets sceneSelector
+	 * @return sceneSelector
+	 */
 	public boolean isSceneSelector() {
 		return sceneSelector;
 	}
 
+	/**
+	 * Sets sceneSelector
+	 * @param sceneSelector
+	 */
 	public void setSceneSelector(boolean sceneSelector) {
 		this.sceneSelector = sceneSelector;
 	}
 
+	/**
+	 * Gets the link to the database
+	 * @return db
+	 */
 	public DBQuery getDb() {
 		return db;
 	}
 
+	/**
+	 * Sets the link to the database
+	 * @param db
+	 */
 	public void setDb(DBQuery db) {
 		this.db = db;
 	}
 
+	/**
+	 * Gets the current championship
+	 * @return
+	 */
 	public Championship getChampionship() {
 		return championship;
 	}
 
+	/**
+	 * Sets the current championship
+	 * @param championship
+	 */
 	public void setChampionship(Championship championship) {
 		this.championship = championship;
 	}
@@ -164,6 +229,13 @@ public class ReleaseSellController {
 		list.addAll(playerList);
 	}
 	
+	/**
+	 * This method manages the necessary procedures before changing scene. 
+	 * In fact, different things are done if you are 
+	 * in sell or release for the first or second time
+	 * @param event
+	 * @throws IOException
+	 */
 	@FXML
 	public void handlerNextController(ActionEvent event) throws IOException{
 		if(sceneSelector == false) {

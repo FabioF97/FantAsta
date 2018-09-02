@@ -160,19 +160,21 @@ public class AuctionDefController {
 		}
     }
 	
-	
-	
+	/**
+	 * Gets sceneSelector
+	 * @return sceneSelector
+	 */
 	public boolean isSceneSelector() {
 		return sceneSelector;
 	}
 
-
-
+	/**
+	 * Sets sceneSelector
+	 * @param sceneSelector
+	 */
 	public void setSceneSelector(boolean sceneSelector) {
 		this.sceneSelector = sceneSelector;
 	}
-
-
 
 	/**
 	 * Returns the link with the database

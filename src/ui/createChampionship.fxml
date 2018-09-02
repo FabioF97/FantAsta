@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1080.0" spacing="32.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.CreateChampionshipController">
+   <children>
+      <Label text="Add users and then a championship">
+         <font>
+            <Font name="System Bold" size="31.0" />
+         </font>
+         <VBox.margin>
+            <Insets top="58.0" />
+         </VBox.margin>
+      </Label>
+      <VBox alignment="TOP_CENTER" prefHeight="136.0" prefWidth="1080.0" spacing="10.0">
+         <children>
+            <Label text="Name">
+               <font>
+                  <Font name="System Bold" size="20.0" />
+               </font>
+            </Label>
+            <TextField fx:id="textfieldName">
+               <VBox.margin>
+                  <Insets left="450.0" right="450.0" />
+               </VBox.margin>
+            </TextField>
+            <Label layoutX="522.0" layoutY="131.0" text="Budget">
+               <font>
+                  <Font name="System Bold" size="20.0" />
+               </font>
+            </Label>
+            <TextField fx:id="textfieldBudget" layoutX="460.0" layoutY="161.0" prefHeight="0.0" prefWidth="180.0">
+               <VBox.margin>
+                  <Insets left="450.0" right="450.0" />
+               </VBox.margin>
+            </TextField>
+            <Button fx:id="buttonChampionship" mnemonicParsing="false" onAction="#handlerButtonChampionship" text="Create championship" />
+            <Label fx:id="labelChampionship">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+         </children>
+      </VBox>
+      <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="5.0">
+         <children>
+            <Label text="Username">
+               <font>
+                  <Font name="System Bold" size="20.0" />
+               </font>
+            </Label>
+            <TextField fx:id="textfieldUsername">
+               <VBox.margin>
+                  <Insets left="450.0" right="450.0" />
+               </VBox.margin>
+            </TextField>
+            <Label layoutX="503.0" layoutY="83.0" text="Name of the team">
+               <font>
+                  <Font name="System Bold" size="20.0" />
+               </font>
+            </Label>
+            <TextField fx:id="textfieldClub" layoutX="460.0" layoutY="113.0">
+               <VBox.margin>
+                  <Insets left="450.0" right="450.0" />
+               </VBox.margin>
+            </TextField>
+            <Button fx:id="buttonUser" mnemonicParsing="false" onAction="#handlerButtonUser" text="Add user" />
+            <Label fx:id="labelUser" />
+         </children>
+      </VBox>
+      <Button fx:id="buttonNext" mnemonicParsing="false" onAction="#handlerNextController" text="Next" />
+   </children>
+</VBox>

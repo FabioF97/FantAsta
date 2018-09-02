@@ -31,23 +31,67 @@ import ui.Championship;
 import ui.Player;
 import ui.User;
 
+/**
+ * This class manages the repair auction transfer phase 
+ * in which each user can send 
+ * money and players to any other team
+ * @author Fabio Polito, Fabio Fontana
+ *
+ */
 public class TransferController {
 	
+	/**
+	 * Shows the player of the current team
+	 */
 	@FXML private TableView<Player> tab1;
+	/**
+	 * Allow to choose the user to view the team
+	 */
 	@FXML private ChoiceBox<User> clubBox;
+	/**
+	 * Allow to choose the user to send credits to
+	 */
 	@FXML private ChoiceBox<User> creditBox;
+	/**
+	 * Allow to enter the amount of credits to be sent
+	 */
 	@FXML private TextField creditTextfield; 
+	/**
+	 * Used to send credits
+	 */
 	@FXML private Button goButton;
+	/**
+	 * Shows the current username
+	 */
 	@FXML private Label userLabel;
+	/**
+	 * Shows the budget of the current user
+	 */
 	@FXML private Label budgetLabel;
 	
+	/**
+	 * Link to the database
+	 */
 	private DBQuery db;
+	/**
+	 * Current championship
+	 */
 	private Championship championship;
 	
+	/**
+	 * Used to fill clubBox and creditBox
+	 */
 	private ObservableList<User> users;
+	/**
+	 * Used to fill tab1
+	 */
 	private ObservableList<Player> list;
 	
 	
+	/**
+	 * This method initializes the scene by creating 
+	 * the table columns that are filled by the ObservableLists 
+	 */
 	@FXML
 	public void initialize() {
 		if(db != null) {
@@ -113,19 +157,42 @@ public class TransferController {
 
 	}
 
+	/**
+	 * Gets the link to the database
+	 * @return db
+	 */
 	public DBQuery getDb() {
 		return db;
 	}
+	
+	/**
+	 * Sets the link to the database
+	 * @param db
+	 */
 	public void setDb(DBQuery db) {
 		this.db = db;
 	}
+	
+	/**
+	 * Gets the current championship
+	 * @return championship
+	 */
 	public Championship getChampionship() {
 		return championship;
 	}
+	
+	/**
+	 * Sets the current championship
+	 * @param championship
+	 */
 	public void setChampionship(Championship championship) {
 		this.championship = championship;
 	}
 	
+	/**
+	 * This method manages the update of the displayed team
+	 * @param event
+	 */
 	@FXML
 	public void handlerClubBox(ActionEvent event) {
 		userLabel.setText("User: " + clubBox.getValue().getUsername());
@@ -135,6 +202,10 @@ public class TransferController {
 		list.addAll(playerList);
 	}
 	
+	/**
+	 * Manages the sending of credits between users
+	 * @param event
+	 */
 	@FXML
 	public void handlerGoButton(ActionEvent event) {
 		Window owner = goButton.getScene().getWindow();
@@ -159,12 +230,19 @@ public class TransferController {
 		budgetLabel.setText("Budget: " + clubBox.getValue().getBudget());
 	}
 	
+	/**
+	 * Update the team to be displayed
+	 * @param team
+	 */
 	public void refreshClubBox(List<Player> team) {
 		list.clear();
 		Collections.sort(team);
 		list.addAll(team);
 	}
 	
+	/**
+	 * Update the team to be displayed
+	 */
 	public void refreshClubBox2() {
 		list.clear();
 		List<Player> playerList = clubBox.getValue().getClub().getTeam();
@@ -172,6 +250,11 @@ public class TransferController {
 		Collections.sort(list);
 	}
 	
+	/**
+	 * Manages the necessary operations before changing scene
+	 * @param event
+	 * @throws IOException
+	 */
 	@FXML
 	public void handlerNextController(ActionEvent event) throws IOException{
 		list.clear();

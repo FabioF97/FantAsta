@@ -142,54 +142,106 @@ public abstract class Player implements Comparable<Player>{
 		choice = new ChoiceBox<User>();
 	}
 	
+	/**
+	 * Gets visibleProperty
+	 * @return vsbl
+	 */
 	public BooleanProperty visibleProperty() {
 		return vsbl;
 	}
 
+	/**
+	 * Gets sell button
+	 * @return
+	 */
 	public Button getSell() {
 		return sell;
 	}
 
+	/**
+	 * Sets sell button
+	 * @param sell
+	 */
 	public void setSell(Button sell) {
 		this.sell = sell;
 	}
 
+	/**
+	 * Gets send button
+	 * @return send
+	 */
 	public Button getSend() {
 		return send;
 	}
 
+	/**
+	 * Sets send button
+	 * @param send
+	 */
 	public void setSend(Button send) {
 		this.send = send;
 	}
 
+	/**
+	 * Gets the PriceTab
+	 * @return priceTab
+	 */
 	public TextField getPriceTab() {
 		return priceTab;
 	}
 
+	/**
+	 * Sets pricetab
+	 * @param priceTab
+	 */
 	public void setPriceTab(TextField priceTab) {
 		this.priceTab = priceTab;
 	}
 
+	/**
+	 * Gets buy button
+	 * @return buy
+	 */
 	public Button getBuy() {
 		return buy;
 	}
 
+	/**
+	 * Sets buy button
+	 * @param buy
+	 */
 	public void setBuy(Button buy) {
 		this.buy = buy;
 	}
 
+	/**
+	 * Gets choice choichebox
+	 * @return
+	 */
 	public ChoiceBox<User> getChoice() {
 		return choice;
 	}
 
+	/**
+	 * Sets the choichebox
+	 * @param choice
+	 */
 	public void setChoice(ChoiceBox<User> choice) {
 		this.choice = choice;
 	}
 	
+	/**
+	 * Gets the chosen team
+	 * @return value
+	 */
 	public User destination() {
 		return choice.getValue();
 	}
 	
+	/**
+	 * Gets the price
+	 * @return price
+	 */
 	public int buyPrice() {
 		return Integer.parseInt(priceTab.getText());
 	}
@@ -347,6 +399,10 @@ public abstract class Player implements Comparable<Player>{
 		return 2;
 	}
 	
+	/**
+	 * Allows a transaction
+	 * @return
+	 */
 	public boolean checkBuy()
 	{
 		if (choice.getValue() == null) {

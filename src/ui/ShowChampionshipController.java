@@ -1,8 +1,19 @@
 package ui;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Collections;
 import java.util.List;
+
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Element;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.Phrase;
+import com.itextpdf.text.pdf.PdfPCell;
+import com.itextpdf.text.pdf.PdfPTable;
+import com.itextpdf.text.pdf.PdfWriter;
 
 import data.DBQuery;
 import domain.Championship;
@@ -21,6 +32,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.DirectoryChooser;
 import javafx.stage.Stage;
 
 /**
@@ -183,6 +195,68 @@ public class ShowChampionshipController {
 		
 		window.setScene(scene2);
 		window.show();
+	}
+	
+	/**
+	 * This button save the data in a PDF
+	 * @param event
+	 * @throws IOException
+	 */
+	@FXML
+	public void handlerPDFButton(ActionEvent event) throws IOException{
+
+			String path = new String();
+			Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+			DirectoryChooser directoryChooser = new DirectoryChooser();
+			File selectedDirectory = directoryChooser.showDialog(window);
+	            if (selectedDirectory != null) {
+	                path=selectedDirectory.getAbsolutePath();
+	            }
+			System.out.println(path + "\\" + team.getValue().getUsername());
+			Document document = new Document();
+			try {
+				PdfWriter.getInstance(document, new FileOutputStream(path + "\\" + team.getValue().getUsername() + ".pdf"));
+				document.open();
+				document.add(new Paragraph("Championship: " + championship.getName()));
+				document.add(new Paragraph("User: " + team.getValue().getUsername()));
+				document.add(new Paragraph("Club: " + team.getValue().getClub().getName()));
+				document.add(new Paragraph("Budget: " + team.getValue().getBudget()));
+				document.add(new Paragraph(" "));
+				document.add(new Paragraph(" "));
+				
+				PdfPTable table = new PdfPTable(5);
+				table.setWidthPercentage(90f);
+				
+				PdfPCell c1 = new PdfPCell(new Phrase("Position"));
+				c1.setHorizontalAlignment(Element.ALIGN_CENTER);
+		        table.addCell(c1);
+		        PdfPCell c2 = new PdfPCell(new Phrase("Name"));
+				c2.setHorizontalAlignment(Element.ALIGN_CENTER);
+		        table.addCell(c2);
+		        PdfPCell c3 = new PdfPCell(new Phrase("Team"));
+				c3.setHorizontalAlignment(Element.ALIGN_CENTER);
+		        table.addCell(c3);
+		        PdfPCell c4 = new PdfPCell(new Phrase("Value"));
+				c4.setHorizontalAlignment(Element.ALIGN_CENTER);
+		        table.addCell(c4);
+		        PdfPCell c5 = new PdfPCell(new Phrase("Price"));
+				c5.setHorizontalAlignment(Element.ALIGN_CENTER);
+		        table.addCell(c5);
+		             
+		        for (Player p : team.getValue().getClub().getTeam()) {
+		        	table.addCell(p.getPosition());
+		        	table.addCell(p.getName());
+		        	table.addCell(p.getTeam());
+		        	table.addCell(Integer.toString(p.getValue()));
+		        	table.addCell(Integer.toString(p.getPrice()));
+		        }
+		        
+		        document.add(table);
+				
+				document.close();
+			} catch (DocumentException e) {
+				e.printStackTrace();
+			}
 	}
 	
 	/**

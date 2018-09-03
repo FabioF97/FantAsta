@@ -361,7 +361,6 @@ public class DBQuery {
 		"and name='" + championship.replace(" ", "_") + "'");
 		if (rs.isBeforeFirst()) {
 			db.executeUpdate("DROP table " + championship.replace(" ", "_"));
-			db.executeUpdate("DELETE from user where championship='" + championship + "'");
 		}	
 		db.executeUpdate("DELETE from user where championship='" + championship + "'");
 		db.executeUpdate("DELETE from championship where name='" + championship +"'");		

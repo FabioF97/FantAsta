@@ -19,7 +19,7 @@ import ui.*;
 
 /**
  * This class executes SQL statements to download and upload
- * data to the database.
+ * data from/on the database.
  * @author Fabio Polito, Fabio Fontana
  *
  */

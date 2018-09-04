@@ -17,26 +17,46 @@ import java.sql.Statement;
  */
 public class DBManager {
 
-	
+	/**
+	 * Statement used in executeQuery and executeUpdate
+	 */
 	protected Statement statement;
+	/**
+	 * Connection with the database
+	 */
 	protected Connection connection;
 	
 	public DBManager() throws ClassNotFoundException, SQLException {
-		Class.forName("org.sqlite.JDBC");
-		connection = DriverManager.getConnection("jdbc:sqlite:FantAsta.db");
-		statement = connection.createStatement();
-		statement.setQueryTimeout(30); //Questo non penso serva ma non ne sono sicuro
-		//showMetadata(); Penso non ce ne freghi nulla di questo
+		Class.forName("org.sqlite.JDBC"); //Load vendor specific driver
+		connection = DriverManager.getConnection("jdbc:sqlite:FantAsta.db"); //Establish a connection
+		statement = connection.createStatement(); //Create the statement
+		statement.setQueryTimeout(30); //This is the time the driver will wait for a Statement object to execute
 	}
 	
+	/**
+	 * Used to read data from the database
+	 * @param query
+	 * @return
+	 * @throws SQLException
+	 */
 	public ResultSet executeQuery(String query) throws SQLException {
 		return statement.executeQuery(query);
 	}
 
+	/**
+	 * Used to write changes on the database
+	 * @param query
+	 * @return
+	 * @throws SQLException
+	 */
 	public int executeUpdate(String query) throws SQLException {
 		return statement.executeUpdate(query);
 	}
 
+	/**
+	 * Used to close the connection with the database
+	 * @throws SQLException
+	 */
 	public void close() throws SQLException {
 		if (connection != null) {
 			statement.close();
